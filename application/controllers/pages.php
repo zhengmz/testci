@@ -23,11 +23,14 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 
-		$data['title'] = ucfirst($page); // 将title中的第一个字符大写
+		//$data['title'] = ucfirst($page); // 将title中的第一个字符大写
 		$data['ip_address'] = $this->input->ip_address();
 		$data['user_agent'] = $this->input->user_agent();
 		$data['request_headers'] = $this->input->request_headers();
-		$data = array('data_arr' => $data);
+		$data = array(
+			'data_arr' => $data,
+			'title' => ucfirst($page)
+		);
 	  
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/'.$page, $data);
