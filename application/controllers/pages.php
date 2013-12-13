@@ -27,7 +27,7 @@ class Pages extends CI_Controller {
 		$data['ip_address'] = $this->input->ip_address();
 		$data['user_agent'] = $this->input->user_agent();
 		$data['request_headers'] = $this->input->request_headers();
-		$data = arrary("data_arr" => $data);
+		$data = array('data_arr' => $data);
 	  
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/'.$page, $data);
