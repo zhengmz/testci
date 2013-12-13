@@ -2,6 +2,13 @@
 
 class Pages extends CI_Controller {
 
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('input');
+	}
+
 	public function index()
 	{
 		$this->view('home');
@@ -17,6 +24,7 @@ class Pages extends CI_Controller {
 		}
 
 		$data['title'] = ucfirst($page); // 将title中的第一个字符大写
+		$data['ip_address'] = $this->input->ip_address();
 	  
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/'.$page, $data);
