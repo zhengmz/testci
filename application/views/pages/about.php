@@ -1,1 +1,1 @@
-This is a About Page.
+<p>This is about page.</p>

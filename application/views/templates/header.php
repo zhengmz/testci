@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title><?php echo $title ?> - My ci Web</title>
+	<title><?php echo $title ?> - Welcome to earth</title>
 
 	<style type="text/css">
 
@@ -65,4 +65,4 @@
 	</style>
 </head>
 <body>
-	<h1>My CodeIgniter Web</h1>
+  <h1>Welcome to earth!</h1>

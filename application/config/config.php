@@ -14,7 +14,6 @@
 | path to your installation.
 |
 */
-//$config['base_url']	= 'http://192.168.3.61/php/ci/foo/';
 $config['base_url']	= '';
 
 /*
@@ -360,4 +359,4 @@ $config['proxy_ips'] = '';
 
 
 /* End of file config.php */
-/* Location: ./application/foo/config/config.php */
+/* Location: ./application/config/config.php */
