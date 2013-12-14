@@ -1,4 +1,4 @@
 #!/bin/sh
 
-git push orgin master
+git push origin master
 ssh zhengmz@aws "sh update.sh"
