@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * My Loader Class
@@ -113,7 +113,7 @@ class MY_Loader extends CI_Loader {
 				load_class('Service', 'core');
 			}
 
-			require_once($service_full_path));
+			require_once($service_full_path);
 
 			$service = ucfirst($service);
 
@@ -128,7 +128,6 @@ class MY_Loader extends CI_Loader {
 	}
  
 }
-// END MY_Loader Class
 
 /* End of file MY_Loader.php */
 /* Location: ./application/core/MY_Loader.php */
