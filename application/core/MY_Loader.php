@@ -16,14 +16,14 @@ class MY_Loader extends CI_Loader {
 	 * @var array
 	 * @access protected
 	 */
-	protected $_ci_service_paths		= array();
+	protected $_ci_service_paths = array();
 	/**
 	 * List of loaded services
 	 *
 	 * @var array
 	 * @access protected
 	 */
-	protected $_ci_services			= array();
+	protected $_ci_services = array();
 
 
 	/**
@@ -33,9 +33,9 @@ class MY_Loader extends CI_Loader {
 	 */
 	public function __construct()
 	{
+		parent::__construct();
 		$this->_ci_service_paths = array(APPPATH);
 		$this->_ci_services = array();
-		parent::__construct();
 
 		log_message('debug', "MY_Loader Class Initialized");
 	}
