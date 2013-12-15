@@ -43,7 +43,7 @@ class MY_Loader extends CI_Loader {
 	{
 		$this->_ci_services = array();
 
-		parent::__construct();
+		parent::initialize();
 		return $this;
 	}
 
