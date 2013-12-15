@@ -15,6 +15,9 @@ class Upload extends CI_Controller {
 
  function do_upload()
  {
+	$this->load->service('upload_serv');
+	$this->upload_serv->do_upload();
+/*
   $config['upload_path'] = 'uploads/';
   $config['allowed_types'] = 'gif|jpg|png';
   $config['max_size'] = '100';
@@ -35,6 +38,7 @@ class Upload extends CI_Controller {
    
    $this->load->view('upload_success', $data);
   }
+*/
  } 
 }
 
