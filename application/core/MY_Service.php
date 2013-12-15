@@ -1,4 +1,5 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('APPPATH')) exit('No direct script access allowed');
+
 /**
  * My Service Class
  *

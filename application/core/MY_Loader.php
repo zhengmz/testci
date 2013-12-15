@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * My Loader Class
  *
@@ -40,15 +41,6 @@ class MY_Loader extends CI_Loader {
 		log_message('debug', "MY_Loader Class Initialized");
 	}
 
-/*
-	public function initialize()
-	{
-		$this->_ci_services = array();
-
-		parent::initialize();
-		return $this;
-	}
-*/
 
 	/**
 	 * Service Loader
