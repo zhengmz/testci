@@ -25,5 +25,5 @@ class Upload_serv extends MY_Service
 	}
 }
 
-/* End of file upload.php */
-/* Location: ./application/controllers/upload.php */
+/* End of file upload_serv.php */
+/* Location: ./application/services/upload_serv.php */
