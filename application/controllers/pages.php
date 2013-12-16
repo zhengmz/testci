@@ -28,7 +28,7 @@ class Pages extends CI_Controller {
 		   {table_close}</table>{/table_close}
 		';
 		$prefs['show_next_prev'] = TRUE;
-		$prefs['next_prev_url'] = 'pages/calview';
+		$prefs['next_prev_url'] = '/pages/calview';
 
 		$this->load->library('calendar', $prefs);
 		//$this->load->library('calendar');
