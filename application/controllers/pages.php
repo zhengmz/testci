@@ -41,12 +41,12 @@ class Pages extends CI_Controller {
 	{
 		$this->view('home');
 	}
-	public function calview($year = '2013', $month = '12')
+	public function calview($year = '', $month = '')
 	{
 		$this->view('home', $year, $month);
 	}
 
-	public function view($page = 'home', $year = '2013', $month = '12')
+	public function view($page = 'home', $year = '', $month = '')
 	{
 	      
 		if ( ! file_exists(APPPATH.'/views/pages/'.$page.'.php'))
