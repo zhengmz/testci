@@ -28,7 +28,7 @@ class Pages extends CI_Controller {
 		   {table_close}</table>{/table_close}
 		';
 		$prefs['show_next_prev'] = TRUE;
-		$prefs['next_prev_url'] = 'page';
+		$prefs['next_prev_url'] = 'pages/calview';
 
 		$this->load->library('calendar', $prefs);
 		//$this->load->library('calendar');
@@ -41,8 +41,12 @@ class Pages extends CI_Controller {
 	{
 		$this->view('home');
 	}
+	public function calview($year = '2013', $month = '12')
+	{
+		$this->view('home', $year, $month);
+	}
 
-	public function view($page = 'home')
+	public function view($page = 'home', $year = '2013', $month = '12')
 	{
 	      
 		if ( ! file_exists(APPPATH.'/views/pages/'.$page.'.php'))
@@ -81,7 +85,7 @@ class Pages extends CI_Controller {
 		     );
 
 		$data['table'] =  $this->table->generate($tbl_data);
-		$data['calendar'] = $this->calendar->generate(2013,12);
+		$data['calendar'] = $this->calendar->generate($year, $month);
 		$data['site_url'] = $this->config->site_url();
 		$data['base_url'] = $this->config->base_url();
 		$data['system_url'] = $this->config->system_url();
