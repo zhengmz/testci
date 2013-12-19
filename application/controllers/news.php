@@ -18,6 +18,19 @@ public function index(){
   $this->output->enable_profiler(TRUE);
 }
 
+public function page($page = 1)
+{
+	$this->load->library('pagination');
+
+	$config['base_url'] = '/news/page/';
+	$config['total_rows'] = 200;
+	$config['per_page'] = 20; 
+
+	$this->pagination->initialize($config); 
+
+	echo $this->pagination->create_links();
+}
+
 public function view($slug){
   $data['news_item'] = $this->news_model->get_news($slug);
 
@@ -32,6 +45,7 @@ public function view($slug){
   $this->load->view('news/view', $data);
   $this->load->view('templates/footer', $data);
 }
+
 public function create()
 {
   $this->load->helper('form');
