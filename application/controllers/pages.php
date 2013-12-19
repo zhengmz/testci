@@ -47,7 +47,7 @@ class Pages extends CI_Controller {
 		$this->view('home', $year, $month);
 	}
 
-	public function output($data)
+	public function output($data = '')
 	{
 		$this->output->set_content_type('application/json')->set_output(json_encode(array('foo' => 'bar')));
 	}
