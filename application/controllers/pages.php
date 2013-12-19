@@ -41,13 +41,19 @@ class Pages extends CI_Controller {
 	{
 		$this->view('home');
 	}
+
 	public function calview($year = '', $month = '')
 	{
 		$this->view('home', $year, $month);
 	}
 
+	public function output($data)
+	{
+	}
+
 	public function view($page = 'home', $year = '', $month = '')
 	{
+		$this->output->set_content_type('application/json')->set_output(json_encode(array('foo' => 'bar')));
 	      
 		if ( ! file_exists(APPPATH.'/views/pages/'.$page.'.php'))
 		{
