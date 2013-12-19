@@ -18,7 +18,7 @@ public function index(){
   $this->output->enable_profiler(TRUE);
 }
 
-public function page($page = 0)
+public function page($page = 1)
 {
 	echo 'page = '.$page.'<br>';
 	$this->load->library('pagination');
