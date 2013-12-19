@@ -40,6 +40,10 @@ else
 }
 
 echo $agent.'<br />';
+if ($this->agent->is_mobile())
+{
+    echo 'is_mobile: '.$this->agent->mobile().'<br />';
+}
 
 echo $this->agent->platform().'<br />';
 	}
