@@ -18,8 +18,9 @@ public function index(){
   $this->output->enable_profiler(TRUE);
 }
 
-public function page($page = 1)
+public function page($page = 0)
 {
+	echo 'page = '.$page;
 	$this->load->library('pagination');
 
 	$config['base_url'] = '/news/page/';
