@@ -2,11 +2,11 @@
 
 class Blog extends CI_Controller {
  
-	function index($blog_entries = FALSE)
+	function index($blog_entries = '')
 	{
 		$this->load->library('parser');
 
-		if ($blog_entries === FALSE)
+		if ($blog_entries == '')
 		{
 			$blog_entries = array(
 				array('title' => 'Title 1', 'body' => 'Body 1'),
@@ -14,7 +14,7 @@ class Blog extends CI_Controller {
 				array('title' => 'Title 3', 'body' => 'Body 3'),
 				array('title' => 'Title 4', 'body' => 'Body 4'),
 				array('title' => 'Title 5', 'body' => 'Body 5')
-			}
+			)
 		}
 		$data = array(
 			    'blog_title' => 'My Blog Title',
