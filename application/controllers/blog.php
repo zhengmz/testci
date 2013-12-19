@@ -22,28 +22,25 @@ class Blog extends CI_Controller {
 
 $this->load->library('user_agent');
 
+$agent = '';
 if ($this->agent->is_browser())
 {
-    $agent = 'is_browser: '.$this->agent->browser().' '.$this->agent->version();
+    $agent = $agent.'<br />is_browser: '.$this->agent->browser().' '.$this->agent->version();
 }
-elseif ($this->agent->is_robot())
+if ($this->agent->is_robot())
 {
-    $agent = 'is_robot: '.$this->agent->robot();
+    $agent = $agent.'<br />is_robot: '.$this->agent->robot();
 }
-elseif ($this->agent->is_mobile())
+if ($this->agent->is_mobile())
 {
-    $agent = 'is_mobile: '.$this->agent->mobile();
+    $agent = $agent.'<br />is_mobile: '.$this->agent->mobile();
 }
-else
+if ($agent == '')
 {
     $agent = 'Unidentified User Agent';
 }
 
 echo $agent.'<br />';
-if ($this->agent->is_mobile())
-{
-    echo 'is_mobile: '.$this->agent->mobile().'<br />';
-}
 
 echo $this->agent->platform().'<br />';
 	}
