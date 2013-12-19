@@ -43,6 +43,12 @@ if ($agent == '')
 echo $agent.'<br />';
 
 echo $this->agent->platform().'<br />';
+
+if ($this->agent->is_referral())
+{
+    echo $this->agent->referrer().'<br />';
+}
+echo $this->agent->agent_string().'<br />';
 	}
 
 	function news()
