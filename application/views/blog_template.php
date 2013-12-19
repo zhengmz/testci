@@ -1,6 +1,7 @@
 <html>
 <head>
-<title>{blog_title}</title>
+	<meta charset="utf-8">
+	<title>{blog_title}</title>
 </head>
 <body>
 
