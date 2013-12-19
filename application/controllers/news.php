@@ -20,12 +20,13 @@ public function index(){
 
 public function page($page = 0)
 {
-	echo 'page = '.$page;
+	echo 'page = '.$page.'<br>';
 	$this->load->library('pagination');
 
 	$config['base_url'] = '/news/page/';
 	$config['total_rows'] = 200;
 	$config['per_page'] = 20; 
+	$config['use_page_numbers'] = TRUE;
 
 	$this->pagination->initialize($config); 
 
