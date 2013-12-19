@@ -23,6 +23,7 @@ class Blog extends CI_Controller {
 
 	function news()
 	{
+    		$this->load->database();
 		$query = $this->db->query("SELECT title, text as body FROM news");
 
 		$this->load->library('parser');
