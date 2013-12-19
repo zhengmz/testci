@@ -24,24 +24,24 @@ $this->load->library('user_agent');
 
 if ($this->agent->is_browser())
 {
-    $agent = $this->agent->browser().' '.$this->agent->version();
+    $agent = 'is_browser: '.$this->agent->browser().' '.$this->agent->version();
 }
 elseif ($this->agent->is_robot())
 {
-    $agent = $this->agent->robot();
+    $agent = 'is_robot: '.$this->agent->robot();
 }
 elseif ($this->agent->is_mobile())
 {
-    $agent = $this->agent->mobile();
+    $agent = 'is_mobile: '.$this->agent->mobile();
 }
 else
 {
     $agent = 'Unidentified User Agent';
 }
 
-echo $agent;
+echo $agent.'<br />';
 
-echo $this->agent->platform();
+echo $this->agent->platform().'<br />';
 	}
 
 	function news()
