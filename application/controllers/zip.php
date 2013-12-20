@@ -10,13 +10,13 @@ class Zip extends CI_Controller {
 
 	function index()
 	{ 
-//		$name = 'uploads/mydata1.txt';
+//		$name = 'mydata1.txt';
 //		$data = 'A Data String!';
 
 //		$this->zip->add_data($name, $data);
 		$data = array(
-			'uploads/mydata1.txt' => 'A Data String!',
-			'uploads/mydata2.txt' => 'Another Data String!'
+			'dir1/mydata1.txt' => 'A Data String!',
+			'dir2/mydata2.txt' => 'Another Data String!'
 		    );
 
 		$this->zip->add_data($data);
