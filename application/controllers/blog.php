@@ -71,6 +71,9 @@ echo $this->agent->agent_string().'<br />';
     		$this->load->database();
 		$query = $this->db->query("SELECT title, text as body FROM news");
 
+		$this->index('My News Title', 'My News Heading', $query->result_array());
+
+/*
 		$this->load->library('parser');
 
 		$data = array(
@@ -80,6 +83,7 @@ echo $this->agent->agent_string().'<br />';
 			    );
 
 		$this->parser->parse('blog_template', $data);
+*/
 	}
 }
 
