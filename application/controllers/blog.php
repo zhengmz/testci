@@ -2,13 +2,28 @@
 
 class Blog extends CI_Controller {
  
-	function index()
+	function index($blog_title = '', $blog_heading = '', $blog_entries = '')
 	{
 		$this->load->library('parser');
 
+		if ($blog_title == '')
+		{
+			$blog_title = 'My Blog Title';
+		}
+
+		if ($blog_heading == '')
+		{
+			$blog_heading = 'My Blog Heading';
+		}
+
+		if ($blog_entries == '')
+		{
+			$blog_entries = array(
+		}
+
 		$data = array(
-			    'blog_title' => 'My Blog Title',
-			    'blog_heading' => 'My Blog Heading',
+			    'blog_title' => $blog_title,
+			    'blog_heading' => $blog_heading,
 			    'blog_entries' => array(
 				array('title' => 'Title 1', 'body' => 'Body 1'),
 				array('title' => 'Title 2', 'body' => 'Body 2'),
