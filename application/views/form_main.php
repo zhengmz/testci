@@ -8,6 +8,11 @@
 
 <?php echo form_open('form'); ?>
 
+<h5>Captcha</h5>
+<?php echo form_error('captcha', '<div class="error">', '</div>'); ?>
+<input type="text" name="captcha" value="<?php echo set_value('captcha'); ?>" size="50" />
+<?php echo $cap['image']; ?>
+
 <h5>Username</h5>
 <?php echo form_error('username', '<div class="error">', '</div>'); ?>
 <input type="text" name="username" value="<?php echo set_value('username'); ?>" size="50" />
