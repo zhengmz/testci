@@ -1,6 +1,6 @@
 <?php
 
-class Smileys extends CI_Controller {
+class Smiley extends CI_Controller {
 
  function __construct()
  {
