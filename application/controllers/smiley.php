@@ -9,7 +9,7 @@ class Smiley extends CI_Controller {
  
  function index()
  {
-  $this->load->helper('smiley');
+  $this->load->helper(array('smiley','html','string'));
   $this->load->library('table');
   
   $image_array = get_clickable_smileys('smileys/', 'comments');
