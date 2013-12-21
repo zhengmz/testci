@@ -13,9 +13,10 @@
 <input type="text" name="captcha" value="<?php echo set_value('captcha'); ?>" size="50" />
 <?php echo $cap['image']; ?>
 
-<h5>Username</h5>
-<?php echo form_error('username', '<div class="error">', '</div>'); ?>
+<!-- <h5>Username</h5> -->
 <?php
+echo echo heading('Username', 5);
+echo form_error('username', '<div class="error">', '</div>'); 
 $data = array(
               'name'        => 'username',
               'value'       => set_value('username'),

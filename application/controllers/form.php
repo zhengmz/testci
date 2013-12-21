@@ -4,7 +4,7 @@ class Form extends CI_Controller {
  
 	function index()
 	{
-		$this->load->helper(array('form', 'url'));
+		$this->load->helper(array('form', 'url', 'html'));
 		 
 		$this->load->library('form_validation');
 

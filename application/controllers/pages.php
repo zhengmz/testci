@@ -98,11 +98,12 @@ class Pages extends CI_Controller {
 		//$data['title'] = ucfirst($page); // 将title中的第一个字符大写
 		$data['ip_address'] = $this->input->ip_address();
 		$data['user_agent'] = $this->input->user_agent();
-		$data['request_headers'] = implode(",", $this->input->request_headers());
+		//$data['request_headers'] = implode(",", $this->input->request_headers());
+		$data['request_headers'] = $this->input->request_headers();
 
 		//testing directory helper
 		$this->load->helper('directory');
-		$data['dir_map'] = implode(',', directory_map('uploads'));
+		$data['dir_map'] = directory_map('.');
 
 		$data = array(
 			'data_arr' => $data,
