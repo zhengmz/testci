@@ -15,7 +15,20 @@
 
 <h5>Username</h5>
 <?php echo form_error('username', '<div class="error">', '</div>'); ?>
+<?php
+$data = array(
+              'name'        => 'username',
+              'value'       => set_value('username'),
+              'maxlength'   => '100',
+              'size'        => '50'
+            );
+
+echo form_label('你的名字是？','username');
+echo form_input($data);
+?>
+<!--
 <input type="text" name="username" value="<?php echo set_value('username'); ?>" size="50" />
+-->
 
 <h5>Password</h5>
 <?php echo form_error('password'); ?>
@@ -47,9 +60,34 @@
 <option value="three" <?php echo set_select('myselect', 'three'); ?> >Three</option>
 </select>
 
+<?php
+$options = array(
+                  'small'  => 'Small Shirt',
+                  'med'    => 'Medium Shirt',
+                  'large'   => 'Large Shirt',
+                  'xlarge' => 'Extra Large Shirt',
+                );
+
+$shirts_on_sale = array('small', 'large');
+
+echo form_dropdown('shirts', $options, 'large');
+echo form_dropdown('shirts', $options, $shirts_on_sale);
+
+echo "<p></p>";
+$attributes = array('id' => 'address_info', 'class' => 'address_info');
+echo form_fieldset('Address Information', $attributes);
+echo "<p>fieldset content here</p>\n";
+$string = "</div></div>";
+echo form_fieldset_close($string);
+
+echo "<p></p>";
+$string = 'Here is a string containing "quoted" text.';
+?>
+<input type="text" name="myform" value="<var<<?php echo form_prep($string); ?></var<" />
+
 <div><input type="submit" value="Submit" /></div>
 
-</form>
+<?php echo form_close(); ?>
 
 </body>
 </html>
