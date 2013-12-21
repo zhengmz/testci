@@ -35,6 +35,7 @@ class Pages extends CI_Controller {
 
 		$this->load->library('table');
 		$this->load->library('input');
+		$this->load->help('html');
 	}
 
 	public function index()
