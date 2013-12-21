@@ -104,7 +104,7 @@ class Pages extends CI_Controller {
 
 		//testing directory helper
 		$this->load->helper('directory');
-		$data['dir_map'] = directory_map('.');
+		$data['dir_map'] = directory_map('uploads');
 
 		$data = array(
 			'data_arr' => $data,
