@@ -35,7 +35,7 @@ class Pages extends CI_Controller {
 
 		$this->load->library('table');
 		$this->load->library('input');
-		$this->load->help('html');
+		$this->load->helper('html');
 	}
 
 	public function index()
@@ -100,11 +100,11 @@ class Pages extends CI_Controller {
 		$data['ip_address'] = $this->input->ip_address();
 		$data['user_agent'] = $this->input->user_agent();
 		//$data['request_headers'] = implode(",", $this->input->request_headers());
-		//$data['request_headers'] = $this->input->request_headers();
+		$data['request_headers'] = $this->input->request_headers();
 
 		//testing directory helper
 		$this->load->helper('directory');
-		//$data['dir_map'] = directory_map('.');
+		$data['dir_map'] = directory_map('.');
 
 		$data = array(
 			'data_arr' => $data,
