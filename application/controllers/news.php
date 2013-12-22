@@ -5,6 +5,7 @@ class News extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('news_model');
+    $this->load->helper('url');
   }
 
 public function index(){
