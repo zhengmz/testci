@@ -3,12 +3,6 @@
 
 class News_model extends MY_Model {
 
-	public function __construct($group_name = '')
-	{
-		parent::__construct();
-
-		log_message('debug', "News_model Class Initialized");
-	}
 	/**
 	 * 表名
 	 */
@@ -27,14 +21,12 @@ class News_model extends MY_Model {
 
 	public function get_news($slug = FALSE)
 	{
-		log_message('debug', "enter get_news function");
 		$where = array();
 		if ($slug !== FALSE)
 		{
 			$where['slug'] = $slug;
 		}
 		
-		log_message('debug', "prepare calling find_all function");
 		return $this->find_all($where);
 	}
 
@@ -42,7 +34,7 @@ class News_model extends MY_Model {
 	{
 		$this->load->helper('url');
 		
-		$slug = url_title($this->input->post('title'), '_', TRUE);
+		$slug = url_title($this->input->post('title'), 'dash', TRUE);
 
 		$data = array(
 			'title' => $this->input->post('title'),

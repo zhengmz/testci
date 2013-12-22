@@ -150,9 +150,7 @@ class MY_Model extends CI_Model {
 	 */
 	public function find_all($where = array(), $limit = 0, $offset = 0, $sort = NULL)
 	{
-		log_message('debug', "enter find_all function");
 		$this->db->from($this->table_name())->where($where);
-		log_message('debug', "set from and where");
 		if($sort !== NULL) {
 			if(is_array($sort)){
 				foreach($sort as $value){
