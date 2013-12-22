@@ -35,6 +35,7 @@ public function page($page = 1)
 
 public function view($slug){
   $data['news_item'] = $this->news_model->get_news($slug);
+  print_r($data['news_item']);
 
   if (empty($data['news_item']))
   {
@@ -68,6 +69,7 @@ public function create()
   else
   {
     $ret = $this->news_model->set_news();
+    $data['return'] = $ret;
     $this->load->view('templates/header', $data);  
     $this->load->view('news/success');
     $this->load->view('templates/footer');
