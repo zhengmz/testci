@@ -35,7 +35,7 @@ class News_model extends MY_Model {
 		}
 		
 		log_message('debug', "prepare calling find_all function");
-		return find_all($where);
+		return $this->find_all($where);
 	}
 
 	public function set_news()
@@ -50,7 +50,7 @@ class News_model extends MY_Model {
 			'text' => $this->input->post('text')
 		);
 
-		return save($data);
+		return $this->save($data);
 	}
 }
 
