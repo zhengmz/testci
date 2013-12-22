@@ -27,12 +27,14 @@ class News_model extends MY_Model {
 
 	public function get_news($slug = FALSE)
 	{
+		log_message('debug', "enter get_news function");
 		$where = array();
 		if ($slug !== FALSE)
 		{
 			$where['slug'] = $slug;
 		}
 		
+		log_message('debug', "prepare calling find_all function");
 		return find_all($where);
 	}
 
