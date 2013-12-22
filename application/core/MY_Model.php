@@ -27,18 +27,22 @@ class MY_Model extends CI_Model {
 	/**
 	 * 表名
 	 */
+/*
 	public function table_name()
 	{
 		show_error('You must rewrite function table_name() at models.');
 	}
+*/
 
 	/**
 	 * 主键
 	 */
+/*
 	public function primary_key()
 	{
 		show_error('You must rewrite function primary_key() at models.');
 	}
+*/
 
 	/**
 	 * 保存数据

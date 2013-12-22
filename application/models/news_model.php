@@ -3,6 +3,12 @@
 
 class News_model extends MY_Model {
 
+	public function __construct($group_name = '')
+	{
+		parent::__construct();
+
+		log_message('debug', "News_model Class Initialized");
+	}
 	/**
 	 * 表名
 	 */
