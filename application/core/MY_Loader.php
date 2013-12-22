@@ -52,13 +52,13 @@ class MY_Loader extends CI_Loader {
 	 * @param	string	an optional object name
 	 * @return	void
 	 */
-	public function service($service = '', $object_name = NULL)
+	public function service($service = '', $params = NULL, $object_name = NULL)
 	{
 		if (is_array($service))
 		{
 			foreach ($service as $class)
 			{
-				$this->service($class);
+				$this->service($class, $params);
 			}
 
 			return;
@@ -80,6 +80,11 @@ class MY_Loader extends CI_Loader {
 
 			// And the service name behind it
 			$service = substr($service, $last_slash + 1);
+		}
+
+		if ( ! is_null($params) && ! is_array($params))
+		{
+			$params = NULL;
 		}
 
 		if ($object_name == '')
@@ -117,7 +122,7 @@ class MY_Loader extends CI_Loader {
 
 			$service = ucfirst($service);
 
-			$CI->$object_name = new $service();
+			$CI->$object_name = new $service($params);
 
 			$this->_ci_services[] = $object_name;
 			return;
