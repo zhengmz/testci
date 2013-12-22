@@ -41,6 +41,7 @@ class News_model extends MY_Model {
 			'slug' => $slug,
 			'text' => $this->input->post('text')
 		);
+		print_r($data);
 
 		return $this->save($data);
 	}

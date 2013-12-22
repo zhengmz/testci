@@ -34,13 +34,13 @@ public function page($page = 1)
 }
 
 public function view($slug){
-  $data['news_item'] = $this->news_model->get_news($slug);
-  print_r($data['news_item']);
+  $data = $this->news_model->get_news($slug);
 
   if (empty($data['news_item']))
   {
     show_404();
   }
+  $data['news_item'] = $data[0];
 
   $data['title'] = $data['news_item']['title'];
 
