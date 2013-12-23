@@ -3,6 +3,9 @@
 system
 license.txt
 
+application/db/*
+!application/db/index.html
+
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
