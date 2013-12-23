@@ -15,7 +15,7 @@
 
 <!-- <h5>Username</h5> -->
 <?php
-echo echo heading('Username', 5);
+echo heading('Username', 5);
 echo form_error('username', '<div class="error">', '</div>'); 
 $data = array(
               'name'        => 'username',
