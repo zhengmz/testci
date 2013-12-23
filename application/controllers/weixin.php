@@ -22,7 +22,8 @@ class Weixin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('html','url'));
+		
+		log_message('debug', "Weixin Class Initialized");
 	}
 
 	/**
@@ -34,12 +35,16 @@ class Weixin extends CI_Controller {
 		$signature = $this->input->get('signature');
 		$timestamp = $this->input->get('timestamp');
 		$nonce = $this->input->get('nonce');
-		$echoStr = $this->input->get('echoStr');
+		$echostr = $this->input->get('echostr');
 
+		log_message('debug', "signature = ".$signature);
+		log_message('debug', "timestamp = ".$timestamp);
+		log_message('debug', "nonce = ".$nonce);
+		log_message('debug', "echostr = ".$echostr);
 		//valid signature , option
 		if($this->check_signature($signature, $timestamp, $nonce))
 		{
-			echo $echoStr;
+			echo $echostr;
 			exit;
 		}
 	}
