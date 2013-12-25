@@ -31,7 +31,19 @@ class Weixin extends CI_Controller {
 	 */
 	public function index()
 	{
-		echo "Welcome to weixin's world!";
+		$signature = $this->input->get('signature');
+		$timestamp = $this->input->get('timestamp');
+		$nonce = $this->input->get('nonce');
+
+		log_message('debug', "signature = ".$signature);
+		log_message('debug', "timestamp = ".$timestamp);
+		log_message('debug', "nonce = ".$nonce);
+		if($this->_check_signature($signature, $timestamp, $nonce))
+		{
+			echo "You are welcome.";
+		} else {
+			echo "You aren't welcome.";
+		}
 	}
 
 	/**
@@ -49,7 +61,6 @@ class Weixin extends CI_Controller {
 		log_message('debug', "signature = ".$signature);
 		log_message('debug', "timestamp = ".$timestamp);
 		log_message('debug', "nonce = ".$nonce);
-		log_message('debug', "echostr = ".$echostr);
 		//valid signature , option
 		if($this->_check_signature($signature, $timestamp, $nonce))
 		{
