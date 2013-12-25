@@ -27,10 +27,10 @@ class Weixin extends CI_Controller {
 	}
 
 	/**
-	 * 接收函数
-	 * @return boolean 插入成功返回ID，插入失败返回FALSE
+	 * 验证函数
+	 * @return string 成功返回echostr，失败不返回
 	 */
-	public function index()
+	public function valid()
 	{
 		$signature = $this->input->get('signature');
 		$timestamp = $this->input->get('timestamp');
@@ -42,7 +42,7 @@ class Weixin extends CI_Controller {
 		log_message('debug', "nonce = ".$nonce);
 		log_message('debug', "echostr = ".$echostr);
 		//valid signature , option
-		if($this->check_signature($signature, $timestamp, $nonce))
+		if($this->_check_signature($signature, $timestamp, $nonce))
 		{
 			echo $echostr;
 			exit;
@@ -53,7 +53,7 @@ class Weixin extends CI_Controller {
 	 * 验证算法
 	 * @return boolean 成功返回TRUE，失败返回FASLE
 	 */
-	private function check_signature($signature, $timestamp, $nonce)
+	private function _check_signature($signature, $timestamp, $nonce)
 	{
 		$token = TOKEN;
 		$tmpArr = array($token, $timestamp, $nonce);
@@ -67,7 +67,6 @@ class Weixin extends CI_Controller {
 			return FALSE;
 		}
 	}
-
 }
 
 /* End of file blog.php */
