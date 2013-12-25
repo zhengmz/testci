@@ -47,7 +47,7 @@ class Weixin extends CI_Controller {
 		if ($post_arr['type'] == 'text')
 		{
 			$respone_str = $post_arr['from'].', 你好!\n';
-			$respone_str = $respone_str.'Your msg is : '.$post_arr['Content'];
+			$respone_str = $respone_str.'Your msg is : '.$post_arr['content'];
 			$data = array(
 				'to' => $post_arr['from'],
 				'from' => $post_arr['to'],
