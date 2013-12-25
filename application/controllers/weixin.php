@@ -27,7 +27,16 @@ class Weixin extends CI_Controller {
 	}
 
 	/**
+	 * 默认接入函数
+	 */
+	public function index()
+	{
+		echo "Welcome to weixin's world!";
+	}
+
+	/**
 	 * 验证函数
+	 *
 	 * @return string 成功返回echostr，失败不返回
 	 */
 	public function valid()
@@ -51,6 +60,7 @@ class Weixin extends CI_Controller {
 
 	/**
 	 * 验证算法
+	 *
 	 * @return boolean 成功返回TRUE，失败返回FASLE
 	 */
 	private function _check_signature($signature, $timestamp, $nonce)
