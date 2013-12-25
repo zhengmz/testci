@@ -86,7 +86,7 @@ class Weixin extends CI_Controller {
 		{
 			$ret_arr['content'] = trim($post_obj->Content);
 		}
-		return ret_arr;
+		return $ret_arr;
 	}
 
 	/**
