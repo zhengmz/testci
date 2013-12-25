@@ -35,9 +35,7 @@ class Weixin extends CI_Controller {
 		$timestamp = $this->input->get('timestamp');
 		$nonce = $this->input->get('nonce');
 
-		$post_str = $this->input->post();
-		if (is_array($post_str))
-			$post_str = $post_str(0);
+		$post_str = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");
 
 		log_message('debug', "signature = ".$signature);
 		log_message('debug', "timestamp = ".$timestamp);
