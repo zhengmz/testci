@@ -35,12 +35,15 @@ class Weixin extends CI_Controller {
 		$timestamp = $this->input->get('timestamp');
 		$nonce = $this->input->get('nonce');
 
-		$post = $this->input->post();
+		$post_str = $this->input->post();
+		if (is_array($post_str))
+			$post_str = $post_str(0);
 
 		log_message('debug', "signature = ".$signature);
 		log_message('debug', "timestamp = ".$timestamp);
 		log_message('debug', "nonce = ".$nonce);
-		if($this->_check_signature($signature, $timestamp, $nonce))
+		log_message('debug', "post_str = ".$post_str);
+		if ($this->_check_signature($signature, $timestamp, $nonce))
 		{
 			echo "You are welcome.";
 		} else {
@@ -49,7 +52,7 @@ class Weixin extends CI_Controller {
 	}
 
 	/**
-	 * 验证函数
+	 * 验证函数, 要配合route.php设置default_controller.
 	 *
 	 * @return string 成功返回echostr，失败不返回
 	 */
@@ -64,7 +67,7 @@ class Weixin extends CI_Controller {
 		log_message('debug', "timestamp = ".$timestamp);
 		log_message('debug', "nonce = ".$nonce);
 		//valid signature , option
-		if($this->_check_signature($signature, $timestamp, $nonce))
+		if ($this->_check_signature($signature, $timestamp, $nonce))
 		{
 			echo $echostr;
 			exit;
