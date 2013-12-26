@@ -17,8 +17,6 @@ class Weixin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$echostr = $this->input->get('echostr');
-		log_message('debug', 'echostr = '.$echostr);
 		
 		$this->load->library('weixin_lib');
 		log_message('debug', "Weixin Controller Initialized");

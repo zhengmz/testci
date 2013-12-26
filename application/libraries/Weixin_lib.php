@@ -33,6 +33,7 @@ class Weixin_lib
 		$this->_valid();
 
 		log_message('debug', "Weixin_lib library Initialized");
+		log_message('debug', "TOKEN = ".$this->_weixin_token);
 	}
 
 	/**
@@ -98,7 +99,7 @@ class Weixin_lib
 
 		$str = sha1(implode($tmp));
 
-		return ($str == $signature) ? TRUE : FALSE;
+		return $str == $signature ? TRUE : FALSE;
 	}
 }
 
