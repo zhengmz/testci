@@ -148,7 +148,7 @@ class Weixin
 	 * 
 	 * @return string 返回码
 	 */
-	public function send($text = '')
+	public function get_ret_code()
 	{
 		return $this->_get_post();
 	}
