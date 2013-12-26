@@ -37,7 +37,7 @@ class Wx_home extends CI_Controller {
 		if ($post_arr['MsgType'] == 'text')
 		{
 			$respone_str = $post_arr['FromUserName'].', 你好! '.chr(13).chr(10);
-			$respone_str .= 'Your msg is : '.$post_arr['Content'];
+			$respone_str .= '你的消息是: ['.$post_arr['Content'].'].';
 			$data = array(
 				'to' => $post_arr['FromUserName'],
 				'from' => $post_arr['ToUserName'],
