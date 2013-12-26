@@ -40,7 +40,8 @@ class Wx_home extends CI_Controller {
 			$respone_str .= 'Your msg is : '.$post_arr['Content'];
 			$data = array(
 				'to' => $post_arr['FromUserName'],
-				'from' => $post_arr['ToUserName'],
+				//'from' => $post_arr['ToUserName'],
+				'from' => '',
 				'time' => time(),
 				'type' => 'text',
 				'content' => $respone_str
