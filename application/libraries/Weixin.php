@@ -9,14 +9,32 @@
  *	@author		zhengmz
  *	@link
  */
-class Weixin
-{
+class Weixin {
+
 	/**
 	 * 用来保存TOKEN
 	 * @var string
 	 * @access protected
 	 */
 	protected $_weixin_token = 'weixin';
+	/**
+	 * 用来保存open_id
+	 * @var string
+	 * @access protected
+	 */
+	protected $_open_id = '';
+	/**
+	 * 用来保存appid
+	 * @var string
+	 * @access protected
+	 */
+	protected $_appid = '';
+	/**
+	 * 用来保存appsecret
+	 * @var string
+	 * @access protected
+	 */
+	protected $_appsecret = '';
 	/**
 	 * 用来保存微信加密签名
 	 * @var string
@@ -54,9 +72,14 @@ class Weixin
 	 */
 	protected $_msg_arr = array();
 
+
+	// ---------------------------------------------------------------
+
 	/**
 	 * 构造函数
 	 * 调用initialize方法进行初始化
+	 *
+	 * @param array 默认使用config/weixin.php进行配置，也可以传递进来
 	 */
 	public function __construct($config = array())
 	{
