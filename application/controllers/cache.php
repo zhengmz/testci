@@ -7,6 +7,14 @@ class Cache extends CI_Controller {
 		$this->load->helper(array('form', 'url', 'html'));
 		$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 
+/*
+		$data = array(
+			'user' => '',
+			'pwd' => '',
+			'email' => ''
+		};
+*/
+
 		$user = $this->input->post('user');
 		if ( $user !== FALSE )
 		{
@@ -19,14 +27,13 @@ class Cache extends CI_Controller {
 			{
 				$user = $cache_user;
 			}
-		}
 
+		}
 		$data = array(
 			'user' => $user,
 			'pwd' => $this->input->post('pwd'),
 			'email' => $this->input->post('email')
-		}
-
+		};
 
 		 
 		$this->load->view('cache_form', $data);
