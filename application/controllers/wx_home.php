@@ -34,31 +34,10 @@ class Wx_home extends CI_Controller {
 			exit;
 		}
 
-		$this->load->library('user_agent');
-
-		$agent = '';
-		if ($this->agent->is_browser())
-		{
-		    $agent .= 'is_browser: '.$this->agent->browser().' '.$this->agent->version().chr(13).chr(10);
-		}
-		if ($this->agent->is_robot())
-		{
-		    $agent .= 'is_robot: '.$this->agent->robot().chr(13).chr(10);
-		}
-		if ($this->agent->is_mobile())
-		{
-		    $agent .= 'is_mobile: '.$this->agent->mobile().chr(13).chr(10);
-		}
-		if ($agent == '')
-		{
-		    $agent = 'Unidentified User Agent';
-		}
-
 		if ($post_arr['type'] == 'text')
 		{
 			$respone_str = $post_arr['from'].', 你好! '.chr(13).chr(10);
-			$respone_str .= 'Your msg is : '.$post_arr['content'].chr(13).chr(10);
-			$respone_str .= 'You are from : '.$agent;
+			$respone_str .= 'Your msg is : '.$post_arr['content'];
 			$data = array(
 				'to' => $post_arr['from'],
 				'from' => $post_arr['to'],

@@ -14,25 +14,52 @@
 class Weixin
 {
 	protected $_weixin_token = 'weixin';
-
-	protected $CI;
+	protected $_signature = '';
+	protected $_timestamp = '';
+	protected $_nonce = '';
+	protected $_echostr = '';
 
 	public function __construct($config = array())
 	{
-		if (! empty($config))
-		{
-			foreach ($config as $key => $val)
-			{
-				if(isset($this->{'_'.$key}))
-				{
-					$this->{'_'.$key} = $val;
-				}
-			}
-		}
-		$this->CI = &get_instance();
-		$this->_valid();
+		$this->initialize($config);
 
 		log_message('debug', "Weixin library Initialized");
+	}
+
+	/**
+	 * 初始化
+	 *
+	 * @param	array
+	 * @return	void
+	 */
+	public function initialize($config = array())
+	{
+		$CI = &get_instance();
+		// 微信加密签名
+		$config['signature'] = $CI->input->get('signature');
+		// 时间戳
+		$config['timestamp'] = $CI->input->get('timestamp');
+		// 随机数
+		$config['nonce'] = $CI->input->get('nonce');
+		// 随机字符串
+		$config['echostr'] = $CI->input->get('echostr');
+
+		foreach ($config as $key => $val)
+		{
+			if(isset($this->{'_'.$key}))
+			{
+				$this->{'_'.$key} = $val;
+			}
+		}
+
+		log_message('debug', "signature = ".$this->_signature);
+		log_message('debug', "timestamp = ".$this->_timestamp);
+		log_message('debug', "nonce = ".$this->_nonce);
+		log_message('debug', 'echostr = '.$this->_echostr);
+		log_message('debug', "TOKEN = ".$this->_weixin_token);
+
+		// 验证消息真实性和开发者认证
+		$this->_valid();
 	}
 
 	/**
@@ -48,7 +75,7 @@ class Weixin
 		//extract post data
 		if (empty($post))
 		{
-			return;
+			return NULL;
 		}
 
 		return simplexml_load_string($post, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -59,15 +86,11 @@ class Weixin
 	 *
 	 * @return void
 	 */
-	private function _valid()
+	protected function _valid()
 	{
-		// 随机字符串
-		$echostr = $this->CI->input->get('echostr');
-
-		log_message('debug', 'echostr = '.$echostr);
 		if ($this->_check_signature())
 		{
-			echo $echostr;
+			echo $this->_echostr;
 		}
 		else
 		{
@@ -81,25 +104,14 @@ class Weixin
 	 *
 	 * @return bool
 	 */
-	private function _check_signature()
+	protected function _check_signature()
 	{
-		// 微信加密签名
-		$signature = $this->CI->input->get('signature');
-		// 时间戳
-		$timestamp = $this->CI->input->get('timestamp');
-		// 随机数
-		$nonce = $this->CI->input->get('nonce');
-
-		log_message('debug', "signature = ".$signature);
-		log_message('debug', "timestamp = ".$timestamp);
-		log_message('debug', "nonce = ".$nonce);
-		log_message('debug', "TOKEN = ".$this->_weixin_token);
-		$tmp = array($this->_weixin_token, $timestamp, $nonce);
+		$tmp = array($this->_weixin_token, $this->_timestamp, $this->_nonce);
 		sort($tmp);
 
 		$str = sha1(implode($tmp));
 
-		return $str == $signature ? TRUE : FALSE;
+		return $str == $this->_signature ? TRUE : FALSE;
 	}
 }
 
