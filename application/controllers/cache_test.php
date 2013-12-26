@@ -17,8 +17,7 @@ class Cache_test extends CI_Controller {
 		{
 			if ($user !== FALSE)
 			{
-				// cached for ten minutes.
-				$this->cache->file->save('user', $user, 600);
+				$this->cache->file->save('user', $user);
 			}
 		}
 
