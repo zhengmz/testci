@@ -3,22 +3,61 @@
 /**
  *	微信公众平台消息接口
  *
- *
  *	@package	Weixin
- *	@subpackage Libraries
+ *	@subpackage	Libraries
  *	@category	API
- *	@author		Kshan <kshan@qq.com>
- *	@modify		zhengmz
+ *	@author		zhengmz
  *	@link
  */
 class Weixin
 {
+	/**
+	 * 用来保存TOKEN
+	 * @var string
+	 * @access protected
+	 */
 	protected $_weixin_token = 'weixin';
+	/**
+	 * 用来保存微信加密签名
+	 * @var string
+	 * @access protected
+	 */
 	protected $_signature = '';
+	/**
+	 * 用来保存时间戳
+	 * @var string
+	 * @access protected
+	 */
 	protected $_timestamp = '';
+	/**
+	 * 用来保存随机数
+	 * @var string
+	 * @access protected
+	 */
 	protected $_nonce = '';
+	/**
+	 * 用来保存随机字符串
+	 * @var string
+	 * @access protected
+	 */
 	protected $_echostr = '';
+	/**
+	 * 用来保存传入消息, 对象格式
+	 * @var object
+	 * @access protected
+	 */
+	protected $_msg_obj = NULL;
+	/**
+	 * 用来保存传入消息, 数据格式
+	 * @var array
+	 * @access protected
+	 */
+	protected $_msg_arr = array();
 
+	/**
+	 * 构造函数
+	 * 调用initialize方法进行初始化
+	 */
 	public function __construct($config = array())
 	{
 		$this->initialize($config);
@@ -60,6 +99,18 @@ class Weixin
 
 		// 验证消息真实性和开发者认证
 		$this->_valid();
+
+		// 读取用户消息
+		$post = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents('php://input');
+		log_message('debug', 'post = '.$post);
+
+		//extract post data
+		if (! empty($post))
+		{
+			$this->_msg_obj = simplexml_load_string($post, 'SimpleXMLElement', LIBXML_NOCDATA);
+			$this->_msg_arr = get_object_vars($this->_msg_obj);
+		}
+
 	}
 
 	/**
@@ -67,18 +118,19 @@ class Weixin
 	 *
 	 * @return object 微信接口对象
 	 */
+	public function msg_obj()
+	{
+		return $this->_msg_obj;
+	}
+
+	/**
+	 * 接收消息
+	 *
+	 * @return array 微信接口数组
+	 */
 	public function msg()
 	{
-		$post = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents('php://input');
-		log_message('debug', 'post = '.$post);
-
-		//extract post data
-		if (empty($post))
-		{
-			return NULL;
-		}
-
-		return simplexml_load_string($post, 'SimpleXMLElement', LIBXML_NOCDATA);
+		return $this->_msg_arr;
 	}
 
 	/**

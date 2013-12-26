@@ -27,52 +27,26 @@ class Wx_home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$post_arr = $this->_parse_post($this->weixin->msg());
-		if (count($post_arr) == 0)
+		$post_arr = $this->weixin->msg();
+		if (empty($post_arr))
 		{
 			echo "Cannot get post data from wechat!";
 			exit;
 		}
 
-		if ($post_arr['type'] == 'text')
+		if ($post_arr['MsgType'] == 'text')
 		{
-			$respone_str = $post_arr['from'].', 你好! '.chr(13).chr(10);
-			$respone_str .= 'Your msg is : '.$post_arr['content'];
+			$respone_str = $post_arr['FromUserName'].', 你好! '.chr(13).chr(10);
+			$respone_str .= 'Your msg is : '.$post_arr['Content'];
 			$data = array(
-				'to' => $post_arr['from'],
-				'from' => $post_arr['to'],
+				'to' => $post_arr['FromUserName'],
+				'from' => $post_arr['ToUserName'],
 				'time' => time(),
 				'type' => 'text',
 				'content' => $respone_str
 			);
 			$this->load->view('weixin/text', $data);
 		}
-
-	}
-
-	/**
-	 * 分解XML格式的HTTP_RAW_POST_DATA数据
-	 *
-	 * @return array 失败返回空数组
-	 */
-	private function _parse_post($post_obj)
-	{
-		$ret_arr = array();
-		if (empty($post_obj))
-		{
-			log_message('debug', "Cannot get HTTP_RAW_POST_DATA");
-			return $ret_arr;
-		}
-		$ret_arr['from'] = $post_obj->FromUserName;
-		$ret_arr['to'] = $post_obj->ToUserName;
-		$ret_arr['time'] = $post_obj->CreateTime;
-		$ret_arr['type'] = $post_obj->MsgType;
-
-		if ($ret_arr['type'] == 'text')
-		{
-			$ret_arr['content'] = trim($post_obj->Content);
-		}
-		return $ret_arr;
 	}
 }
 
