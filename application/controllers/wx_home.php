@@ -40,10 +40,10 @@ class Wx_home extends CI_Controller {
 			$respone_str .= 'Your msg is : '.$post_arr['Content'];
 			$data = array(
 				'to' => $post_arr['FromUserName'],
-				//'from' => $post_arr['ToUserName'],
-				'from' => '',
+				'from' => $post_arr['ToUserName'],
 				'time' => time(),
-				'type' => 'text',
+				//'type' => 'text',
+				'type' => '',
 				'content' => $respone_str
 			);
 			$this->load->view('weixin/text', $data);
