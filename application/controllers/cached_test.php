@@ -1,6 +1,6 @@
 <?php
 
-class Cache extends CI_Controller {
+class Cache_test extends CI_Controller {
  
 	function index()
 	{
@@ -38,5 +38,5 @@ class Cache extends CI_Controller {
 	}
 }
 
-/* End of file cache.php */
-/* Location: ./application/controllers/cache.php */
+/* End of file cache_test.php */
+/* Location: ./application/controllers/cache_test.php */
