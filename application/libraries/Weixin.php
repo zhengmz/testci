@@ -11,7 +11,7 @@
  *	@modify		zhengmz
  *	@link
  */
-class Weixin_lib
+class Weixin
 {
 	protected $_weixin_token = 'weixin';
 
@@ -32,7 +32,7 @@ class Weixin_lib
 		$this->CI = &get_instance();
 		$this->_valid();
 
-		log_message('debug', "Weixin_lib library Initialized");
+		log_message('debug', "Weixin library Initialized");
 	}
 
 	/**
@@ -103,5 +103,5 @@ class Weixin_lib
 	}
 }
 
-/* End of file Weixin_lib.php */
-/* Location: ./application/libraries/Weixin_lib.php */
+/* End of file Weixin.php */
+/* Location: ./application/libraries/Weixin.php */

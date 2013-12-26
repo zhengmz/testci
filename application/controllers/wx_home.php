@@ -3,13 +3,13 @@
 /**
  * 微信控制器
  *
- * @package		Weixin
+ * @package		Wx_home
  * @subpackage		Libraries
  * @category		Libraries
  * @author		zhengmz
  * @link		http://mp.weixin.qq.com/wiki/index.php?title=接入指南
  */
-class Weixin extends CI_Controller {
+class Wx_home extends CI_Controller {
 
 	/**
 	 * 构造函数
@@ -18,8 +18,8 @@ class Weixin extends CI_Controller {
 	{
 		parent::__construct();
 		
-		$this->load->library('weixin_lib');
-		log_message('debug', "Weixin Controller Initialized");
+		$this->load->library('weixin');
+		log_message('debug', "Wx_home Controller Initialized");
 	}
 
 	/**
@@ -27,7 +27,7 @@ class Weixin extends CI_Controller {
 	 */
 	public function index()
 	{
-		$post_arr = $this->_parse_post($this->weixin_lib->msg());
+		$post_arr = $this->_parse_post($this->weixin->msg());
 		if (count($post_arr) == 0)
 		{
 			echo "Cannot get post data from wechat!";
@@ -97,5 +97,5 @@ class Weixin extends CI_Controller {
 	}
 }
 
-/* End of file weixin.php */
-/* Location: ./application/controllers/weixin.php */
+/* End of file wx_home.php */
+/* Location: ./application/controllers/wx_home.php */
