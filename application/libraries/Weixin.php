@@ -141,8 +141,16 @@ class Weixin
 	public function send($text = '')
 	{
 		echo $text;
-		sleep(2);
-		return _get_post();
+	}
+
+	/**
+	 *  获取返回结果
+	 * 
+	 * @return string 返回码
+	 */
+	public function send($text = '')
+	{
+		return $this->_get_post();
 	}
 
 	/**
@@ -150,7 +158,7 @@ class Weixin
 	 * 
 	 * @return string 接收的消息
 	 */
-	public function _get_post()
+	protected function _get_post()
 	{
 		// 读取用户消息
 		return isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents('php://input');
