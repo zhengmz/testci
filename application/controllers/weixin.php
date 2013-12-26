@@ -1,11 +1,6 @@
 <?php  if ( ! defined('APPPATH')) exit('No direct script access allowed');
 
 /**
- * 定义微信接入TOKEN
- */
-define("TOKEN", "wx_mifi_token_2013");
-
-/**
  * 微信控制器
  *
  * @package		Weixin
@@ -23,7 +18,8 @@ class Weixin extends CI_Controller {
 	{
 		parent::__construct();
 		
-		log_message('debug', "Weixin Class Initialized");
+		$this->load->library('weixin');
+		log_message('debug', "Weixin Controller Initialized");
 	}
 
 	/**
@@ -31,23 +27,38 @@ class Weixin extends CI_Controller {
 	 */
 	public function index()
 	{
-		//验证真实客户消息
-		if ($this->_valid() === FALSE)
-		{
-			echo "This must be called by wechat!";
-			exit;
-		}
-
-		$post_arr = $this->_parse_post();
+		$post_arr = $this->_parse_post($this->weixin->msg());
 		if (count($post_arr) == 0)
 		{
 			echo "Cannot get post data from wechat!";
 			exit;
 		}
+
+		$this->load->library('user_agent');
+
+		$agent = '';
+		if ($this->agent->is_browser())
+		{
+		    $agent .= 'is_browser: '.$this->agent->browser().' '.$this->agent->version().chr(13).chr(10);
+		}
+		if ($this->agent->is_robot())
+		{
+		    $agent .= 'is_robot: '.$this->agent->robot().chr(13).chr(10);
+		}
+		if ($this->agent->is_mobile())
+		{
+		    $agent .= 'is_mobile: '.$this->agent->mobile().chr(13).chr(10);
+		}
+		if ($agent == '')
+		{
+		    $agent = 'Unidentified User Agent';
+		}
+
 		if ($post_arr['type'] == 'text')
 		{
 			$respone_str = $post_arr['from'].', 你好! '.chr(13).chr(10);
-			$respone_str = $respone_str.'Your msg is : '.$post_arr['content'];
+			$respone_str .= 'Your msg is : '.$post_arr['content'].chr(13).chr(10);
+			$respone_str .= 'You are from : '.$agent;
 			$data = array(
 				'to' => $post_arr['from'],
 				'from' => $post_arr['to'],
@@ -65,18 +76,14 @@ class Weixin extends CI_Controller {
 	 *
 	 * @return array 失败返回空数组
 	 */
-	private function _parse_post()
+	private function _parse_post($post_obj)
 	{
-		$post_str = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");
-
-		log_message('debug', "post_str = ".$post_str);
 		$ret_arr = array();
-		if (empty($post_str))
+		if (empty($post_obj))
 		{
 			log_message('debug', "Cannot get HTTP_RAW_POST_DATA");
 			return $ret_arr;
 		}
-		$post_obj = simplexml_load_string($post_str, 'SimpleXMLElement', LIBXML_NOCDATA);
 		$ret_arr['from'] = $post_obj->FromUserName;
 		$ret_arr['to'] = $post_obj->ToUserName;
 		$ret_arr['time'] = $post_obj->CreateTime;
@@ -88,56 +95,7 @@ class Weixin extends CI_Controller {
 		}
 		return $ret_arr;
 	}
-
-	/**
-	 * 验证函数
-	 *
-	 * @return boolean 成功返回TRUE，失败返回FASLE
-	 */
-	private function _valid()
-	{
-		$signature = $this->input->get('signature');
-		$timestamp = $this->input->get('timestamp');
-		$nonce = $this->input->get('nonce');
-		$echostr = $this->input->get('echostr');
-
-		log_message('debug', "signature = ".$signature);
-		log_message('debug', "timestamp = ".$timestamp);
-		log_message('debug', "nonce = ".$nonce);
-		log_message('debug', "echostr = ".$echostr);
-		//valid signature , option
-		if ($this->_check_signature($signature, $timestamp, $nonce))
-		{
-			if ($echostr !== FALSE)
-			{
-				echo $echostr;
-				exit;
-			}
-			return TRUE;
-		}
-		return FALSE;
-	}
-
-	/**
-	 * 验证算法
-	 *
-	 * @return boolean 成功返回TRUE，失败返回FASLE
-	 */
-	private function _check_signature($signature, $timestamp, $nonce)
-	{
-		$token = TOKEN;
-		$tmpArr = array($token, $timestamp, $nonce);
-		sort($tmpArr);
-		$tmpStr = implode( $tmpArr );
-		$tmpStr = sha1( $tmpStr );
-		
-		if( $tmpStr == $signature ){
-			return TRUE;
-		}else{
-			return FALSE;
-		}
-	}
 }
 
-/* End of file blog.php */
-/* Location: ./application/controllers/blog.php */
+/* End of file weixin.php */
+/* Location: ./application/controllers/weixin.php */
