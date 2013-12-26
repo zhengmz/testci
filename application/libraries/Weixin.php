@@ -100,17 +100,16 @@ class Weixin
 		// 验证消息真实性和开发者认证
 		$this->_valid();
 
-		// 读取用户消息
-		$post = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents('php://input');
-		log_message('debug', 'post = '.$post);
+		// 处理用户消息
+		$post = $this->_get_post();
 
+		log_message('debug', 'post = '.$post);
 		//extract post data
 		if (! empty($post))
 		{
 			$this->_msg_obj = simplexml_load_string($post, 'SimpleXMLElement', LIBXML_NOCDATA);
 			$this->_msg_arr = get_object_vars($this->_msg_obj);
 		}
-
 	}
 
 	/**
@@ -131,6 +130,30 @@ class Weixin
 	public function msg()
 	{
 		return $this->_msg_arr;
+	}
+
+	/**
+	 *  发送消息
+	 * 
+	 * @param string $text 消息
+	 * @return string 返回码
+	 */
+	public function send($text = '')
+	{
+		echo $text;
+		sleep(2);
+		return _get_post();
+	}
+
+	/**
+	 * 接收用户消息
+	 * 
+	 * @return string 接收的消息
+	 */
+	public function _get_post()
+	{
+		// 读取用户消息
+		return isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents('php://input');
 	}
 
 	/**
