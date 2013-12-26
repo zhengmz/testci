@@ -4,7 +4,7 @@
 </head>
 <body>
 
-<?php echo form_open('cache'); ?>
+<?php echo form_open('cache_test'); ?>
 
 <h5>Username</h5>
 <input type="text" name="user" value="<?=$user?>" size="50" />

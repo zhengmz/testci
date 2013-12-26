@@ -5,33 +5,29 @@ class Cache_test extends CI_Controller {
 	function index()
 	{
 		$this->load->helper(array('form', 'url', 'html'));
-		$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
-
-		$data = array(
-			'user' => '',
-			'pwd' => '',
-			'email' => ''
-		};
+		$this->load->driver('cache');
 
 		$user = $this->input->post('user');
-		if ( $user !== FALSE )
+		if ($user !== FALSE)
 		{
-			if ( ! $cache_user = $this->cache->get('user'))
+			$cache_user = $this->cache->file->get('user');
+			if ($cache_user === FALSE)
 			{
 				// cached for ten minutes.
-				$this->cache->save('user', $user, 600);
+				$this->cache->file->save('user', $user, 600);
 			}
 			else
 			{
 				$user = $cache_user;
 			}
 
-			$data = array(
-				'user' => $user,
-				'pwd' => $this->input->post('pwd'),
-				'email' => $this->input->post('email')
-			};
 		}
+
+		$data = array(
+			'user' => $user,
+			'pwd' => $this->input->post('pwd'),
+			'email' => $this->input->post('email')
+		);
 
 		 
 		$this->load->view('cache_form', $data);
