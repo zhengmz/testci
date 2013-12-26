@@ -42,8 +42,8 @@ class Wx_home extends CI_Controller {
 				'to' => $post_arr['FromUserName'],
 				'from' => $post_arr['ToUserName'],
 				'time' => time(),
-				//'type' => 'text',
-				'type' => '',
+				'type' => 'text',
+				//'type' => '',
 				'content' => $respone_str
 			);
 			$xml = $this->load->view('weixin/text', $data, TRUE);
