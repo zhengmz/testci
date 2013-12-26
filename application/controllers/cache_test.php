@@ -8,19 +8,18 @@ class Cache_test extends CI_Controller {
 		$this->load->driver('cache');
 
 		$user = $this->input->post('user');
-		if ($user !== FALSE)
+		$cache_user = $this->cache->file->get('user');
+		if ($cache_user !== FALSE)
 		{
-			$cache_user = $this->cache->file->get('user');
-			if ($cache_user === FALSE)
+			$user = $cache_user;
+		}
+		else
+		{
+			if ($user !== FALSE)
 			{
 				// cached for ten minutes.
 				$this->cache->file->save('user', $user, 600);
 			}
-			else
-			{
-				$user = $cache_user;
-			}
-
 		}
 
 		$data = array(
