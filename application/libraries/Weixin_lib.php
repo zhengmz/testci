@@ -33,7 +33,6 @@ class Weixin_lib
 		$this->_valid();
 
 		log_message('debug', "Weixin_lib library Initialized");
-		log_message('debug', "TOKEN = ".$this->_weixin_token);
 	}
 
 	/**
@@ -94,6 +93,7 @@ class Weixin_lib
 		log_message('debug', "signature = ".$signature);
 		log_message('debug', "timestamp = ".$timestamp);
 		log_message('debug', "nonce = ".$nonce);
+		log_message('debug', "TOKEN = ".$this->_weixin_token);
 		$tmp = array($this->_weixin_token, $timestamp, $nonce);
 		sort($tmp);
 
