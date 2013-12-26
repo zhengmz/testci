@@ -34,14 +34,14 @@ class Weixin extends CI_Controller {
 		//验证真实客户消息
 		if ($this->_valid() === FALSE)
 		{
-			echo "Error!";
+			echo "This must be called by wechat!";
 			exit;
 		}
 
 		$post_arr = $this->_parse_post();
-		if (empty($post_arr))
+		if (count($post_arr) == 0)
 		{
-			echo "Error!";
+			echo "Cannot get post data from wechat!";
 			exit;
 		}
 		if ($post_arr['type'] == 'text')
