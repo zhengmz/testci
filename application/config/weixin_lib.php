@@ -10,5 +10,5 @@
 //微信公众平台上的 TOKEN
 $config['weixin_token'] = 'wx_mifi_token_2013';
 
-/* End of file weixin.php */
-/* Location: ./application/config/weixin.php */
+/* End of file weixin_lib.php */
+/* Location: ./application/config/weixin_lib.php */
