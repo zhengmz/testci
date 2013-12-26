@@ -46,10 +46,7 @@ class Wx_home extends CI_Controller {
 				//'type' => '',
 				'content' => $respone_str
 			);
-			$xml = $this->load->view('weixin/text', $data, TRUE);
-			$this->output->set_output($xml);
-			$ret_code = $this->weixin->get_ret_code();
-			log_message('debug', "return code is : ".$ret_code);
+			$this->load->view('weixin/text', $data);
 		}
 	}
 }
