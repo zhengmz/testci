@@ -17,8 +17,10 @@ class Weixin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$echostr = $this->input->get('echostr');
+		log_message('debug', 'echostr = '.$echostr);
 		
-		$this->load->library('weixin');
+		$this->load->library('weixin_lib');
 		log_message('debug', "Weixin Controller Initialized");
 	}
 
@@ -27,7 +29,7 @@ class Weixin extends CI_Controller {
 	 */
 	public function index()
 	{
-		$post_arr = $this->_parse_post($this->weixin->msg());
+		$post_arr = $this->_parse_post($this->weixin_lib->msg());
 		if (count($post_arr) == 0)
 		{
 			echo "Cannot get post data from wechat!";
