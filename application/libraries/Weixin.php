@@ -26,14 +26,14 @@ class Weixin {
 				if(isset($this->{'_' . $key}))
 				{
 					$this->{'_' . $key} = $val;
-				}				
+				}
 			}
 		}
 		$this->CI = &get_instance();
 
 		$this->_valid();
 
-		log_message('debug', "Weixin Class Initialized");		
+		log_message('debug', "Weixin Class Initialized");
 	}
 
 	/**
@@ -44,7 +44,8 @@ class Weixin {
 	public function msg()
 	{
 		$post = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");
-				
+		log_message('debug', "post = ".$post);
+
 		//extract post data
 		if (empty($post))
 		{
@@ -71,7 +72,7 @@ class Weixin {
 		// 文本消息
 		if ($type == 'text') 
 		{
-            		$tpl = "<xml>
+			$tpl = "<xml>
 				<ToUserName><![CDATA[%s]]></ToUserName>
 				<FromUserName><![CDATA[%s]]></FromUserName>
 				<CreateTime>%s</CreateTime>
@@ -81,20 +82,20 @@ class Weixin {
 				</xml>"; 
 
 			echo sprintf($tpl, $msg['to'], $msg['from'], $msg['time'], $type, $msg['content'], $tag);
-			exit;							
+			exit;
 		}
 
 		// 图文消息
 		if ($type = 'news')
 		{
-            		$tpl = "<xml>
+			$tpl = "<xml>
 				<ToUserName><![CDATA[%s]]></ToUserName>
 				<FromUserName><![CDATA[%s]]></FromUserName>
 				<CreateTime>%s</CreateTime>
 				<MsgType><![CDATA[%s]]></MsgType>
 				<Content><![CDATA[]]></Content>
 				<ArticleCount>%s</ArticleCount>
-				<Articles>"; 
+				<Articles>";
 
 			$output = sprintf($tpl, $msg['to'], $msg['from'], $msg['time'], $type, count($msg['items']));
 
@@ -109,16 +110,15 @@ class Weixin {
 
 				$output .= sprintf($tpl, $item['title'], trim($item['description']), $item['picurl'], $item['url']);
 			}
-
 			$tpl = "</Articles>
-     				<FuncFlag>%s</FuncFlag>
-    				</xml>";
+				<FuncFlag>%s</FuncFlag>
+				</xml>";
 
-    		$output .= sprintf($tpl, $tag);
+			$output .= sprintf($tpl, $tag);
 
-    		echo $output;
-    		exit;    		
-    	}
+			echo $output;
+			exit;    		
+		}
 	}
 
 	/**
@@ -134,11 +134,11 @@ class Weixin {
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$geo = curl_exec($ch);
-		curl_close($ch);	
-		
-		$geo = json_decode($geo, TRUE);	
+		curl_close($ch);
+
+		$geo = json_decode($geo, TRUE);
 
 		// 不存在有效地理信息
 		if ( ! isset($geo['results']))
@@ -166,6 +166,7 @@ class Weixin {
 		// 随机字符串
 		$echostr = $this->CI->input->get('echostr');
 		
+		log_message('debug', "echostr = ".$echostr);		
 		if ($this->_check_signature())
 		{
 			echo $echostr;
@@ -191,6 +192,9 @@ class Weixin {
 		// 随机数
 		$nonce = $this->CI->input->get('nonce');
 
+		log_message('debug', "signature = ".$signature);
+		log_message('debug', "timestamp = ".$timestamp);
+		log_message('debug', "nonce = ".$nonce);
 		$tmp = array($this->_weixin_token, $timestamp, $nonce);
 		sort($tmp);
 
