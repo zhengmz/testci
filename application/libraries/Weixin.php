@@ -7,7 +7,7 @@
  *	@subpackage	Libraries
  *	@category	API
  *	@author		zhengmz
- *	@link
+ *	@link		http://mp.weixin.qq.com/wiki/index.php?title=接入指南
  */
 class Weixin {
 
@@ -89,9 +89,9 @@ class Weixin {
 	}
 
 	/**
-	 * 初始化
+	 * 初始化: 将配置参数保持给成员变量，同时将post数据读出
 	 *
-	 * @param	array
+	 * @param	array	配置参数
 	 * @return	void
 	 */
 	public function initialize($config = array())
@@ -120,7 +120,7 @@ class Weixin {
 		log_message('debug', 'echostr = '.$this->_echostr);
 		log_message('debug', "TOKEN = ".$this->_weixin_token);
 
-		// 验证消息真实性和开发者认证
+		// 验证消息真实性, 并支持开发者认证
 		$this->_valid();
 
 		// 读取用户消息
@@ -156,7 +156,75 @@ class Weixin {
 	}
 
 	/**
+	 * 获取微信接口访问所需的access_token
+	 * 使用的成员变量: _appid, _appsecret
+	 *
+	 * @return string 返回access_token
+	 */
+	protected function _get_access_token()
+	{
+		$params = array (
+			'grant_type' => 'client_credential',
+			'appid' => $this->_appid,
+			'secret' => $this->_appsecret
+		);
+
+		$ret_arr = $this->_wx_url_api('token', 'GET', $params);
+	}
+
+	/**
+	 * 访问weixin接口
+	 * @param string 调用的方法名，如'token', 'menu/create'等
+	 * @param string 调用类型, 有三种方式: GET, POST, GET_POST
+	 * @param array 使用GET调用的参数数组
+	 * @param var 使用POST调用的参数
+	 *
+	 * @return array 根据返回的json对象转为数组
+	 */
+	protected function _wx_url_api($method, $get_post = 'GET', $get_params = array(), $post_params = NULL)
+	{
+		$url_base = 'https://api.weixin.qq.com/cgi-bin/';
+
+		$url = $url_base.$method.'?';
+		if ($get_post == 'GET')
+		{
+			$get_str = '';
+			foreach ($get_params as $key => $val)
+			{
+				if ($ == 1)
+			}
+		}
+		$url = sprintf('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s', $this->_appid, $this->_appsecret);
+		
+		$url = sprintf('http://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&sensor=false&language=' . $language, $lat, $lng);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  
+		$geo = curl_exec($ch);
+		curl_close($ch);	
+		
+		$geo = json_decode($geo, TRUE);	
+
+		// 不存在有效地理信息
+		if ( ! isset($geo['results']))
+		{
+			return;
+		}
+
+		$output = array();
+
+		foreach ($geo['results'][0]['address_components'] as $address)
+		{
+			$output[$address['types'][0]] = $address['long_name'];
+		}
+
+		return $output;
+	}
+
+	/**
 	 * 接入是否生效
+	 * 使用到成员变量: _echostr, _signature
 	 *
 	 * @return void
 	 */
@@ -175,6 +243,7 @@ class Weixin {
 
 	/**
 	 * 通过检验signature对网址接入合法性进行校验
+	 * 使用到成员变量: _weixin_token, _timestamp, _nonce, _signature
 	 *
 	 * @return bool
 	 */
