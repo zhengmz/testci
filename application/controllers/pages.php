@@ -81,6 +81,7 @@ class Pages extends CI_Controller {
 
 			    'table_close'         => '</table>'
 		      );
+		echo 'tmpl = '.implode('&', $tmpl);
 
 		$this->table->set_template($tmpl);
 		$this->table->set_caption('Colors');
