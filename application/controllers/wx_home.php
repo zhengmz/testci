@@ -19,6 +19,7 @@ class Wx_home extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->library('weixin');
+		$this->load->library('wx_api');
 		log_message('debug', "Wx_home Controller Initialized");
 	}
 
@@ -27,10 +28,7 @@ class Wx_home extends CI_Controller {
 	 */
 	public function index()
 	{
-		// 验证接入消息的真实性, 支持开发者认证
-		$this->weixin->valid();
-
-		$post_arr = $this->weixin->msg();
+		$post_arr = $this->weixin->msg_arr();
 		if (empty($post_arr))
 		{
 			echo "Cannot get post data from wechat!";
@@ -39,7 +37,7 @@ class Wx_home extends CI_Controller {
 
 		if ($post_arr['MsgType'] == 'text')
 		{
-			$from = $this->weixin->get_user_info($post_arr['FromUserName'])->nickname;
+			$from = $this->wx_api->get_user_info($post_arr['FromUserName'])->nickname;
 			$respone_str = $from.', 你好! '.chr(13).chr(10);
 			$respone_str .= '你的消息是: ['.$post_arr['Content'].'].';
 			$data = array(
@@ -55,11 +53,11 @@ class Wx_home extends CI_Controller {
 	}
 	public function action()
 	{
-		$user_1 = $this->weixin->get_user_info('oepyJt6gXLGhAniv2Z33xfaYFNUE');
+		$user_1 = $this->wx_api->get_user_info('oepyJt6gXLGhAniv2Z33xfaYFNUE');
 		echo '<p>receive user 1: </p>';
 		print_r($user_1);
 		echo '<p>user 1: '.$user_1->nickname.'</p>';
-		$user_2 = $this->weixin->get_user_info('abcd');
+		$user_2 = $this->wx_api->get_user_info('abcd');
 		echo '<p>receive user 2: </p>';
 		print_r($user_2);
 		echo '<p>user 2: '.$user_2->nickname.'</p>';
