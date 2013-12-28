@@ -33,8 +33,6 @@ class Blog extends CI_Controller {
 			    'blog_entries' => $blog_entries
 			    );
 
-		echo "data = ".implode('&',$data);
-
 		$this->parser->parse('blog_template', $data);
 
 $this->load->library('user_agent');
