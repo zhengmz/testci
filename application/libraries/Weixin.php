@@ -159,7 +159,7 @@ class Weixin {
 	 * 获取微信接口访问所需的access_token
 	 * 使用的成员变量: _appid, _appsecret
 	 *
-	 * @return string 返回access_token
+	 * @return string 返回access_token, 错误返回FALSE
 	 */
 	protected function _get_access_token()
 	{
@@ -175,49 +175,60 @@ class Weixin {
 	/**
 	 * 访问weixin接口
 	 * @param string 调用的方法名，如'token', 'menu/create'等
-	 * @param string 调用类型, 有三种方式: GET, POST, GET_POST
 	 * @param array 使用GET调用的参数数组
-	 * @param var 使用POST调用的参数
+	 * @param array 使用POST调用的参数, 如果非空, 则自动使用POST方法
 	 *
 	 * @return array 根据返回的json对象转为数组
 	 */
-	protected function _wx_url_api($method, $get_post = 'GET', $get_params = array(), $post_params = NULL)
+	protected function _wx_url_api($method, $get_params = array(), $post_params = array())
 	{
 		$url_base = 'https://api.weixin.qq.com/cgi-bin/';
 
-		$url = $url_base.$method.'?';
-		if ($get_post == 'GET')
+		$url = $url_base.$method;
+		$get_param_str = '';
+		foreach ($get_params as $key => $val)
 		{
-			$get_str = '';
-			foreach ($get_params as $key => $val)
+			if ($get_param_str !== '')
 			{
-				if ($ == 1)
+				$get_param_str .= '&';
 			}
+			$get_param_str .= $key.'='.$val;
 		}
-		$url = sprintf('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s', $this->_appid, $this->_appsecret);
-		
-		$url = sprintf('http://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&sensor=false&language=' . $language, $lat, $lng);
+		if ($get_param_str !== '')
+		{
+			$url .= '?'.$get_param_str;
+		}
 
+		$url_params = array (
+			CURLOPT_URL => $url,
+			CURLOPT_RETURNTRANSFER => TRUE,
+		);
+		if (!empty($post_params))
+		{
+			CURLOPT_POST=>true,
+              		CURLOPT_POSTFIELDS=>$post_params
+		}
+		
+		$geo = json_decode($geo, TRUE);
+	}
+
+	/**
+	 * 使用curl方法获取远程url的数据
+	 * @param array curl_setopt所需要的参数
+	 *
+	 * @return string
+	 */
+	protected function _get_from_url($url_params)
+	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  
-		$geo = curl_exec($ch);
-		curl_close($ch);	
-		
-		$geo = json_decode($geo, TRUE);	
-
-		// 不存在有效地理信息
-		if ( ! isset($geo['results']))
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		foreach ($url_params as $key => $val)
 		{
-			return;
+			curl_setopt($ch, $key, $val);
 		}
-
-		$output = array();
-
-		foreach ($geo['results'][0]['address_components'] as $address)
-		{
-			$output[$address['types'][0]] = $address['long_name'];
-		}
+		$output = curl_exec($ch);
+		curl_close($ch);
 
 		return $output;
 	}
