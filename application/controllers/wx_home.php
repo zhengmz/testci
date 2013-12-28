@@ -18,7 +18,6 @@ class Wx_home extends CI_Controller {
 	{
 		parent::__construct();
 		
-		$this->load->library('weixin');
 		$this->load->library('wx_api');
 		log_message('debug', "Wx_home Controller Initialized");
 	}
@@ -28,6 +27,8 @@ class Wx_home extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->library('weixin');
+
 		$post_arr = $this->weixin->msg_arr();
 		if (empty($post_arr))
 		{
