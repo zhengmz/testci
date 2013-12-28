@@ -39,7 +39,8 @@ class Wx_home extends CI_Controller {
 
 		if ($post_arr['MsgType'] == 'text')
 		{
-			$respone_str = $post_arr['FromUserName'].', 你好! '.chr(13).chr(10);
+			$from = $this->weixin->get_user_info($post_arr['FromUserName'])->nickname;
+			$respone_str = $from.', 你好! '.chr(13).chr(10);
 			$respone_str .= '你的消息是: ['.$post_arr['Content'].'].';
 			$data = array(
 				'to' => $post_arr['FromUserName'],
@@ -54,7 +55,14 @@ class Wx_home extends CI_Controller {
 	}
 	public function action()
 	{
-		print_r($this->weixin->get_user_info('abc'));
+		$user_1 = $this->weixin->get_user_info('oepyJt6gXLGhAniv2Z33xfaYFNUE');
+		echo '<p>receive user 1: </p>';
+		print_r($user_1);
+		echo '<p>user 1: '.$user_1->nickname.'</p>';
+		$user_2 = $this->weixin->get_user_info('abcd');
+		echo '<p>receive user 2: </p>';
+		print_r($user_2);
+		echo '<p>user 2: '.$user_2->nickname.'</p>';
 	}
 }
 

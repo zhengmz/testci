@@ -158,7 +158,7 @@ class Weixin {
 	 * 获取用户信息
 	 *
 	 * @param string 用户的openid
-	 * @return array 微信接口数组
+	 * @return array 用户信息数组, 失败返回FALSE
 	 */
 	public function get_user_info($openid)
 	{
@@ -191,12 +191,12 @@ class Weixin {
 			'secret' => $this->_appsecret
 			);
 		$ret = $this->_wx_url_api('token', $params);
-		$access_token = $ret['access_token'];
-		$expires_in = $ret['expires_in'];
-		if (empty($ret['access_token']))
+		$access_token = $ret->access_token;
+		$expires_in = $ret->expires_in;
+		if (empty($access_token))
 		{
-			echo '错误代码: '.$ret['errcode'].'\n';
-			echo '错误信息: '.$ret['errmsg'];
+			echo '错误代码: '.$ret->errcode.'\n';
+			echo '错误信息: '.$ret->errmsg;
 			return FALSE;
 		}
 
@@ -212,7 +212,7 @@ class Weixin {
 	 * @param string 调用的方法名，如'token', 'menu/create'等
 	 * @param array 使用GET调用的参数数组
 	 * @param var 使用POST调用的参数, 如果非空, 则自动使用POST方法
-	 * @return array 根据返回的json对象转为数组
+	 * @return object 根据返回的json字符串转为对象
 	 */
 	protected function _wx_url_api($method, $get_params = array(), $post_params = NULL)
 	{
@@ -243,7 +243,8 @@ class Weixin {
 		}
 		
 		// 将返回的json数据转为数组
-		return json_decode($this->_get_from_url($url_params), TRUE);
+		//return json_decode($this->_get_from_url($url_params), TRUE);
+		return json_decode($this->_get_from_url($url_params));
 	}
 
 	/**
