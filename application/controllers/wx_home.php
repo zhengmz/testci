@@ -27,6 +27,9 @@ class Wx_home extends CI_Controller {
 	 */
 	public function index()
 	{
+		// 验证接入消息的真实性, 支持开发者认证
+		$this->weixin->valid();
+
 		$post_arr = $this->weixin->msg();
 		if (empty($post_arr))
 		{
@@ -48,6 +51,10 @@ class Wx_home extends CI_Controller {
 			);
 			$this->load->view('weixin/text', $data);
 		}
+	}
+	public function action()
+	{
+		print_r($this->weixin->get_user_info('abc'));
 	}
 }
 
