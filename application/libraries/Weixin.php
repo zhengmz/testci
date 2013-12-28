@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('APPPATH')) exit('No direct script access allowed');
 
 /**
  *	微信公众平台消息接口
@@ -24,30 +24,6 @@ class Weixin {
 	 */
 	protected $_open_id = '';
 	/**
-	 * 用来保存微信加密签名
-	 * @var string
-	 * @access protected
-	 */
-	protected $_signature = '';
-	/**
-	 * 用来保存时间戳
-	 * @var string
-	 * @access protected
-	 */
-	protected $_timestamp = '';
-	/**
-	 * 用来保存随机数
-	 * @var string
-	 * @access protected
-	 */
-	protected $_nonce = '';
-	/**
-	 * 用来保存随机字符串
-	 * @var string
-	 * @access protected
-	 */
-	protected $_echostr = '';
-	/**
 	 * 用来保存传入消息, 对象格式
 	 * @var object
 	 * @access protected
@@ -59,6 +35,12 @@ class Weixin {
 	 * @access protected
 	 */
 	protected $_msg_arr = array();
+	/**
+	 * 用来访问CodeIgniter资源
+	 * @var object
+	 * @access protected
+	 */
+	protected $CI = NULL;
 
 
 	// ---------------------------------------------------------------
@@ -77,22 +59,14 @@ class Weixin {
 	}
 
 	/**
-	 * 初始化: 将配置参数保持给成员变量，同时将post数据读出
+	 * 初始化: 将配置参数赋值给成员变量
 	 *
 	 * @param	array	配置参数
 	 * @return	void
 	 */
 	public function initialize($config = array())
 	{
-		$CI = &get_instance();
-		// 微信加密签名
-		$config['signature'] = $CI->input->get('signature');
-		// 时间戳
-		$config['timestamp'] = $CI->input->get('timestamp');
-		// 随机数
-		$config['nonce'] = $CI->input->get('nonce');
-		// 随机字符串
-		$config['echostr'] = $CI->input->get('echostr');
+		$this->CI = &get_instance();
 
 		foreach ($config as $key => $val)
 		{
@@ -102,22 +76,13 @@ class Weixin {
 			}
 		}
 
-		log_message('debug', "signature = ".$this->_signature);
-		log_message('debug', "timestamp = ".$this->_timestamp);
-		log_message('debug', "nonce = ".$this->_nonce);
-		log_message('debug', 'echostr = '.$this->_echostr);
-		log_message('debug', "TOKEN = ".$this->_weixin_token);
-
-		// 验证消息真实性, 并支持开发者认证
+		// 验证消息真实性，并支持开发者认证
 		$this->_valid();
 
 		// 读取用户消息
 		$post = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents('php://input');
 
 		log_message('debug', 'post = '.$post);
-
-		_msg_obj = NULL;
-		_msg_arr = array();
 		//extract post data
 		if (! empty($post))
 		{
@@ -148,15 +113,35 @@ class Weixin {
 
 	/**
 	 * 接入是否生效
-	 * 使用到成员变量: _echostr
+	 * 通过微信客户端才需要使用此方法
 	 *
 	 * @return void
 	 */
 	protected function _valid()
 	{
-		if ($this->_check_signature())
+		// 微信加密签名
+		$signature = $this->CI->input->get('signature');
+		// 时间戳
+		$timestamp = $this->CI->input->get('timestamp');
+		// 随机数
+		$nonce = $this->CI->input->get('nonce');
+		// 随机字符串
+		$echostr = $this->CI->input->get('echostr');
+
+		log_message('debug', "signature = ".$signature);
+		log_message('debug', "timestamp = ".$timestamp);
+		log_message('debug', "nonce = ".$nonce);
+		log_message('debug', 'echostr = '.$echostr);
+		log_message('debug', "TOKEN = ".$this->_weixin_token);
+
+		if ($this->_check_signature($signature, $timestamp, $nonce))
 		{
-			echo $this->_echostr;
+			// 支持开发者认证
+			if (!empty($echostr))
+			{
+				echo $echostr;
+				exit;
+			}
 		}
 		else
 		{
@@ -167,18 +152,20 @@ class Weixin {
 
 	/**
 	 * 通过检验signature对网址接入合法性进行校验
-	 * 使用到成员变量: _weixin_token, _timestamp, _nonce, _signature
 	 *
+	 * @param string 微信加密签名
+	 * @param string 时间戳
+	 * @param string 随机数
 	 * @return bool
 	 */
-	protected function _check_signature()
+	protected function _check_signature($signature, $timestamp, $nonce)
 	{
-		$tmp = array($this->_weixin_token, $this->_timestamp, $this->_nonce);
+		$tmp = array($this->_weixin_token, $timestamp, $nonce);
 		sort($tmp);
 
 		$str = sha1(implode($tmp));
 
-		return $str == $this->_signature ? TRUE : FALSE;
+		return $str == $signature ? TRUE : FALSE;
 	}
 }
 
