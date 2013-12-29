@@ -121,6 +121,7 @@ class Wx_api {
 	 */
 	protected function _url_encode($data, $is_menu = FALSE)
 	{
+		log_message('debug', "_url_encode: data = ".$data);
 		foreach ($data as $key => $val)
 		{
 			if (is_array($val))
