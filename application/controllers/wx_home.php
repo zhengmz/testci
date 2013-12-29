@@ -122,8 +122,9 @@ class Wx_home extends CI_Controller {
 			echo '<pre>';
 			print_r($menu);
 			echo '</pre>';
+			echo '<pre>';
+			echo 'ret: ';
 			$ret = $this->wx_api->create_menu($menu);
-			echo '<pre>ret: \n';
 			print_r($ret);
 			echo '</pre>';
 			break;
