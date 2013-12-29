@@ -102,12 +102,14 @@ class Wx_api {
 		log_message('debug', "menu = ".$menu);
 		if (is_array($menu))
 		{
+			log_message('debug', "enter create if");
 			$menu = $this->_url_encode($menu, TRUE);
 			log_message('debug', "urlencode menu = ".$menu);
 			$menu = json_encode($menu);
 			log_message('debug', "json menu = ".$menu);
 		}
-		return $this->_menu_operator('create', $menu);
+		return $menu;
+		//return $this->_menu_operator('create', $menu);
 	}
 
 	/**
