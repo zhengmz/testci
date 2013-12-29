@@ -89,16 +89,9 @@ class Wx_api {
 	 */
 	public function create_menu($menu)
 	{
-		foreach ($menu as $key => $val)
-		{
-			if ($get_param_str !== '')
-			{
-				$get_param_str .= '&';
-			}
-			$get_param_str .= $key.'='.$val;
-		}
 		if (is_array($menu))
 		{
+			$menu = _url_encode_arr($menu);
 			$menu = json_encode($menu);
 		}
 		return $this->_menu_operator('create', $menu);
@@ -110,8 +103,20 @@ class Wx_api {
 	 * @param array 传入待编码的数组
 	 * @return array 返回编码后的数组
 	 */
-	protected function _url_encode($data)
+	protected function _url_encode_arr($data)
 	{
+		foreach ($data as $key => $val)
+		{
+			if (is_array($val))
+			{
+				$data[$key] = _url_encode($val);
+			}
+			else
+			{
+				$data[$key] = urlencode($val);
+			}
+		}
+		return $data;
 	}
 
 	/**
