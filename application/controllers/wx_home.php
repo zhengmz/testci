@@ -37,7 +37,7 @@ class Wx_home extends CI_Controller {
 			$from = $this->weixin->get('FromUserName');
 			$from = $this->wx_api->get_user_info($from)->nickname;
 			$response = $from.', 你好! '.chr(13).chr(10);
-			$response .= '你的消息是: ['.$this->weixin->get['Content'].']';
+			$response .= '你的消息是: ['.$this->weixin->get('Content').']';
 			break;
 		default:
 			$response = '未知或暂无处理的类型['.$type.']';
