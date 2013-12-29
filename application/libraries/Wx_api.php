@@ -89,6 +89,10 @@ class Wx_api {
 	 */
 	public function create_menu($menu)
 	{
+		if (is_array($menu))
+		{
+			$menu = json_encode($menu);
+		}
 		return $this->_menu_operator('create', $menu);
 	}
 
@@ -96,10 +100,10 @@ class Wx_api {
 	 * 菜单操作
 	 *
 	 * @param string 菜单接口方法, 有create, get, delete
-	 * @param array 要创建的菜单数组
+	 * @param string 要创建的菜单json
 	 * @return array 成功返回错误码0, 失败非0
 	 */
-	protected function _menu_operator($method, $menu = FALSE)
+	protected function _menu_operator($method, $menu = NULL)
 	{
 		$get_params = array (
 			'access_token' => $this->_get_access_token(),
@@ -149,10 +153,10 @@ class Wx_api {
 	 *
 	 * @param string 调用的方法名，如'token', 'menu/create'等
 	 * @param array 使用GET调用的参数数组
-	 * @param var 使用POST调用的参数, 如果非空, 则自动使用POST方法
+	 * @param string 使用POST调用的参数, 如果非空, 则自动使用POST方法
 	 * @return object 根据返回的json字符串转为对象
 	 */
-	protected function _wx_url_api($method, $get_params = array(), $post_params = FALSE)
+	protected function _wx_url_api($method, $get_params = array(), $post_params = NULL)
 	{
 		$url_base = 'https://api.weixin.qq.com/cgi-bin/';
 
@@ -174,7 +178,7 @@ class Wx_api {
 		$url_params = array();
 		$url_params[CURLOPT_URL] = $url;
 		$url_params[CURLOPT_RETURNTRANSFER] = TRUE;
-		if ($post_params !== FALSE)
+		if ($post_params !== NULL)
 		{
 			$url_params[CURLOPT_POST] = TRUE;
               		$url_params[CURLOPT_POSTFIELDS] = $post_params;
