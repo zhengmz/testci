@@ -30,28 +30,56 @@ class Wx_home extends CI_Controller {
 		$this->load->library('weixin');
 
 		$type = $this->weixin->get('MsgType');
-		$response = '';
 		$from = $this->weixin->get('FromUserName');
+		$nickname = $this->wx_api->get_user_info($from)->nickname;
+		//$response = $nickname.', 你好! '.chr(13).chr(10);
+		$response = sprintf('%s, 你好! \n', $nickname);
 		switch (strtoupper($type))
 		{
 		case 'TEXT':
-			$nickname = $this->wx_api->get_user_info($from)->nickname;
-			$response = $nickname.', 你好! '.chr(13).chr(10);
 			$response .= '你的消息是: ['.$this->weixin->get('Content').']';
 			break;
 		case 'VOICE':
-			$nickname = $this->wx_api->get_user_info($from)->nickname;
-			$response = $nickname.', 你好! '.chr(13).chr(10);
 			$response .= '你的语音消息是: ['.$this->weixin->get('Recognition').']';
 			break;
+		case 'LINK':
+			$response .= '你发过来的链接是: ['.$this->weixin->get('Url').']';
+			break;
+		case 'LOCATION':
+			$response .= vsprintf('你的位置在：X[%s], Y[%s], 缩放[%s], 位置信息[%s]', $this->weixin->get(array('Location_X', 'Location_Y', 'Scale', 'Label'));
+			break;
+		case 'EVENT':
+			$event = $this->weixin->get('Event');
+			switch (strtoupper($event))
+			{
+			// 地理位置
+			case 'LOCATION':
+				$response .= vsprintf('你的位置在：纬度[%s], 经度[%s], 精度[%s]', $this->weixin->get(array('Latitude', 'Longitude', 'Precision'));
+				break;
+			// 订阅
+			case 'SUBSCRIBE':
+				$response .= '欢迎光临小店，我们将竭诚为您服务!';
+				break;
+			// 取消订阅
+			case 'UNSUBSCRIBE':
+				$response .= '欢迎再次光临!';
+				break;
+			// 重新扫描进来
+			case 'SCAN':
+				$response .= '欢迎回来，我们将竭诚为您服务!';
+				break;
+			// 菜单点击
+			case 'CLICK':
+				$response .= sprintf('你点中的菜单项是[%s].', $this->weixin->get('EventKey'));
+				break;
+			default:
+				$response = '暂不支持['.$event.']事件，我们将很快就会推出相关功能';
+			}
+			break;
 		default:
-			$response = '未知或暂无处理的类型['.$type.']';
+			$response = '暂不支持['.$type.']类型，我们将很快就会推出相关功能';
 		}
 
-		if ($response === '')
-		{
-			exit;
-		}
 		$data = array(
 			'to' => $from,
 			'from' => $this->weixin->get('ToUserName'),
