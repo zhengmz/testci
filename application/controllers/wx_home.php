@@ -32,8 +32,7 @@ class Wx_home extends CI_Controller {
 		$type = $this->weixin->get('MsgType');
 		$from = $this->weixin->get('FromUserName');
 		$nickname = $this->wx_api->get_user_info($from)->nickname;
-		//$response = $nickname.', 你好! '.chr(13).chr(10);
-		$response = sprintf('%s, 你好! \n', $nickname);
+		$response = $nickname.', 你好! '.chr(13).chr(10);
 		switch (strtoupper($type))
 		{
 		case 'TEXT':
