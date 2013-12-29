@@ -103,6 +103,9 @@ class Wx_api {
 		{
 			$menu = $this->_url_encode($menu, TRUE);
 			$menu = json_encode($menu);
+			log_message('debug', "json menu: ".$menu);
+			$menu = urlencode($menu);
+			log_message('debug', "urlencode menu: ".$menu);
 		}
 		return $this->_menu_operator('create', $menu);
 	}
