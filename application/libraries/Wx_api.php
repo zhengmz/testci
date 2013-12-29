@@ -99,10 +99,11 @@ class Wx_api {
 	 */
 	public function create_menu($menu)
 	{
+		log_message('debug', "menu = ".$menu);
 		if (is_array($menu))
 		{
 			$menu = $this->_url_encode($menu, TRUE);
-			log_message('debug', "menu = ".$menu);
+			log_message('debug', "urlencode menu = ".$menu);
 			$menu = json_encode($menu);
 			log_message('debug', "json menu = ".$menu);
 		}
