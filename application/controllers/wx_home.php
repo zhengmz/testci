@@ -68,7 +68,12 @@ class Wx_home extends CI_Controller {
 			echo '<p>user 2: '.$user_2->nickname.'</p>';
 			echo '<p>errormsg: '.$user_2->errcode.'-'.$user_2->errmsg.'</p>';
 			break;
-		case 'MENU':
+		case 'GET_MENU':
+			echo '<pre>';
+			print_r($this->wx_api->get_menu());
+			echo '</pre>';
+			break;
+		case 'CREATE_MENU':
 			$sub_menu = array(
 				array(
 					'type' => 'click',
