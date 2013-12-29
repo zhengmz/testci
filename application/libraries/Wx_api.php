@@ -82,10 +82,20 @@ class Wx_api {
 	}
 
 	/**
+	 * 获取菜单
+	 *
+	 * @return object 
+	 */
+	public function get_menu()
+	{
+		return $this->_menu_operator('get');
+	}
+
+	/**
 	 * 创建菜单
 	 *
 	 * @param array 要创建的菜单数组
-	 * @return array 成功返回错误码0, 失败非0
+	 * @return object 成功返回错误码0, 失败非0
 	 */
 	public function create_menu($menu)
 	{
@@ -124,7 +134,7 @@ class Wx_api {
 	 *
 	 * @param string 菜单接口方法, 有create, get, delete
 	 * @param string 要创建的菜单json
-	 * @return array 成功返回错误码0, 失败非0
+	 * @return object 成功返回错误码0, 失败非0
 	 */
 	protected function _menu_operator($method, $menu = NULL)
 	{
