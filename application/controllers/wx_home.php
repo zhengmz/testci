@@ -29,28 +29,33 @@ class Wx_home extends CI_Controller {
 	{
 		$this->load->library('weixin');
 
-		$post_arr = $this->weixin->msg_arr();
-		if (empty($post_arr))
+		$type = $this->weixin->get('MsgType');
+		$response = '';
+		switch (strtoupper($type))
 		{
-			echo "Cannot get post data from wechat!";
-			exit;
+		case 'TEXT':
+			$from = $this->weixin->get('FromUserName');
+			$from = $this->wx_api->get_user_info($from)->nickname;
+			$response = $from.', 你好! '.chr(13).chr(10);
+			$response .= '你的消息是: ['.$this->weixin->get['Content'].']';
+			break;
+		default:
+			$response = '未知或暂无处理的类型['.$type.']';
 		}
 
-		if ($post_arr['MsgType'] == 'text')
+		if ($response === '')
 		{
-			$from = $this->wx_api->get_user_info($post_arr['FromUserName'])->nickname;
-			$respone_str = $from.', 你好! '.chr(13).chr(10);
-			$respone_str .= '你的消息是: ['.$post_arr['Content'].'].';
-			$data = array(
-				'to' => $post_arr['FromUserName'],
-				'from' => $post_arr['ToUserName'],
-				'time' => time(),
-				'type' => 'text',
-				//'type' => '',
-				'content' => $respone_str
-			);
-			$this->load->view('weixin/text', $data);
+			exit;
 		}
+		$data = array(
+			'to' => $this->weixin->get('FromUserName'),
+			'from' => $this->weixin->get('ToUserName'),
+			'time' => time(),
+			'type' => 'text',
+			//'type' => '',
+			'content' => $response
+		);
+		$this->load->view('weixin/text', $data);
 	}
 
 	public function action($action = '')
