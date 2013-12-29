@@ -78,44 +78,49 @@ class Wx_home extends CI_Controller {
 			print_r($this->wx_api->get_menu());
 			echo '</pre>';
 			break;
+		case 'DEL_MENU':
+			echo '<pre>';
+			print_r($this->wx_api->del_menu());
+			echo '</pre>';
+			break;
 		case 'CREATE_MENU':
 			$sub_menu = array(
 				array(
 					'type' => 'click',
 					'name' => '注册/登入',
-					'key' => 'V301'
+					'key' => 'M301_BIND'
 					),
 				array(
 					'type' => 'click',
 					'name' => '会员信息',
-					'key' => 'V302'
+					'key' => 'M302_USER'
 					),
 				array(
 					'type' => 'click',
 					'name' => '订单查询',
-					'key' => 'V303'
+					'key' => 'M303_ORDER'
 					),
 				array(
 					'type' => 'click',
 					'name' => '使用手册',
-					'key' => 'V304'
+					'key' => 'M304_HELP'
 					),
 				array(
 					'type' => 'click',
 					'name' => '问题申告',
-					'key' => 'V305'
+					'key' => 'M305_FAQ'
 					)
 				);
 			$menu = array(
 				array(
 					'type' => 'click',
 					'name' => '最新优惠',
-					'key' => 'V100'
+					'key' => 'M100_NEWS'
 					),
 				array(
 					'type' => 'click',
 					'name' => '产品购买',
-					'key' => 'V200'
+					'key' => 'M200_BUY'
 					),
 				array(
 					'name' => '会员服务',
