@@ -117,6 +117,10 @@ class Wx_home extends CI_Controller {
 			echo '<pre>';
 			print_r($menu);
 			echo '</pre>';
+			$ret = $this->wx_api->create_menu($menu);
+			echo '<pre>';
+			print_r($ret);
+			echo '</pre>';
 			break;
 		default:
 			echo "<p>请输入你所需要的操作</p>";
