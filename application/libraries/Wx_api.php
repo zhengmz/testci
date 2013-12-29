@@ -101,7 +101,7 @@ class Wx_api {
 	{
 		if (is_array($menu))
 		{
-			$menu = json_encode($menu, TRUE);
+			$menu = urldecode(json_encode($menu));
 			log_message('debug', "json menu: ".$menu);
 			//$menu = $this->_url_encode($menu, TRUE);
 			//$menu = json_encode($menu, TRUE);
