@@ -52,16 +52,29 @@ class Wx_home extends CI_Controller {
 			$this->load->view('weixin/text', $data);
 		}
 	}
-	public function action()
+
+	public function action($action = '')
 	{
-		$user_1 = $this->wx_api->get_user_info('oepyJt6gXLGhAniv2Z33xfaYFNUE');
-		echo '<p>receive user 1: </p>';
-		print_r($user_1);
-		echo '<p>user 1: '.$user_1->nickname.'</p>';
-		$user_2 = $this->wx_api->get_user_info('abcd');
-		echo '<p>receive user 2: </p>';
-		print_r($user_2);
-		echo '<p>user 2: '.$user_2->nickname.'</p>';
+		switch (strtoupper($action))
+		{
+		case 'USER':
+			$user_1 = $this->wx_api->get_user_info('oepyJt6gXLGhAniv2Z33xfaYFNUE');
+			echo '<p>receive user 1: </p>';
+			print_r($user_1);
+			echo '<p>user 1: '.$user_1->nickname.'</p>';
+			$user_2 = $this->wx_api->get_user_info('abcd');
+			echo '<p>receive user 2: </p>';
+			print_r($user_2);
+			echo '<p>user 2: '.$user_2->nickname.'</p>';
+			echo '<p>errormsg: '.$user_2->errcode.'-'.$user_2->errmsg.'</p>';
+			break;
+		default:
+			echo "<p>请输入你所需要的操作</p>";
+			echo "<p>目前支持的功能有:</p>";
+			echo "<p>user -- 获取用户信息</p>";
+			echo "<p>menu -- 创建菜单</p>";
+		}
+		
 	}
 }
 
