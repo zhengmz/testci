@@ -77,39 +77,39 @@ class Wx_home extends CI_Controller {
 			$sub_menu = array(
 				array(
 					'type' => 'click',
-					'value' => '注册/登入',
+					'name' => '注册/登入',
 					'key' => 'V301'
 					),
 				array(
 					'type' => 'click',
-					'value' => '会员信息',
+					'name' => '会员信息',
 					'key' => 'V302'
 					),
 				array(
 					'type' => 'click',
-					'value' => '订单查询',
+					'name' => '订单查询',
 					'key' => 'V303'
 					),
 				array(
 					'type' => 'click',
-					'value' => '使用手册',
+					'name' => '使用手册',
 					'key' => 'V304'
 					),
 				array(
 					'type' => 'click',
-					'value' => '问题申告',
+					'name' => '问题申告',
 					'key' => 'V305'
 					)
 				);
 			$menu = array(
 				array(
 					'type' => 'click',
-					'value' => '最新优惠',
+					'name' => '最新优惠',
 					'key' => 'V100'
 					),
 				array(
 					'type' => 'click',
-					'value' => '产品购买',
+					'name' => '产品购买',
 					'key' => 'V200'
 					),
 				array(
