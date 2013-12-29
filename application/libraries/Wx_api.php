@@ -99,17 +99,12 @@ class Wx_api {
 	 */
 	public function create_menu($menu)
 	{
-		log_message('debug', "menu = ".$menu);
 		if (is_array($menu))
 		{
-			log_message('debug', "enter create if");
 			$menu = $this->_url_encode($menu, TRUE);
-			log_message('debug', "urlencode menu = ".$menu);
 			$menu = json_encode($menu);
-			log_message('debug', "json menu = ".$menu);
 		}
-		return $menu;
-		//return $this->_menu_operator('create', $menu);
+		return $this->_menu_operator('create', $menu);
 	}
 
 	/**
@@ -121,7 +116,6 @@ class Wx_api {
 	 */
 	protected function _url_encode($data, $is_menu = FALSE)
 	{
-		log_message('debug', "_url_encode: data = ".$data);
 		foreach ($data as $key => $val)
 		{
 			if (is_array($val))
