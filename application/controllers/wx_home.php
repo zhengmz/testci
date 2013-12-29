@@ -31,13 +31,18 @@ class Wx_home extends CI_Controller {
 
 		$type = $this->weixin->get('MsgType');
 		$response = '';
+		$from = $this->weixin->get('FromUserName');
 		switch (strtoupper($type))
 		{
 		case 'TEXT':
-			$from = $this->weixin->get('FromUserName');
-			$from = $this->wx_api->get_user_info($from)->nickname;
-			$response = $from.', 你好! '.chr(13).chr(10);
+			$nickname = $this->wx_api->get_user_info($from)->nickname;
+			$response = $nickname.', 你好! '.chr(13).chr(10);
 			$response .= '你的消息是: ['.$this->weixin->get('Content').']';
+			break;
+		case 'VOICE':
+			$nickname = $this->wx_api->get_user_info($from)->nickname;
+			$response = $nickname.', 你好! '.chr(13).chr(10);
+			$response .= '你的语音消息是: ['.$this->weixin->get('Recognition').']';
 			break;
 		default:
 			$response = '未知或暂无处理的类型['.$type.']';
@@ -48,7 +53,7 @@ class Wx_home extends CI_Controller {
 			exit;
 		}
 		$data = array(
-			'to' => $this->weixin->get('FromUserName'),
+			'to' => $from,
 			'from' => $this->weixin->get('ToUserName'),
 			'time' => time(),
 			'type' => 'text',
