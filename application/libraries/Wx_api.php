@@ -104,9 +104,11 @@ class Wx_api {
 			// 先对中文进行编码
 			$menu = $this->_url_encode($menu);
 			// 再对中文进行解码
-			$menu = urldecode(json_encode($menu));
+			$menu = urldecode(json_encode($menu, TRUE));
+			log_message('debug', 'json menu = '.$menu);
 		}
-		return $this->_menu_operator('create', $menu);
+		return $menu;
+		//return $this->_menu_operator('create', $menu);
 	}
 
 	/**
