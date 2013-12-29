@@ -101,7 +101,7 @@ class Wx_api {
 	{
 		if (is_array($menu))
 		{
-			$menu = _url_encode_arr($menu);
+			$menu = _url_encode($menu, TRUE);
 			$menu = json_encode($menu);
 		}
 		return $this->_menu_operator('create', $menu);
@@ -111,9 +111,10 @@ class Wx_api {
 	 * 实现对数组的urlencode
 	 *
 	 * @param array 传入待编码的数组
+	 * @param boolean 判断传入的数组是否是菜单数组
 	 * @return array 返回编码后的数组
 	 */
-	protected function _url_encode_arr($data)
+	protected function _url_encode($data, $is_menu = FALSE)
 	{
 		foreach ($data as $key => $val)
 		{
@@ -123,7 +124,11 @@ class Wx_api {
 			}
 			else
 			{
-				$data[$key] = urlencode($val);
+				// 对菜单数组进行特殊处理
+				if (! $is_menu or $key !== 'type')
+				{
+					$data[$key] = urlencode($val);
+				}
 			}
 		}
 		return $data;
