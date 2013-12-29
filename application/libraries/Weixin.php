@@ -42,7 +42,6 @@ class Weixin {
 	 */
 	protected $CI = NULL;
 
-
 	// ---------------------------------------------------------------
 
 	/**
@@ -110,6 +109,19 @@ class Weixin {
 	{
 		return $this->_msg_arr;
 	}
+
+	/**
+	 * 根据key，获取用户传入的相应数据
+	 * 这里做了统一的容错处理
+	 *
+	 * @return string 成功返回相应的数据，失败返回''
+	 */
+	public function get($key)
+	{
+		return isset($this->_msg_obj->$key) ? $this->_msg_obj->$key : '';
+	}
+	
+	// ---------------------------------------------------------------
 
 	/**
 	 * 接入是否生效
