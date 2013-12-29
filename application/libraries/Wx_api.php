@@ -82,6 +82,32 @@ class Wx_api {
 	}
 
 	/**
+	 * 创建菜单
+	 *
+	 * @param array 要创建的菜单数组
+	 * @return array 成功返回错误码0, 失败非0
+	 */
+	public function create_menu($menu)
+	{
+		return $this->_menu_operator('create', $menu);
+	}
+
+	/**
+	 * 菜单操作
+	 *
+	 * @param string 菜单接口方法, 有create, get, delete
+	 * @param array 要创建的菜单数组
+	 * @return array 成功返回错误码0, 失败非0
+	 */
+	protected function _menu_operator($method, $menu = NULL)
+	{
+		$get_params = array (
+			'access_token' => $this->_get_access_token(),
+			);
+		return $this->_wx_url_api('menu/'.$method, $get_params, $menu);
+	}
+
+	/**
 	 * 获取微信接口访问所需的access_token
 	 * 先从缓存读取, 如果没有或已过期, 再调用微信接口
 	 *
