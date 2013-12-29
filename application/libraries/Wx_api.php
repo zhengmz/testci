@@ -104,7 +104,8 @@ class Wx_api {
 			$menu = _url_encode($menu, TRUE);
 			$menu = json_encode($menu);
 		}
-		return $this->_menu_operator('create', $menu);
+		return $menu;
+		//return $this->_menu_operator('create', $menu);
 	}
 
 	/**
