@@ -101,24 +101,32 @@ class Weixin {
 	}
 
 	/**
-	 * 接收消息
-	 *
-	 * @return array 微信接口数组
-	 */
-	public function msg_arr()
-	{
-		return $this->_msg_arr;
-	}
-
-	/**
 	 * 根据key，获取用户传入的相应数据
 	 * 这里做了统一的容错处理
 	 *
-	 * @return string 成功返回相应的数据，失败返回''
+	 * @param mixed 可以是一个字符串，或是一个数组
+	 * @return mixed 根据参数，返回字符串或是数组
 	 */
-	public function get($key)
+	public function get($keys = array())
 	{
-		return isset($this->_msg_obj->$key) ? $this->_msg_obj->$key : '';
+		// 空，直接返回整个数组
+		if (empty($keys))
+		{
+			return $this->_msg_arr;
+		}
+
+		// 单个的处理
+		if (! is_array($keys))
+		{
+			return isset($this->_msg_obj->$keys) ? $this->_msg_obj->$keys : '';
+		}
+
+		$ret = array();
+		foreach ($keys as $key)
+		{
+			$ret[$key] = $this->get($key);
+		}
+		return $ret;
 	}
 	
 	// ---------------------------------------------------------------
