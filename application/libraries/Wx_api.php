@@ -99,7 +99,7 @@ class Wx_api {
 	 * @param array 要创建的菜单数组
 	 * @return array 成功返回错误码0, 失败非0
 	 */
-	protected function _menu_operator($method, $menu = NULL)
+	protected function _menu_operator($method, $menu = FALSE)
 	{
 		$get_params = array (
 			'access_token' => $this->_get_access_token(),
@@ -152,7 +152,7 @@ class Wx_api {
 	 * @param var 使用POST调用的参数, 如果非空, 则自动使用POST方法
 	 * @return object 根据返回的json字符串转为对象
 	 */
-	protected function _wx_url_api($method, $get_params = array(), $post_params = NULL)
+	protected function _wx_url_api($method, $get_params = array(), $post_params = FALSE)
 	{
 		$url_base = 'https://api.weixin.qq.com/cgi-bin/';
 
@@ -174,7 +174,7 @@ class Wx_api {
 		$url_params = array();
 		$url_params[CURLOPT_URL] = $url;
 		$url_params[CURLOPT_RETURNTRANSFER] = TRUE;
-		if ($post_params !== NULL)
+		if ($post_params !== FALSE)
 		{
 			$url_params[CURLOPT_POST] = TRUE;
               		$url_params[CURLOPT_POSTFIELDS] = $post_params;
