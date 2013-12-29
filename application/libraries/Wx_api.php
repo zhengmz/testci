@@ -126,7 +126,7 @@ class Wx_api {
 		{
 			if (is_array($val))
 			{
-				$data[$key] = _url_encode($val, $is_menu);
+				$data[$key] = $this->_url_encode($val, $is_menu);
 			}
 			else
 			{
