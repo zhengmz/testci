@@ -18,8 +18,8 @@ class Wx_home extends CI_Controller {
 	{
 		parent::__construct();
 		
-		$this->load->library('wx_api');
 		log_message('debug', "Wx_home Controller Initialized");
+		$this->load->library('wx_api');
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Wx_home extends CI_Controller {
 			$response .= '你发过来的链接是: ['.$this->weixin->get('Url').']';
 			break;
 		case 'LOCATION':
-			$response .= vsprintf('你的位置在：X[%s], Y[%s], 缩放[%s], 位置信息[%s]', $this->weixin->get(array('Location_X', 'Location_Y', 'Scale', 'Label'));
+			$response .= vsprintf('你的位置在：X[%s], Y[%s], 缩放[%s], 位置信息[%s]', $this->weixin->get(array('Location_X', 'Location_Y', 'Scale', 'Label')));
 			break;
 		case 'EVENT':
 			$event = $this->weixin->get('Event');
@@ -54,7 +54,7 @@ class Wx_home extends CI_Controller {
 			{
 			// 地理位置
 			case 'LOCATION':
-				$response .= vsprintf('你的位置在：纬度[%s], 经度[%s], 精度[%s]', $this->weixin->get(array('Latitude', 'Longitude', 'Precision'));
+				$response .= vsprintf('你的位置在：纬度[%s], 经度[%s], 精度[%s]', $this->weixin->get(array('Latitude', 'Longitude', 'Precision')));
 				break;
 			// 订阅
 			case 'SUBSCRIBE':
