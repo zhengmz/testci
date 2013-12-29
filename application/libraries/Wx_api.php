@@ -92,6 +92,16 @@ class Wx_api {
 	}
 
 	/**
+	 * 删除菜单
+	 *
+	 * @return object 
+	 */
+	public function del_menu()
+	{
+		return $this->_menu_operator('delete');
+	}
+
+	/**
 	 * 创建菜单
 	 *
 	 * @param array 要创建的菜单数组
