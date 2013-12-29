@@ -68,6 +68,54 @@ class Wx_home extends CI_Controller {
 			echo '<p>user 2: '.$user_2->nickname.'</p>';
 			echo '<p>errormsg: '.$user_2->errcode.'-'.$user_2->errmsg.'</p>';
 			break;
+		case 'MENU':
+			$sub_menu = array(
+				array(
+					'type' => 'click',
+					'value' => '注册/登入',
+					'key' => 'V301'
+					),
+				array(
+					'type' => 'click',
+					'value' => '会员信息',
+					'key' => 'V302'
+					),
+				array(
+					'type' => 'click',
+					'value' => '订单查询',
+					'key' => 'V303'
+					),
+				array(
+					'type' => 'click',
+					'value' => '使用手册',
+					'key' => 'V304'
+					),
+				array(
+					'type' => 'click',
+					'value' => '问题申告',
+					'key' => 'V305'
+					)
+				);
+			$menu = array(
+				array(
+					'type' => 'click',
+					'value' => '最新优惠',
+					'key' => 'V100'
+					),
+				array(
+					'type' => 'click',
+					'value' => '产品购买',
+					'key' => 'V200'
+					),
+				array(
+					'name' => '会员服务',
+					'sub_button' => $sub_menu
+					)
+				);
+				
+			$menu = array('button' => $menu);
+			print_r($menu);
+			
 		default:
 			echo "<p>请输入你所需要的操作</p>";
 			echo "<p>目前支持的功能有:</p>";
