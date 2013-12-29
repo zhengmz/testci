@@ -101,17 +101,12 @@ class Wx_api {
 	{
 		if (is_array($menu))
 		{
+			// 先对中文进行编码
 			$menu = $this->_url_encode($menu);
+			// 再对中文进行解码
 			$menu = urldecode(json_encode($menu));
-			log_message('debug', "json menu: ".$menu);
-			//$menu = $this->_url_encode($menu, TRUE);
-			//$menu = json_encode($menu, TRUE);
-			//log_message('debug', "json menu: ".$menu);
-			//$menu = urlencode($menu);
-			//log_message('debug', "urlencode menu: ".$menu);
 		}
-		return $menu;
-		//return $this->_menu_operator('create', $menu);
+		return $this->_menu_operator('create', $menu);
 	}
 
 	/**
@@ -126,7 +121,7 @@ class Wx_api {
 		{
 			if (is_array($val))
 			{
-				$data[$key] = $this->_url_encode($val, $is_menu);
+				$data[$key] = $this->_url_encode($val);
 			}
 			else
 			{
