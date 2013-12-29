@@ -102,10 +102,11 @@ class Wx_api {
 		if (is_array($menu))
 		{
 			$menu = _url_encode($menu, TRUE);
+			log_message('debug', "menu = ".$menu);
 			$menu = json_encode($menu);
+			log_message('debug', "json menu = ".$menu);
 		}
-		return $menu;
-		//return $this->_menu_operator('create', $menu);
+		return $this->_menu_operator('create', $menu);
 	}
 
 	/**
@@ -121,7 +122,7 @@ class Wx_api {
 		{
 			if (is_array($val))
 			{
-				$data[$key] = _url_encode($val);
+				$data[$key] = _url_encode($val, $is_menu);
 			}
 			else
 			{
