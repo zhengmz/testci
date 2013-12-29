@@ -114,8 +114,10 @@ class Wx_home extends CI_Controller {
 				);
 				
 			$menu = array('button' => $menu);
+			echo '<pre>';
 			print_r($menu);
-			
+			echo '</pre>';
+			break;
 		default:
 			echo "<p>请输入你所需要的操作</p>";
 			echo "<p>目前支持的功能有:</p>";
