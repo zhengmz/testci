@@ -99,7 +99,7 @@ class Wx_home extends CI_Controller {
 			echo '<p>receive user 1: </p>';
 			print_r($user_1);
 			echo '<p>user 1: '.$user_1->nickname.'</p>';
-			$user_2 = $this->wx_api->get_user_info('abcd');
+			$user_2 = $this->wx_api->get_user_info('oepyJt2MEicb1dPo04UU-OzZQxcM');
 			echo '<p>receive user 2: </p>';
 			print_r($user_2);
 			echo '<p>user 2: '.$user_2->nickname.'</p>';
