@@ -87,7 +87,7 @@ class Wx_home extends CI_Controller {
 			//'type' => '',
 			'content' => $response
 		);
-		$this->load->view('weixin/text', $data);
+		$this->load->view('weixin/tpl_text', $data);
 	}
 
 	public function action($action = '')
