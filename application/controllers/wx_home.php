@@ -29,8 +29,9 @@ class Wx_home extends CI_Controller {
 	{
 		$this->load->library('weixin');
 
-		$type = $this->weixin->get('MsgType');
-		$from = $this->weixin->get('FromUserName');
+		//$type = $this->weixin->get('MsgType');
+		$type = $this->weixin->MsgType;
+		$from = $this->weixin->FromUserName;
 		$nickname = $this->wx_api->get_user_info($from)->nickname;
 		$response = $nickname.', 你好! '.PHP_EOL;
 		switch (strtoupper($type))
