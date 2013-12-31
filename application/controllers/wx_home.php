@@ -174,7 +174,9 @@ class Wx_home extends CI_Controller {
 			echo "<p>请输入你所需要的操作</p>";
 			echo "<p>目前支持的功能有:</p>";
 			echo "<p>user -- 获取用户信息</p>";
-			echo "<p>menu -- 创建菜单</p>";
+			echo "<p>create_menu -- 创建菜单</p>";
+			echo "<p>get_menu -- 获取菜单</p>";
+			echo "<p>del_menu -- 删除菜单</p>";
 			print_r(get_object_vars($this->wx_api));
 		}
 		
