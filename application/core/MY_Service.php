@@ -3,9 +3,9 @@
 /**
  * My Service Class
  *
- * @package		MyCore
- * @subpackage		Libraries
- * @category		Libraries
+ * @package		MY_Service
+ * @subpackage		core
+ * @category		core
  * @author		zhengmz
  * @link		http://codeigniter.com/user_guide/libraries/config.html
  */
@@ -19,21 +19,6 @@ class MY_Service
 	public function __construct()
 	{
 		log_message('debug', "MY_Service Class Initialized");
-	}
- 
-	/**
-	 * __get
-	 *
-	 * Allows models to access CI's loaded classes using the same
-	 * syntax as controllers.
-	 *
-	 * @param	string
-	 * @access 	private
-	 */
-	function __get($key)
-	{
-		$CI =& get_instance();
-		return $CI->$key;
 	}
 }
 // END MY_Service Class
