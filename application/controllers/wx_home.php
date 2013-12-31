@@ -94,12 +94,15 @@ class Wx_home extends CI_Controller {
 	{
 		switch (strtoupper($action))
 		{
+		case 'BOOTSTRAP':
+			$this->load->view('bootstrap');
+			break;
 		case 'USER':
 			$user_1 = $this->wx_api->get_user_info('oepyJt6gXLGhAniv2Z33xfaYFNUE');
 			echo '<p>receive user 1: </p>';
 			print_r($user_1);
 			echo '<p>user 1: '.$user_1->nickname.'</p>';
-			$user_2 = $this->wx_api->get_user_info('abcd');
+			$user_2 = $this->wx_api->get_user_info('abc');
 			echo '<p>receive user 2: </p>';
 			print_r($user_2);
 			echo '<p>user 2: '.$user_2->nickname.'</p>';
