@@ -102,6 +102,18 @@ class Weixin {
 
 	/**
 	 * 根据key，获取用户传入的相应数据
+	 * 通过重载魔术方法（magic methods）来实现的
+	 *
+	 * @param string 参数名称
+	 * @return string 返回参数值
+	 */
+	public function __get($key)
+	{
+		return $this->get($key);
+	}
+	
+	/**
+	 * 根据key，获取用户传入的相应数据
 	 * 这里做了统一的容错处理
 	 *
 	 * @param mixed 可以是一个字符串，或是一个数组
