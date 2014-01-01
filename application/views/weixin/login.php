@@ -19,10 +19,13 @@ input::-ms-reveal{display:none;}
 .enter-item:focus {box-shadow: inset 0 0 8px #eaeaea; background: #fdfdfd;}
 .first-enter-item {border-radius: 6px 6px 0 0;}
 .last-enter-item { border-radius: 0 0 6px 6px; margin-top:-1px; _margin-top: -3px;}
+.ng-form-area {display:block!important; margin-left:40px; width: 324px; padding-top: 10px; height:330px; overflow: hidden;}
+.ng-form-area{display: none;}
 </style>
   </head>
   
   <body>
+  <div class="ng-form-area">
 	<form action="<?=$action?>" method="post">
 	<table width="95%" border="0" align="center">
 	<tr align="center"><td style="height: 40px;">
@@ -50,5 +53,6 @@ input::-ms-reveal{display:none;}
 	</td></tr>
 	</table>
 	</form>
+  </div>
   </body>
 </html>
