@@ -59,9 +59,9 @@
 <div class="form_area">
 <form action="<?=$action?>" method="post"  onsubmit="return valid_form(this)">
 	<p class="title_text">请输入您的账号进行绑定 </p>
-	<input class="input_item top_input_item" name="login" type="text" value="邮箱地址/手机号码/mifi ID" onMouseOver="this.select()" onFocus="this.select()"/>
+	<input class="input_item top_input_item" name="login" type="text" value="邮箱地址/手机号码/mifi ID" onMouseOver="this.select()" />
 	<span id="txtinfo" style="color:red;" ></span>
-	<input class="input_item bottom_input_item" type="text" value="账号密码" name="pwd" onMouseOver="this.select()" onFocus="this.select()" />
+	<input class="input_item bottom_input_item" type="text" value="账号密码" name="pwd" onMouseOver="this.select()" />
 	<span id="txtpwd" style="color:red;" ></span>
 	<div align="left" class="normal_text">
 		登录即表示您同意遵守MIFI助手账户的<br/><a href="#">用户协议</a>和<a href="#">隐私设置</a>
