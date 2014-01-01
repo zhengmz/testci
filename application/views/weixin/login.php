@@ -14,11 +14,11 @@
 	</td></tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr align="center"><td style="height: 40px;">
-		<input name="username" type="text" style="color:#999; width:94%; height: 28px;" value="邮箱地址/手机号码/mifi ID"/>
+		<input name="username" type="text" style="color:#999; width:94%; font_size: 14px; height: 28px;" value="邮箱地址/手机号码/mifi ID"/>
 		<span id="txtinfo" style="color:red" ></span>
 	</td></tr>
 	<tr align="center"><td style="height: 40px;">
-		<input type="text" value="账号密码" name="pwd" style="color:#8C8C8C; width:94%; height: 28px;"/>
+		<input type="text" value="账号密码" name="pwd" style="color:#8C8C8C; width:94%; font_size: 14px; height: 28px;"/>
 		<span id="txtpwd" style="color:red;" ></span>
 	</td></tr>
         <tr><td style="height: 40px;">
@@ -27,7 +27,7 @@
 		</div>
 	</td></tr>
 	<tr align="center"><td style="height: 40px;">
-        	<input type="submist" style="background-color:#F60; font-size: 16px; color: #FFF; height: 36px; width: 94%;" value="绑定">
+        	<input type="submist" style="background-color:#F60; align: center; font-size: 16px; color: #FFF; height: 36px; width: 94%;" value="绑定">
         </td></tr>
 	<tr align="center"><td>
 		<div align="right" style="padding-top: 10px; padding-right: 3%;">
