@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>欢迎绑定微信</title>
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2,user-scalable=no">
 <style>
 /*.loading-img{display: none!important;}*/
 .ng-form-area {display:block!important; margin-left:5%; width: 90%; padding-top: 2%; height:100%; overflow: hidden;}
