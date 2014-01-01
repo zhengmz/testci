@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>欢迎绑定微信</title>
 <meta http-equiv="charset" content="UTF-8">
+<title>欢迎绑定微信</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2">
 <style>
 .form_area {display:block!important; margin-left:5%; width: 90%; padding-top: 2%; height:100%; overflow: hidden;}
