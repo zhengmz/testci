@@ -46,12 +46,23 @@ a:hover {color: red;}
 	</form>
   </div>
 <script type="text/javascript">
-var browser=navigator.appName
-var b_version=navigator.appVersion
-var version=parseFloat(b_version)
-document.write("浏览器名称："+ browser)
-document.write("<br />")
-document.write("浏览器版本："+ version)
+document.write("<p>浏览器：")
+document.write(navigator.appName + "</p>")
+
+document.write("<p>浏览器版本：")
+document.write(navigator.appVersion + "</p>")
+
+document.write("<p>代码：")
+document.write(navigator.appCodeName + "</p>")
+
+document.write("<p>平台：")
+document.write(navigator.platform + "</p>")
+
+document.write("<p>Cookies 启用：")
+document.write(navigator.cookieEnabled + "</p>")
+
+document.write("<p>浏览器的用户代理报头：")
+document.write(navigator.userAgent + "</p>")
 </script>
   </body>
 </html>
