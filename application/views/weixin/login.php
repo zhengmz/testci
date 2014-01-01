@@ -7,13 +7,12 @@
   </head>
   
   <body>
-	<h1><?=$heading?></h1>
 	<form action="<?=$action?>" method="post">
 	<table width="95%" border="0" align="center">
 	<tr align="center"><td style="height: 40px;">
-		请输入您的账号进行绑定
+		<font size="14px">请输入您的账号进行绑定</font>
 	</td></tr>
-	<tr><td><hr style="width:94%;"/></td></tr>
+	<tr><td>&nbsp;</td></tr>
 	<tr align="center"><td style="height: 40px;">
 		<input name="username" type="text" style="color:#999; width:94%; height: 28px;" value="邮箱地址/手机号码/mifi ID"/>
 		<span id="txtinfo" style="color:red" ></span>
