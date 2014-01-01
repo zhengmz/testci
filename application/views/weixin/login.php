@@ -3,10 +3,10 @@
 <head>
 <title>欢迎绑定微信</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, user-scalable=no">
 <style>
 .form_area {display:block!important; margin-left:5%; width: 90%; padding-top: 2%; height:100%; overflow: hidden;}
-.input_item {background: #fff; width: 95%; display: block; height: 20px; line-height: 20px; padding: 1% 1%; border: 1px solid #e6e6e6; border-radius: 6px; color: #333; font-size: 18px; font-weight: bold;}
+.input_item {background: white; width: 95%; display: block; height: 30px; line-height: 1.5; padding: 1% 1%; border: 1px solid #e6e6e6; border-radius: 6px; color: #333; font-size: 18px; font-weight: bold;}
 .input_item:focus {box-shadow: inset 0 0 8px #eaeaea; background: #fdfdfd;}
 .top_input_item {border-radius: 6px 6px 0 0;}
 .bottom_input_item { border-radius: 0 0 6px 6px; margin-top:-1px; _margin-top: -3px;}
@@ -15,8 +15,8 @@
 .button {background: #fff; border: 1px solid #e5e5e5; border-radius: 6px; color: white; display:block; font-size: 18px; height: 44px; line-height: 2; text-align: center; width: 97%;}
 .button:hover {color: #333;}
 .orange {background: #ff7a4d; color: #fff; border: 1px solid #ff7549;}
-.orange:hover {color:#fff; background: #ff936a; border: 1px solid #ff936a;}
-.orange:active {color:#fff; background: #f6683b; border: 1px solid #f6683b;}
+.orange:hover {color:white; background: #ff936a; border: 1px solid #ff936a;}
+.orange:active {color:white; background: #f6683b; border: 1px solid #f6683b;}
 </style>
 <style>
 html,body,ul,li,p,h1,div,a,img,i,span,input,em {padding: 0; margin: 0;}
