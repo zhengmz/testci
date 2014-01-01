@@ -59,9 +59,9 @@
 <div class="form_area">
 <form action="<?=$action?>" method="post"  onsubmit="return valid_form(this)">
 	<p class="title_text">请输入您的账号进行绑定 </p>
-	<input class="input_item top_input_item" name="login" type="text" onFocus="if(value==default_login){value='';this.style.color='#000'}" onBlur="if(value==''){value=default_login;this.style.color='#999'}" />
+	<input class="input_item top_input_item" name="login" type="text" value="邮箱地址/手机号码/mifi ID" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(value==''){value=defaultValue;this.style.color='#999'}" />
 	<span id="txtinfo" style="color:red;" ></span>
-	<input class="input_item bottom_input_item" type="text" name="pwd" onFocus="if(value==default_pwd){value='';this.style.color='#000'}" onBlur="if(value==''){value=default_pwd;this.style.color='#999'}" />
+	<input class="input_item bottom_input_item" type="text" name="pwd" value="账号密码" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(value==''){value=defaultValue;this.style.color='#999'}" />
 	<span id="txtpwd" style="color:red;" ></span>
 	<div align="left" class="normal_text">
 		登录即表示您同意遵守MIFI助手账户的<br/><a href="#">用户协议</a>和<a href="#">隐私设置</a>
@@ -72,11 +72,5 @@
 	</div>
 </form>
 </div>
-<script>
-	var default_login="邮箱地址/手机号码/mifi ID";
-	var default_pwd="账号密码";
-	document.getElementById("login").value=default_login;
-	document.getElementById("pwd").value=default_pwd;
-</script>
 </body>
 </html>
