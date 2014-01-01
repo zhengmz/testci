@@ -3,7 +3,27 @@
   <head>
 	<title>欢迎绑定微信</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<style type="text/css">
+input.login 
+{
+color: #8c8c8c;
+width: 95%;
+height: auto;
+}
+input.pwd 
+{
+color: #8c8c8c;
+width: 95%;
+height: 50%;
+}
+input.btn 
+{
+background-color: #F60;
+color: #FFF;
+width: 95%;
+height: 36px;
+}
+</style>
   </head>
   
   <body>
@@ -14,12 +34,10 @@
 	</td></tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr align="center"><td style="height: 40px;">
-		<input name="username" type="text" style="color:#999; width:94%; font_size: 14px; height: 28px;" value="邮箱地址/手机号码/mifi ID"/>
-		<span id="txtinfo" style="color:red" ></span>
+		<input class="login" name="login" type="text" value="邮箱地址/手机号码/mifi ID">
 	</td></tr>
 	<tr align="center"><td style="height: 40px;">
-		<input type="text" value="账号密码" name="pwd" style="color:#8C8C8C; width:94%; font_size: 14px; height: 28px;"/>
-		<span id="txtpwd" style="color:red;" ></span>
+		<input class="pwd" type="text" value="账号密码" name="pwd" >
 	</td></tr>
         <tr><td style="height: 40px;">
 		<div style="padding-top: 10px; padding-left: 3%; ">
@@ -27,9 +45,9 @@
 		</div>
 	</td></tr>
 	<tr align="center"><td style="height: 40px;">
-        	<input type="submist" style="background-color:#F60; align: center; font-size: 16px; color: #FFF; height: 36px; width: 94%;" value="绑定">
+        	<input class="btn" type="submist" value="绑定">
         </td></tr>
-	<tr align="center"><td>
+	<tr><td>
 		<div align="right" style="padding-top: 10px; padding-right: 3%;">
 		<a href="/wx_home/action">立即注册</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">忘记密码</a>
 		</div>
