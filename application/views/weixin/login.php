@@ -7,8 +7,8 @@
   </head>
   
   <body>
-	<h1><?=heading?></h1>
-	<form action="<?=action?>" method="post">
+	<h1><?=$heading?></h1>
+	<form action="<?=$action?>" method="post">
 	<table width="95%" border="0" align="center">
 	<tr align="center"><td style="height: 40px;">
 		请输入您的账号进行绑定

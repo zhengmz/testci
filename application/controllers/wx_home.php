@@ -96,7 +96,7 @@ class Wx_home extends CI_Controller {
 	{
 		$data = array(
 			'heading' => '你点中的菜单项是'.$menu_key,
-			'action' => 'wx_home/action/USER'
+			'action' => '/wx_home/action/user'
 			);
 		$this->load->view('weixin/login', $data);
 	}
