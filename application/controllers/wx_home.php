@@ -70,8 +70,10 @@ class Wx_home extends CI_Controller {
 				break;
 			// 菜单点击
 			case 'CLICK':
-				$response .= sprintf('你点中的菜单项是[%s].', $this->weixin->get('EventKey'));
-				return $this->menu($this->weixin->EventKey);
+				$this->load->helper('url');
+				$menu_key = $this->weixin->EventKey;
+				$response .= sprintf('你点中的菜单项是[%s], 暂未绑定.', $menu_key);
+				$response .= PHP_EOL.anchor('/wx_home/menu/'.$menu_key, '绑定用户');
 				break;
 			default:
 				$response = '暂不支持['.$event.']事件，我们将很快就会推出相关功能';
