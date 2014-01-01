@@ -71,6 +71,7 @@ class Wx_home extends CI_Controller {
 			// 菜单点击
 			case 'CLICK':
 				$response .= sprintf('你点中的菜单项是[%s].', $this->weixin->get('EventKey'));
+				return $this->menu($this->weixin->EventKey);
 				break;
 			default:
 				$response = '暂不支持['.$event.']事件，我们将很快就会推出相关功能';
@@ -89,6 +90,15 @@ class Wx_home extends CI_Controller {
 			'content' => $response
 		);
 		$this->load->view('weixin/tpl_text', $data);
+	}
+
+	public function menu($menu_key)
+	{
+		$data = array(
+			'heading' => '你点中的菜单项是'.$menu_key,
+			'action' => 'wx_home/action/USER'
+			);
+		$this->load->view('weixin/login', $data);
 	}
 
 	public function action($action = '')
