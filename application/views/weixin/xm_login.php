@@ -3,37 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>小米帐户 - 登录</title>
-<script>
-function getParam(paramName) {
-  var paramValue = "", isFound = false;
-
-  if (location.search.length === 0) {
-    return paramValue;
-  }
-
-  if (location.search.indexOf("?") == 0 && location.search.indexOf("=") > 1) {
-    arrSource = location.search.substring(1, location.search.length).split("&");
-    i = 0;
-    while (i < arrSource.length && !isFound) {
-      if (arrSource[i].indexOf("=") > 0) {
-        if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
-            paramValue = arrSource[i].split("=")[1];
-            isFound = true;
-        }
-      }
-      i++;
-    }
-  }
-  return paramValue;
-};
-var cssLink = getParam('cssSrc');
-
-if( cssLink ){
-  document.write('<link href="loginfor-' + cssLink + '.css" ' + 'rel="stylesheet" type="text\/css"/>');
-} else {
-  document.write('<link href="loginfor-account.css" ' + 'rel="stylesheet" type="text\/css"/>');
-}
-</script>
 <style>
 /*.loading-img{display: none!important;}*/
 .ng-form-area {display:block!important; margin-left:40px; width: 324px; padding-top: 10px; height:330px; overflow: hidden;}

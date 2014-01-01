@@ -1,28 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-	<title>欢迎绑定微信</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">
-input.login 
-{
-color: #8c8c8c;
-width: 95%;
-height: auto;
-}
-input.pwd 
-{
-color: #8c8c8c;
-width: 95%;
-height: 50%;
-}
-input.btn 
-{
-background-color: #F60;
-color: #FFF;
-width: 95%;
-height: 36px;
-}
+<head>
+<meta charset="UTF-8">
+<title>欢迎绑定微信</title>
+<style>
+html,body,ul,li,p,h1,div,a,img{padding: 0; margin: 0;}
+html,body{background:#f9f9f9; line-height: 1.5; color: #333; font-size: 14px;}
+body,input{font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;}
+.button {cursor:pointer; background: #fff; border: 1px solid #e5e5e5; border-radius: 6px; color: #7c7c7c; display: block; font-size: 16px; height: 44px; line-height: 44px; text-align: center; width: 320px;}
+input::-ms-clear{display:none;}
+input::-ms-reveal{display:none;}
 </style>
   </head>
   

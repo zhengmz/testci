@@ -99,8 +99,7 @@ class Wx_home extends CI_Controller {
 		$data = array(
 			'action' => '/wx_home/action/user'
 			);
-		$this->load->view('weixin/xm_login_frame', $data);
-		//$this->load->view('weixin/login', $data);
+		$this->load->view('weixin/login', $data);
 	}
 
 	public function action($action = '')
