@@ -141,7 +141,7 @@ class MY_Loader extends CI_Loader {
 	 * @param	bool	判断是否连接数据库
 	 * @return	void
 	 */
-	public function model($model, $params = array(), $name = '', $db_conn = FALSE)
+	public function model($model, $name = '', $db_conn = FALSE, $params = array())
 	{
 		parent::model($model, $name, $db_conn);
 		
