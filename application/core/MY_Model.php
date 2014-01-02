@@ -2,6 +2,7 @@
 
 /**
  * My Model Class
+ * 支持每个Model可以连接不同数据库
  *
  * @package		MyCore
  * @subpackage		Libraries
@@ -11,35 +12,138 @@
  */
 class MY_Model extends CI_Model {
 
+
 	/**
-	 * 构造函数，连接数据库
-	 * 
-	 * @param string 在文件config/database.php中配置的数据库连接名
+	 * 表名
+	 * @var string
+	 * @access protected
 	 */
-	public function __construct($group_name = '')
+	protected $_table_name = '';
+	/**
+	 * 主键
+	 * @var string
+	 * @access protected
+	 */
+	protected $_primary_key = '';
+	/**
+	 * 表字段映射关系数组
+	 * @var array 别名<->字段名 
+	 * @access protected
+	 */
+	protected $_map = array();
+	/**
+	 * 数据库连接名称
+	 * @var string
+	 * @access protected
+	 */
+	protected $_db_name = '';
+	/**
+	 * 数据库连接句柄
+	 * @var object
+	 * @access protected
+	 */
+	protected $_db = NULL;
+
+	// ------------------------------------------------------------
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param array 接受参数
+	 */
+	public function __construct($config = array())
 	{
 		parent::__construct();
-		$this->load->database($group_name);
+		$this->initialize($config);
 
 		log_message('debug', "MY_Model Class Initialized");
 	}
 
 	/**
-	 * 表名
+	 * 初始化: 将配置参数赋值给成员变量
+	 * 支持的参数:
+	 *	table_name string 表名
+	 *	primary_key string 主键
+	 *	map array 字段映射关系
+	 *	db_name string 数据库连接名, 见config/database.php中的group
+	 *
+	 * @param	array	配置参数
+	 * @return	void
 	 */
-	public function table_name()
+	public function initialize($config = array())
 	{
-		show_error('You must rewrite function table_name() at models.');
+		foreach ($config as $key => $val)
+		{
+			if(isset($this->{'_'.$key}))
+			{
+				$this->{'_'.$key} = $val;
+			}
+		}
+
+		// 连接数据库
+		$this->conn_db($this->_db_name);
 	}
 
 	/**
-	 * 主键
+	 * 连接数据库
+	 * 如果指定连接串, 则可以支持连接到非默认的数据库
+	 * 
+	 * @param string 数据库连接名
+	 * @return void
 	 */
-	public function primary_key()
+	public function conn_db($db_name = '')
 	{
-		show_error('You must rewrite function primary_key() at models.');
+		$CI =& get_instance();
+		if (empty($db_name))
+		{
+			if (! class_exists('CI_DB'))
+			{
+				$CI->load->database('', FALSE, TRUE);
+			}
+			
+			$this->_db = $CI->db;
+		}
+		else
+		{
+			$this->_db = $CI->load->database($db_name, TRUE, TRUE);
+		}
 	}
 
+	// ------------------------------------------------------------
+ 
+	/**
+	 * 根据映射表转换
+	 * 
+	 * @param array 需要转换的数据
+	 * @param boolean 反转标志
+	 * @return mixed 返回转换后的数据
+	 */
+	private function _map_field($data = array(), $reversal = FALSE)
+	{
+		if (empty($this->_map) or empty($data) or ! is_array($data))
+		{
+			return $data;
+		}
+
+		$map = $this->_map;
+		if (reversal === TRUE)
+		{
+			$map = array_flip($map);
+		}
+		
+		foreach ($data as $key => $val)
+		{
+			if(isset($map[$key])
+			{
+				unset($data[$key]);
+				$data[$map[$key]] = $val;
+			}
+		}
+		return $data;
+	}
+
+	// ------------------------------------------------------------
+ 
 	/**
 	 * 保存数据
 	 * 
@@ -48,19 +152,24 @@ class MY_Model extends CI_Model {
 	 */
 	public function save($data)
 	{
-		if($this->db->set($data)->insert($this->table_name())) {
-			return $this->db->insert_id();
+		$data = $this->_map_field($data);
+
+		if($this->_db->set($data)->insert($this->_table_name)) {
+			return $this->_db->insert_id();
 		}
 		return FALSE;
 	}
  
 	/**
 	 * Replace数据
+	 *
 	 * @param array $data
 	 */
 	public function replace($data)
 	{
-		return $this->db->replace($this->table_name(), $data);
+		$data = $this->_map_field($data);
+
+		return $this->_db->replace($this->_table_name, $data);
 	}
  
 	/**
@@ -73,7 +182,11 @@ class MY_Model extends CI_Model {
 	 */
 	public function update_by_pk($pk, $attributes, $where = array())
 	{
-		$where[$this->primary_key()] = $pk;
+		$where[$this->_primary_key] = $pk;
+
+		$where = $this->_map_field($where);
+		$attributes = $this->_map_field($attributes);
+
 		return $this->update_all($attributes, $where);
 	}
  
@@ -86,7 +199,10 @@ class MY_Model extends CI_Model {
 	 */
 	public function update_all($attributes, $where = array())
 	{
-		return $this->db->where($where)->update($this->table_name(), $attributes);
+		$where = $this->_map_field($where);
+		$attributes = $this->_map_field($attributes);
+
+		return $this->_db->where($where)->update($this->_table_name, $attributes);
 	}
  
 	/**
@@ -98,7 +214,10 @@ class MY_Model extends CI_Model {
 	 */
 	public function delete_by_pk($pk, $where = array())
 	{
-		$where[$this->primary_key()] = $pk;
+		$where[$this->_primary_key] = $pk;
+
+		$where = $this->_map_field($where);
+
 		return $this->delete_all($where);
 	}
  
@@ -111,7 +230,9 @@ class MY_Model extends CI_Model {
 	 */
 	public function delete_all($where = array(), $limit = NULL)
 	{
-		return $this->db->delete($this->table_name(), $where, $limit);
+		$where = $this->_map_field($where);
+
+		return $this->_db->delete($this->_table_name, $where, $limit);
 	}
  
 	/**
@@ -123,9 +244,13 @@ class MY_Model extends CI_Model {
 	 */
 	public function find_by_pk($pk, $where = array())
 	{
-		$where[$this->primary_key()] = $pk;
-		$query = $this->db->from($this->table_name())->where($where)->get();
-		return $query->row_array();
+		$where[$this->_primary_key] = $pk;
+
+		$where = $this->_map_field($where);
+
+		$query = $this->_db->from($this->_table_name)->where($where)->get();
+		//return $query->row_array();
+		return $this->_map_field($query->row_array(), TRUE);
 	}
  
 	/**
@@ -135,8 +260,10 @@ class MY_Model extends CI_Model {
 	 */
 	public function find_by_attributes($where = array())
 	{
-		$query = $this->db->from($this->table_name())->where($where)->limit(1)->get();
-		return $query->row_array();
+		$where = $this->_map_field($where);
+
+		$query = $this->_db->from($this->_table_name)->where($where)->limit(1)->get();
+		return $this->_map_field($query->row_array(), TRUE);
 	}
  
 	/**
@@ -150,23 +277,26 @@ class MY_Model extends CI_Model {
 	 */
 	public function find_all($where = array(), $limit = 0, $offset = 0, $sort = NULL)
 	{
-		$this->db->from($this->table_name())->where($where);
+		$where = $this->_map_field($where);
+
+		$this->_db->from($this->_table_name)->where($where);
 		if($sort !== NULL) {
 			if(is_array($sort)){
 				foreach($sort as $value){
-					$this->db->order_by($value, '', false);
+					$this->_db->order_by($value, '', false);
 				}
 			} else {
-				$this->db->order_by($sort);
+				$this->_db->order_by($sort);
 			}
 		}
 		if($limit > 0) {
-			$this->db->limit($limit, $offset);
+			$this->_db->limit($limit, $offset);
 		}
  
-		$query = $this->db->get();
+		$query = $this->_db->get();
  
-		return $query->result_array();
+		//return $query->result_array();
+		return $this->_map_field($query->result_array(), TRUE);
 	}
  
 	/**
@@ -177,7 +307,9 @@ class MY_Model extends CI_Model {
 	 */
 	public function count($where = array())
 	{
-		return $this->db->from($this->table_name())->where($where)->count_all_results();
+		$where = $this->_map_field($where);
+
+		return $this->_db->from($this->_table_name)->where($where)->count_all_results();
 	}
  
 	/**
@@ -188,8 +320,8 @@ class MY_Model extends CI_Model {
 	 */
 	public function query($sql, $param = array())
 	{
-		$query = $this->db->query($sql, $param);
-		return $query->result_array();
+		$query = $this->_db->query($sql, $param);
+		return $this->_map_field($query->result_array(), TRUE);
 	}
 }
  
