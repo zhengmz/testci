@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, user-scalable=no">
 <style>
 	.form_area {display:block!important; margin-left:5%; width: 90%; padding-top: 2%; height:100%; overflow: hidden;}
+	@media only screen and (min-device-width: 1080px)
+	{
+		.form_area {margin-left:25%; width: 50%;}
+	}
 	.input_item {background: white; width: 95%; display: block; height: 30px; line-height: 1.5; padding: 1% 1%; border: 1px solid #e6e6e6; border-radius: 6px; color: #333; font-size: 18px; font-weight: bold;}
 	.input_item:focus {box-shadow: inset 0 0 8px #eaeaea; background: #fdfdfd;}
 	.top_input_item {border-radius: 6px 6px 0 0;}
@@ -17,8 +21,8 @@
 	.orange {background: #ff7a4d; color: #fff; border: 1px solid #ff7549;}
 	.orange:hover {color:white; background: #ff936a; border: 1px solid #ff936a;}
 	.orange:active {color:white; background: #f6683b; border: 1px solid #f6683b;}
-	</style>
-	<style>
+</style>
+<style>
 	html,body,ul,li,p,h1,div,a,img,i,span,input,em {padding: 0; margin: 0;}
 	html,body {line-height: 1.5; color: #333; font-size: 16px;}
 	body {background: transparent; overflow: hidden;}
