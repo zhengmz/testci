@@ -10,7 +10,7 @@
 	{
 		.form_area {margin-left:25%; width: 50%;}
 	}
-	@media only screen and (min-device-width: 720px) and (max-device-width: 1080px)
+	@media only screen and (min-device-width: 900px) and (max-device-width: 1080px)
 	{
 		.form_area {margin-left:15%; width: 70%;}
 	}
