@@ -1,23 +1,6 @@
 <?php
 
-
 class News_model extends MY_Model {
-
-	/**
-	 * 表名
-	 */
-	public function table_name()
-	{
-		return "news";
-	}
-
-	/**
-	 * 主键
-	 */
-	public function primary_key()
-	{
-		return "slug";
-	}
 
 	public function get_news($slug = FALSE)
 	{
