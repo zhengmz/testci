@@ -20,6 +20,21 @@ class MY_Service
 	{
 		log_message('debug', "MY_Service Class Initialized");
 	}
+
+	/**
+	 * __get
+	 *
+	 * Allows models to access CI's loaded classes using the same
+	 * syntax as controllers.
+	 *
+	 * @param	string
+	 * @access private
+	 */
+	function __get($key)
+	{
+		$CI =& get_instance();
+		return $CI->$key;
+	}
 }
 // END MY_Service Class
 
