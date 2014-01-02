@@ -43,7 +43,7 @@ class Wx_home extends CI_Controller {
 			$response .= '你的语音消息是: ['.$this->weixin->get('Recognition').']';
 			break;
 		case 'LINK':
-			$response .= '你发过来的链接是: ['.$this->weixin->get('Url').']';
+			$response .= '你发过来的链接是: [ '.$this->weixin->get('Url').' ]';
 			break;
 		case 'LOCATION':
 			$response .= vsprintf('你的位置在：X[%s], Y[%s], 缩放[%s], 位置信息[%s]', $this->weixin->get(array('Location_X', 'Location_Y', 'Scale', 'Label')));
