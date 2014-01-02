@@ -2,6 +2,14 @@
 
 class News_model extends MY_Model {
 
+	public function __construct($config = array())
+	{
+		$config['table_name'] = 'news';
+		parent::__construct($config);
+
+		log_message('debug', "MY_Model Class Initialized");
+	}
+
 	public function get_news($slug = FALSE)
 	{
 		$where = array();
