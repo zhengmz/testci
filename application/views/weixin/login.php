@@ -10,6 +10,10 @@
 	{
 		.form_area {margin-left:25%; width: 50%;}
 	}
+	@media only screen and (min-device-width: 720px) and (max-device-width: 1080px)
+	{
+		.form_area {margin-left:15%; width: 70%;}
+	}
 	.input_item {background: white; width: 95%; display: block; height: 30px; line-height: 1.5; padding: 1% 1%; border: 1px solid #e6e6e6; border-radius: 6px; color: #333; font-size: 18px; font-weight: bold;}
 	.input_item:focus {box-shadow: inset 0 0 8px #eaeaea; background: #fdfdfd;}
 	.top_input_item {border-radius: 6px 6px 0 0;}
