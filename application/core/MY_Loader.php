@@ -136,9 +136,9 @@ class MY_Loader extends CI_Loader {
 	 * 重载model方法，实现参数传入
 	 *
 	 * @param	string	model的类名
-	 * @param	array	传入参数
 	 * @param	string	model的别名
 	 * @param	bool	判断是否连接数据库
+	 * @param	array	传入参数
 	 * @return	void
 	 */
 	public function model($model, $name = '', $db_conn = FALSE, $params = array())
