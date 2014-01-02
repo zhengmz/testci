@@ -132,6 +132,26 @@ class MY_Loader extends CI_Loader {
 		show_error('Unable to locate the service you have specified: '.$service);
 	}
  
+	/**
+	 * 重载model方法，实现参数传入
+	 *
+	 * @param	string	model的类名
+	 * @param	array	传入参数
+	 * @param	string	model的别名
+	 * @param	bool	判断是否连接数据库
+	 * @return	void
+	 */
+	public function model($model, $params = array(), $name = '', $db_conn = FALSE)
+	{
+		parent::model($model, $name, $db_conn);
+		
+		$CI =& get_instance();
+		if ($name == '')
+		{
+			$name = $model;
+		}
+		$CI->$name->initialize($params);
+	}
 }
 
 /* End of file MY_Loader.php */
