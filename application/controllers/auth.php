@@ -24,12 +24,12 @@ class Auth extends CI_Controller
             // Howzit?
 //            try
  //           {
-                $token = $provider->access($_GET['code']);
+//                $token = $provider->access($_GET['code']);
 
 		echo "code: ".$this->input->get('code');
+		echo "state: ".$this->input->get('state');
 
-                $user = $provider->get_user_info($token);
-		print_r($user);
+ //               $user = $provider->get_user_info($token);
 
                 // Here you should use this information to A) look for a user B) help a new user sign up with existing data.
                 // If you store it all in a cookie and redirect to a registration page this is crazy-simple.
