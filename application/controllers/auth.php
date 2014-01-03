@@ -6,6 +6,7 @@ class Auth extends CI_Controller
     {
         $this->load->helper('url_helper');
 
+	$this->load->library('session');
 
 	$this->config->load('oauth2');
 
