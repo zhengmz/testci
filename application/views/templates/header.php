@@ -3,6 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title ?> - Welcome to earth</title>
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, user-scalable=no, target-densitydpi=medium-dpi">
 
 	<style type="text/css">
