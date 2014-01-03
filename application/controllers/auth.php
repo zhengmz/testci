@@ -6,7 +6,7 @@ class Auth extends CI_Controller
     {
         $this->load->helper('url_helper');
 
-	$this->load->library('OAuth2');
+	$this->load->library('oauth2');
 
         $provider = $this->oauth2->provider($provider, array(
             'id' => '100577935',
