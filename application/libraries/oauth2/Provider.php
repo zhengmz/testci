@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * OAuth2 Provider
  *
@@ -9,15 +9,57 @@
  * @license    http://philsturgeon.co.uk/code/dbad-license
  */
 
+ /**
+  * Oauth2 SocialAuth for CodeIgniter
+  * 修改自 https://github.com/philsturgeon/codeigniter-oauth2
+  * 
+  * @author     chekun <234267695@qq.com>
+  */
+
 abstract class OAuth2_Provider
 {
 	/**
 	 * @var  string  provider name
 	 */
 	public $name;
-
+        
+        /**
+	 * @var  string  provider human name
+	 */
+	public $human;
+        
+        /**
+	 * @var  string  state key name, for some unfollowing spec kids
+	 */
+	public $state_key = 'state';
+        
+        /**
+	 * @var  string  error key name, for some unfollowing spec kids
+	 */
+	public $error_key = 'error';
+        
+        /**
+	 * @var  string  client_id key name, for some unfollowing spec kids
+	 */
+	public $client_id_key = 'client_id';
+        
+        /**
+	 * @var  string  client_secret key name, for some unfollowing spec kids
+	 */
+	public $client_secret_key = 'client_secret';
+        
+        /**
+	 * @var  string  redirect_uri key name, for some unfollowing spec kids
+	 */
+	public $redirect_uri_key = 'redirect_uri';
+        
+        /**
+	 * @var  string  access_token key name, for some unfollowing spec kids
+	 */
+	public $access_token_key = 'access_token';
+        
 	/**
-	 * @var  string  uid key name
+	 * @var  string  uid key name name, for some unfollowing spec kids
 	 */
 	public $uid_key = 'uid';
 
@@ -115,17 +157,16 @@ abstract class OAuth2_Provider
 	abstract public function get_user_info(OAuth2_Token_Access $token);
 
 	/*
-	* Get an authorization code from Facebook.  Redirects to Facebook, which this redirects back to the app using the redirect address you've set.
+	* Get an authorization code from Provider Service.  Redirects to Provider Authorization Page, which this redirects back to the app using the redirect address you've set.
 	*/	
 	public function authorize($options = array())
 	{
 		$state = md5(uniqid(rand(), true));
 		get_instance()->session->set_userdata('state', $state);
-
 		$params = array(
-			'client_id' 		=> $this->client_id,
-			'redirect_uri' 		=> isset($options['redirect_uri']) ? $options['redirect_uri'] : $this->redirect_uri,
-			'state' 			=> $state,
+			$this->client_id_key 		=> $this->client_id,
+			$this->redirect_uri_key 	=> isset($options[$this->redirect_uri_key]) ? $options[$this->redirect_uri_key] : $this->redirect_uri,
+			$this->state_key 		=> $state,
 			'scope'				=> is_array($this->scope) ? implode($this->scope_seperator, $this->scope) : $this->scope,
 			'response_type' 	=> 'code',
 			'approval_prompt'   => 'force' // - google force-recheck
@@ -144,9 +185,14 @@ abstract class OAuth2_Provider
 	*/	
 	public function access($code, $options = array())
 	{
+      	//check we csrf first
+        if (isset($_GET[$this->state_key]) AND $_GET[$this->state_key] != get_instance()->session->userdata('state'))
+        {
+        	throw new OAuth2_Exception(array('code' => '403', 'message' => 'The state does not match. Maybe you are a victim of CSRF.'));
+        }
 		$params = array(
-			'client_id' 	=> $this->client_id,
-			'client_secret' => $this->client_secret,
+			$this->client_id_key 	=> $this->client_id,
+			$this->client_secret_key => $this->client_secret,
 			'grant_type' 	=> isset($options['grant_type']) ? $options['grant_type'] : 'authorization_code',
 		);
 		
@@ -156,7 +202,7 @@ abstract class OAuth2_Provider
 		{
 			case 'authorization_code':
 				$params['code'] = $code;
-				$params['redirect_uri'] = isset($options['redirect_uri']) ? $options['redirect_uri'] : $this->redirect_uri;
+				$params[$this->redirect_uri_key] = isset($options[$this->redirect_uri_key]) ? $options[$this->redirect_uri_key] : $this->redirect_uri;
 			break;
 
 			case 'refresh_token':
@@ -170,28 +216,13 @@ abstract class OAuth2_Provider
 		switch ($this->method)
 		{
 			case 'GET':
-
-				// Need to switch to Request library, but need to test it on one that works
 				$url .= '?'.http_build_query($params);
 				$response = file_get_contents($url);
-
-				parse_str($response, $return);
+				$return = $this->parse_response($response);
 
 			break;
 
 			case 'POST':
-
-				/* 	$ci = get_instance();
-
-				$ci->load->spark('curl/1.2.1');
-
-				$ci->curl
-					->create($url)
-					->post($params, array('failonerror' => false));
-
-				$response = $ci->curl->execute();
-				*/
-
 				$opts = array(
 					'http' => array(
 						'method'  => 'POST',
@@ -203,20 +234,21 @@ abstract class OAuth2_Provider
 				$_default_opts = stream_context_get_params(stream_context_get_default());
 				$context = stream_context_create(array_merge_recursive($_default_opts['options'], $opts));
 				$response = file_get_contents($url, false, $context);
-
-				$return = json_decode($response, true);
-
+                $return = $this->parse_response($response);
 			break;
 
 			default:
 				throw new OutOfBoundsException("Method '{$this->method}' must be either GET or POST");
 		}
 
-		if ( ! empty($return['error']))
+		if ( ! empty($return[$this->error_key]) OR ! isset($return['access_token']))
 		{
 			throw new OAuth2_Exception($return);
 		}
-		
+                
+		$return['uid_key'] = $this->uid_key;
+        $return['access_token_key'] = $this->access_token_key;
+                
 		switch ($params['grant_type'])
 		{
 			case 'authorization_code':
@@ -229,5 +261,26 @@ abstract class OAuth2_Provider
 		}
 		
 	}
+        
+    protected function parse_response($response = '')
+    {
+    	if (strpos($response, "callback") !== false)
+        {
+        	$lpos = strpos($response, "(");
+            $rpos = strrpos($response, ")");
+            $response  = substr($response, $lpos + 1, $rpos - $lpos -1);
+            $return = json_decode($response, true);
+        }
+        elseif (strpos($response, "&") !== false)
+        {
+            parse_str($response, $return);
+                                
+        }
+        else
+        {
+            $return = json_decode($response, true);
+        }
+        return $return;
+    }
 
 }

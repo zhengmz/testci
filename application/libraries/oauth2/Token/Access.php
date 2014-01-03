@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * OAuth2 Token
  *
@@ -7,6 +7,13 @@
  * @author     Phil Sturgeon
  * @copyright  (c) 2011 HappyNinjas Ltd
  */
+
+ /**
+  * Oauth2 SocialAuth for CodeIgniter
+  * 修改自 https://github.com/philsturgeon/codeigniter-oauth2
+  * 
+  * @author     chekun <234267695@qq.com>
+  */
 
 class OAuth2_Token_Access extends OAuth2_Token
 {
@@ -39,7 +46,7 @@ class OAuth2_Token_Access extends OAuth2_Token
 	 */
 	public function __construct(array $options = null)
 	{
-		if ( ! isset($options['access_token']))
+		if ( ! isset($options[$options['access_token_key']]))
 		{
 			throw new Exception('Required option not passed: access_token'.PHP_EOL.print_r($options, true));
 		}
@@ -49,14 +56,10 @@ class OAuth2_Token_Access extends OAuth2_Token
 		// 	throw new Exception('We do not know when this access_token will expire');
 		// }
 
-		$this->access_token = $options['access_token'];
+		$this->access_token = $options[$options['access_token_key']];
 		
-		// Some providers (not many) give the uid here, so lets take it
-		isset($options['uid']) and $this->uid = $options['uid'];
-		
-		//Vkontakte uses user_id instead of uid
-		isset($options['user_id']) and $this->uid = $options['user_id'];
-		
+        isset($options[$options['uid_key']]) and $this->uid = $options[$options['uid_key']];
+                
 		//Mailru uses x_mailru_vid instead of uid
 		isset($options['x_mailru_vid']) and $this->uid = $options['x_mailru_vid'];
 		
