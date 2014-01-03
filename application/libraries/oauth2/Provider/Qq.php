@@ -60,6 +60,8 @@ class OAuth2_Provider_Qq extends OAuth2_Provider
 	    	throw new OAuth2_Exception((array) $user);
 	    }
                 
+		return $user;
+/*
 		return array(
             'via' => 'qq',
 			'uid' => $me->openid,
@@ -72,5 +74,6 @@ class OAuth2_Provider_Qq extends OAuth2_Provider
 			'expire_at' => $token->expires,
 			'refresh_token' => $token->refresh_token
 		);
+*/
 	}
 }
