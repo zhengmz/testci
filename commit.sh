@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo "Now prepare to input github user's password..."
+echo "Now prepare to push to github ..."
 git push origin master
 
 echo ""
-echo "Now prepare to input aws user's password..."
+echo "Now prepare to update to aws ..."
 ssh zhengmz@aws "sh update.sh"
