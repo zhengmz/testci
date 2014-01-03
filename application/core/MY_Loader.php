@@ -136,12 +136,11 @@ class MY_Loader extends CI_Loader {
 	 * 重载model方法，实现参数传入
 	 *
 	 * @param	string	model的类名
-	 * @param	string	model的别名
-	 * @param	bool	判断是否连接数据库
 	 * @param	array	传入参数
+	 * @param	string	model的别名
 	 * @return	void
 	 */
-	public function model($model, $params= array(), $name = '', $db_conn = FALSE)
+	public function model($model, $params= array(), $name = '')
 	{
 		if (is_array($model))
 		{
@@ -157,14 +156,14 @@ class MY_Loader extends CI_Loader {
 			return;
 		}
 
+		parent::model($model, $name);
+		
+		$CI =& get_instance();
 		if ($name == '')
 		{
 			$name = $model;
 		}
 
-		parent::model($model, $name, $db_conn);
-		
-		$CI =& get_instance();
 		$CI->$name->initialize($params);
 	}
 }
