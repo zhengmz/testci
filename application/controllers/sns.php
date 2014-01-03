@@ -7,23 +7,21 @@ class Sns extends CI_Controller {
 		parent::__construct();
 		$this->load->library('session');
 		$this->load->helper('url');
-		//$this->session->userdata('is_login') AND redirect();
+		$this->session->userdata('is_login') AND redirect('sns');
 	}
 
 	public function index()
 	{
 		$this->config->load('oauth2');
                 $data['user'] = $this->session->userdata('user');
-		//$this->session->set_userdata('is_login', FALSE);
 		$this->load->view('sns_view', $data);
 	}
 
 	public function logout()
 	{
-    		//! $this->session->userdata('is_login') AND redirect();
 		$this->session->sess_destroy();
 		$this->session->set_userdata('is_login', FALSE);
-		redirect();
+		redirect('sns');
 	}
 
 	public function session($provider = '')
@@ -42,7 +40,7 @@ class Sns extends CI_Controller {
 		if ($args AND !isset($args['code']))
 		{
 			$this->session->set_flashdata('info', '授权失败了,可能由于应用设置问题或者用户拒绝授权.<br />具体原因:<br />'.json_encode($args));
-		    redirect();
+		    redirect('sns');
 		    return;
 		}
 		$code = $this->input->get('code', TRUE);
@@ -79,7 +77,7 @@ class Sns extends CI_Controller {
 				$this->session->set_flashdata('info', '操作失败<pre>'.$e.'</pre>');
 			}
 		}
-		redirect('sns/index');
+		redirect('sns');
 	}
 }
 
