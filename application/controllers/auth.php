@@ -24,10 +24,10 @@ class Auth extends CI_Controller
             // Howzit?
 //            try
  //           {
-//                $token = $provider->access($_GET['code']);
-
 		echo "code: ".$this->input->get('code');
 		echo "state: ".$this->input->get('state');
+
+                $token = $provider->access($_GET['code']);
 
  //               $user = $provider->get_user_info($token);
 
