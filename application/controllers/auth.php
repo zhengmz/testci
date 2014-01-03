@@ -7,13 +7,25 @@ class Auth extends CI_Controller
         $this->load->helper('url');
 
 	$this->load->library('session');
+
+/*
 	$this->load->library('oauth2');
 
         $provider = $this->oauth2->provider($provider, array(
             'id' => '100577935',
             'secret' => '7d83d74c2a58f6a51c7ca8d47d154fcb',
         ));
+*/
+	$this->config->load('oauth2');
+	$allowed_providers = $this->config->item('oauth2');
+	if ( ! $provider OR ! isset($allowed_providers[$provider]))
+	{
+		echo 'info: 暂不支持'.$provider.'方式登录.';
+		return;
+	}
+	$this->load->library('oauth2');
 
+	$provider = $this->oauth2->provider($provider, $allowed_providers[$provider]);
         if ( ! $this->input->get('code'))
         {
             // By sending no options it'll come back here
