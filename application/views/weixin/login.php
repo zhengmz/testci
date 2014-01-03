@@ -6,10 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, user-scalable=no, target-densitydpi=medium-dpi">
 <style>
 	.form_area {display:block!important; margin-left:5%; width: 90%; padding-top: 2%; height:100%; overflow: hidden;}
-	@media only screen and (min-device-width: 1080px)
-	{
-		.form_area {margin-left:25%; width: 50%;}
-	}
 	.input_item {background: white; width: 95%; display: block; height: 30px; line-height: 1.5; padding: 1% 1%; border: 1px solid #e6e6e6; border-radius: 6px; color: #333; font-size: 18px; font-weight: bold;}
 	.input_item:focus {box-shadow: inset 0 0 8px #eaeaea; background: #fdfdfd;}
 	.top_input_item {border-radius: 6px 6px 0 0;}
