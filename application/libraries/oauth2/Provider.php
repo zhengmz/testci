@@ -223,6 +223,7 @@ abstract class OAuth2_Provider
 			break;
 
 			case 'POST':
+/*
 				$opts = array(
 					'http' => array(
 						'method'  => 'POST',
@@ -234,6 +235,16 @@ abstract class OAuth2_Provider
 				$_default_opts = stream_context_get_params(stream_context_get_default());
 				$context = stream_context_create(array_merge_recursive($_default_opts['options'], $opts));
 				$response = file_get_contents($url, false, $context);
+*/
+ 		$ch = curl_init();
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+                curl_setopt($ch, CURLOPT_URL, $url);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                $$response = json_decode($response, true);
                 $return = $this->parse_response($response);
 			break;
 
