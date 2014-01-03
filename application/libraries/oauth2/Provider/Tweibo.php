@@ -32,10 +32,10 @@ class OAuth2_Provider_Tweibo extends OAuth2_Provider
 
 		$url = 'https://open.t.qq.com/api/user/info?'.http_build_query(array(
 			'access_token' => $token->access_token,
-                        'oauth_consumer_key' => $this->client_id,
+            'oauth_consumer_key' => $this->client_id,
 			'openid' => $token->uid,
-                        'clientip' => get_instance()->input->ip_address(),
-                        'oauth_version' => '2.a'
+            'clientip' => get_instance()->input->ip_address(),
+            'oauth_version' => '2.a'
 		));
 		$user = json_decode(file_get_contents($url));
 
@@ -47,15 +47,15 @@ class OAuth2_Provider_Tweibo extends OAuth2_Provider
 		// Create a response from the request
 		return array(
             'via' => 'tweibo',
-			'uid' => $user->data->openid,
-			'screen_name' => $user->data->nick,
-			'name' => $user->data->name,
-			'location' => '',
-			'description' => $user->data->introduction,
-                  	'image' => $user->data->head.'/100',
-			'access_token' => $token->access_token,
-			'expire_at' => $token->expires,
-			'refresh_token' => $token->refresh_token
+            'uid' => $user->data->openid,
+            'screen_name' => $user->data->nick,
+            'name' => $user->data->name,
+            'location' => '',
+            'description' => $user->data->introduction,
+            'image' => $user->data->head.'/100',
+            'access_token' => $token->access_token,
+            'expire_at' => $token->expires,
+            'refresh_token' => $token->refresh_token
 		);
 	}
 }
