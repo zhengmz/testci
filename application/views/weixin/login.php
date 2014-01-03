@@ -3,7 +3,7 @@
 <head>
 <title>欢迎绑定微信</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, user-scalable=no, target-densitydpi=medium-dpi">
 <style>
 	.form_area {display:block!important; margin-left:5%; width: 90%; padding-top: 2%; height:100%; overflow: hidden;}
 	@media only screen and (min-device-width: 1080px)
