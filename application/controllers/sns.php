@@ -7,7 +7,6 @@ class Sns extends CI_Controller {
 		parent::__construct();
 		$this->load->library('session');
 		$this->load->helper('url');
-		$this->session->userdata('is_login') AND redirect('sns');
 	}
 
 	public function index()
