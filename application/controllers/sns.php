@@ -20,7 +20,7 @@ class Sns extends CI_Controller {
 
 	public function logout()
 	{
-    		! $this->session->userdata('is_login') AND redirect();
+    		//! $this->session->userdata('is_login') AND redirect();
 		$this->session->sess_destroy();
 		$this->session->set_userdata('is_login', FALSE);
 		redirect();
@@ -79,7 +79,7 @@ class Sns extends CI_Controller {
 				$this->session->set_flashdata('info', '操作失败<pre>'.$e.'</pre>');
 			}
 		}
-		redirect();
+		redirect('sns/index');
 	}
 }
 
