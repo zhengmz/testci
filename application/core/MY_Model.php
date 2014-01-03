@@ -54,7 +54,10 @@ class MY_Model extends CI_Model {
 	public function __construct($config = array())
 	{
 		parent::__construct();
-		$this->initialize($config);
+		if (! empty($config))
+		{
+			$this->initialize($config);
+		}
 
 		log_message('debug', "MY_Model Class Initialized");
 	}
@@ -133,7 +136,7 @@ class MY_Model extends CI_Model {
 		
 		foreach ($data as $key => $val)
 		{
-			if(isset($map[$key])
+			if(isset($map[$key]))
 			{
 				unset($data[$key]);
 				$data[$map[$key]] = $val;
