@@ -1,12 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('APPPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-        <meta property="qc:admins" content="2702401645402437451761452631611006375" />
-        <meta property="qh.webmaster" content="5107502a77812"/>
-        <meta property="author" content="chekun" />
 	<title>Oauth2 SocialAuth for CodeIgniter</title>
 	<style type="text/css">
 
@@ -90,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <?php if ($via != 'duoshuo'): ?>
                   <a href="<?php echo site_url('sns/logout'); ?>">退出</a>
                   <?php else: ?>
-                  <a href="http://socialauth-for-codeigniter.duoshuo.com/logout/?sso=1&redirect_uri=<?php echo site_url('logout'); ?>">退出</a>
+                  <a href="http://socialauth-for-codeigniter.duoshuo.com/logout/?sso=1&redirect_uri=<?php echo site_url('sns/logout'); ?>">退出</a>
                   <?php endif; ?>
 	          	<br />
 	          	<img src="<?php echo $user['image']; ?>" />
@@ -105,26 +102,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </p>
 
         <?php endforeach; ?>
-		<!-- Duoshuo Comment BEGIN -->
-			<div class="ds-thread"></div>
-			<script type="text/javascript">
-			var duoshuoQuery = {
-                        	short_name:"socialauth-for-codeigniter",
-                        	sso: { 
-                                   login: "<?php echo site_url('sns/session/duoshuo'); ?>",
-                                   logout: "<?php echo site_url('logout'); ?>"
-                               }
-                        };
-			(function() {
-				var ds = document.createElement('script');
-				ds.type = 'text/javascript';ds.async = true;
-				ds.src = 'http://static.duoshuo.com/embed.js';
-				ds.charset = 'UTF-8';
-				(document.getElementsByTagName('head')[0] 
-				|| document.getElementsByTagName('body')[0]).appendChild(ds);
-			})();
-			</script>
-		<!-- Duoshuo Comment END -->
 	</div>
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>

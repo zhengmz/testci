@@ -14,7 +14,7 @@ class Sns extends CI_Controller {
 	{
 		$this->config->load('oauth2');
                 $data['user'] = $this->session->userdata('user');
-		$this->session->set_userdata('is_login', TRUE);
+		//$this->session->set_userdata('is_login', FALSE);
 		$this->load->view('sns_view', $data);
 	}
 
