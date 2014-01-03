@@ -12,7 +12,6 @@ class Auth extends CI_Controller
         $provider = $this->oauth2->provider($provider, array(
             'id' => '100577935',
             'secret' => '7d83d74c2a58f6a51c7ca8d47d154fcb',
-	    'redirect_uri' => site_url('auth/session/qq')
         ));
 
         if ( ! $this->input->get('code'))
@@ -26,6 +25,8 @@ class Auth extends CI_Controller
             try
             {
                 $token = $provider->access($_GET['code']);
+
+		echo "code: ".$this->input->get('code');
 
                 $user = $provider->get_user_info($token);
 
