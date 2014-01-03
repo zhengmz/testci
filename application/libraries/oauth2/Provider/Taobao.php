@@ -32,10 +32,10 @@ class OAuth2_Provider_Taobao extends OAuth2_Provider
 
 		$url = 'https://eco.taobao.com/router/rest?'.http_build_query(array(
 			'access_token' => $token->access_token,
-            'method' => 'taobao.user.get',
+                        'method' => 'taobao.user.get',
 			'v' => '2.0',
-            'format' => 'json',
-            'fields' => 'user_id,uid,nick,location,avatar',
+                        'format' => 'json',
+                        'fields' => 'user_id,uid,nick,location,avatar',
 		));
 		$user = json_decode(file_get_contents($url));
 
@@ -46,13 +46,13 @@ class OAuth2_Provider_Taobao extends OAuth2_Provider
 
 		// Create a response from the request
 		return array(
-            'via' => 'taobao',
+            		'via' => 'taobao',
 			'uid' => $user->user_get_response->user->user_id,
 			'screen_name' => $user->user_get_response->user->nick,
 			'name' => $user->user_get_response->user->uid,
 			'location' => $user->user_get_response->user->location,
 			'description' => '',
-            'image' => $user->user_get_response->user->avatar,
+                  	'image' => $user->user_get_response->user->avatar,
 			'access_token' => $token->access_token,
 			'expire_at' => $token->expires,
 			'refresh_token' => $token->refresh_token

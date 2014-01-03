@@ -2,7 +2,7 @@
 
  /**
   * Oauth2 SocialAuth for CodeIgniter
-  * 360 Provider 
+  * 360 Provider
   * 
   * @author     chekun <234267695@qq.com>
   */
@@ -35,14 +35,14 @@ class OAuth2_Provider_360 extends OAuth2_Provider
 		));
 		$user = json_decode(file_get_contents($url));
 
-		if (array_key_exists("error", $user))
-		{
-			throw new OAuth2_Exception((array) $user);
-		}
+      	if (array_key_exists("error", $user))
+        {
+        	throw new OAuth2_Exception((array) $user);
+        }
 
 		// Create a response from the request
 		return array(
-			'via' => '360',
+            'via' => '360',
 			'uid' => $user->id,
 			'screen_name' => $user->name,
 			'name' => '',

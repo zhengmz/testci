@@ -2,7 +2,7 @@
 
  /**
   * Oauth2 SocialAuth for CodeIgniter
-  * 多说 Provider 
+  * 多说 Provider
   * 
   * @author     chekun <234267695@qq.com>
   */
@@ -29,8 +29,9 @@ class OAuth2_Provider_Duoshuo extends OAuth2_Provider
 
 	public function get_user_info(OAuth2_Token_Access $token)
 	{
+		// Create a response from the request
 		return array(
-			'via' => 'duoshuo',
+            'via' => 'duoshuo',
 			'uid' => $token->uid,
 			'screen_name' => $token->uid,
 			'name' => '',
