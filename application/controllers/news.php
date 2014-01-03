@@ -4,12 +4,18 @@ class News extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('news_model');
+    //$this->load->model('news_model', array('table_name' => 'news'));
+    $params = array(
+	'table_name' => 'news',
+	'primary_key' => 'slug'
+	);
+    $this->load->model('base_model', $params, 'news_model');
     $this->load->helper('url');
   }
 
 public function index(){
-  $data['news'] = $this->news_model->get_news();
+  //$data['news'] = $this->news_model->get_news();
+  $data['news'] = $this->news_model->find_all();
   $data['title'] = 'News archive';
 
   $this->load->view('templates/header', $data);
@@ -35,8 +41,8 @@ public function page($page = 1)
 }
 
 public function view($slug){
-  $data = $this->news_model->get_news($slug);
-  $data['news_item'] = $data[0];
+  //$data = $this->news_model->get_news($slug);
+  $data['news_item'] = $this->news_model->find_by_pk($slug);
 
   if (empty($data['news_item']))
   {
@@ -69,7 +75,17 @@ public function create()
   }
   else
   {
-    $ret = $this->news_model->set_news();
+	$this->load->helper('url');
+	
+	$slug = url_title($this->input->post('title'), 'dash', TRUE);
+
+	$data = array(
+		'title' => $this->input->post('title'),
+		'slug' => $slug,
+		'text' => $this->input->post('text')
+	);
+
+    $ret = $this->news_model->save($data);
     $data['return'] = $ret;
     $this->load->view('templates/header', $data);  
     $this->load->view('news/success');
