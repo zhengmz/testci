@@ -4,7 +4,7 @@ class Auth extends CI_Controller
 {
     public function session($provider)
     {
-        $this->load->helper('url_helper');
+        $this->load->helper('url');
 
 	$this->load->library('session');
 	$this->load->library('oauth2');
