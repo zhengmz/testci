@@ -7,7 +7,7 @@
   * @author     chekun <234267695@qq.com>
   */
  
-require APPPATH.'libraries/oauth2/OAuth2.php';
+require 'oauth2/OAuth2.php';
 
 /* End of file Oauth2.php */
 /* Location: ./application/libraries/Oauth2.php */
