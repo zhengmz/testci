@@ -22,8 +22,8 @@ class Auth extends CI_Controller
         else
         {
             // Howzit?
-//            try
- //           {
+            try
+            {
 		echo "code: ".$this->input->get('code');
 		echo "state: ".$this->input->get('state');
 
@@ -38,12 +38,12 @@ class Auth extends CI_Controller
 
                 echo "\n\nUser Info: ";
                 var_dump($user);
-  //          }
+            }
 
-   //         catch (OAuth2_Exception $e)
-    //        {
-     //           show_error('That didnt work: '.$e);
-      //      }
+            catch (OAuth2_Exception $e)
+            {
+                show_error('That didnt work: '.$e);
+            }
 
         }
     }
