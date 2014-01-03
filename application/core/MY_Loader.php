@@ -141,15 +141,30 @@ class MY_Loader extends CI_Loader {
 	 * @param	array	传入参数
 	 * @return	void
 	 */
-	public function model($model, $name = '', $db_conn = FALSE, $params = array())
+	public function model($model, $params= array(), $name = '', $db_conn = FALSE)
 	{
-		parent::model($model, $name, $db_conn);
-		
-		$CI =& get_instance();
+		if (is_array($model))
+		{
+			foreach ($model as $babe)
+			{
+				$this->model($babe, $params);
+			}
+			return;
+		}
+
+		if ($model == '')
+		{
+			return;
+		}
+
 		if ($name == '')
 		{
 			$name = $model;
 		}
+
+		parent::model($model, $name, $db_conn);
+		
+		$CI =& get_instance();
 		$CI->$name->initialize($params);
 	}
 }
