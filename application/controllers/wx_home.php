@@ -24,6 +24,7 @@ class Wx_home extends CI_Controller {
 
 	/**
 	 * 默认接入函数
+	 * 只能在微信中使用
 	 */
 	public function index()
 	{

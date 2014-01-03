@@ -1,5 +1,6 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
+DROP TABLE IF EXISTS 'news';
 CREATE TABLE news ( 
     id    INTEGER         PRIMARY KEY AUTOINCREMENT
                           NOT NULL,
@@ -24,10 +25,11 @@ title 7');
 INSERT INTO "news" VALUES(7,'title 8','title-8','asdfdsa
 adsfdsa
 asdfdsaf');
+DROP TABLE IF EXISTS 'users';
 CREATE TABLE users ( 
     uid      INTEGER         PRIMARY KEY AUTOINCREMENT
                              NOT NULL,
-    name     VARCHAR( 50 )   NOT NULL
+    login     VARCHAR( 50 )   NOT NULL
                              UNIQUE,
     email    VARCHAR( 100 ),
     mobile   VARCHAR( 11 ),
