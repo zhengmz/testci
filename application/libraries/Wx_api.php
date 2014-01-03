@@ -207,18 +207,9 @@ class Wx_api {
 		$url_base = 'https://api.weixin.qq.com/cgi-bin/';
 
 		$url = $url_base.$method;
-		$get_param_str = '';
-		foreach ($get_params as $key => $val)
+		if (!empty($get_params))
 		{
-			if ($get_param_str !== '')
-			{
-				$get_param_str .= '&';
-			}
-			$get_param_str .= $key.'='.$val;
-		}
-		if ($get_param_str !== '')
-		{
-			$url .= '?'.$get_param_str;
+			$url .= '?'.http_build_query($get_params);
 		}
 
 		$url_params = array();
