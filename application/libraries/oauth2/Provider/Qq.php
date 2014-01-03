@@ -47,6 +47,7 @@ class OAuth2_Provider_Qq extends OAuth2_Provider
             throw new OAuth2_Exception((array) $me);
         }
 		
+		return $me;
         $url = 'https://graph.qq.com/user/get_user_info?'.http_build_query(array(
 			'access_token' => $token->access_token,
 			'openid' => $me->openid,
@@ -60,7 +61,6 @@ class OAuth2_Provider_Qq extends OAuth2_Provider
 	    	throw new OAuth2_Exception((array) $user);
 	    }
                 
-		return $user;
 /*
 		return array(
             'via' => 'qq',
