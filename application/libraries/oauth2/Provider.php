@@ -238,16 +238,6 @@ abstract class OAuth2_Provider
 				$context = stream_context_create(array_merge_recursive($_default_opts['options'], $opts));
 				$response = file_get_contents($url, false, $context);
 */
-/*
- 		$ch = curl_init();
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                curl_setopt($ch, CURLOPT_POST, TRUE);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-                curl_setopt($ch, CURLOPT_URL, $url);
-                $response = curl_exec($ch);
-                curl_close($ch);
-*/
-
 		$url_param = array (
 			CURLOPT_URL => $url,
 			CURLOPT_POST => TRUE,
