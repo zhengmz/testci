@@ -124,28 +124,6 @@ class Wx_api {
 	}
 
 	/**
-	 * 实现对数组的urlencode
-	 *
-	 * @param array 传入待编码的数组
-	 * @return array 返回编码后的数组
-	 */
-	protected function _url_encode($data)
-	{
-		foreach ($data as $key => $val)
-		{
-			if (is_array($val))
-			{
-				$data[$key] = $this->_url_encode($val);
-			}
-			else
-			{
-				$data[$key] = urlencode($val);
-			}
-		}
-		return $data;
-	}
-
-	/**
 	 * 菜单操作
 	 *
 	 * @param string 菜单接口方法, 有create, get, delete
@@ -217,6 +195,7 @@ class Wx_api {
 			//$url .= '?'.$this->_build_get_query($get_params);
 			$url .= '?'.build_get_query($get_params);
 		}
+		//log_message('debug', __METHOD__."-url: ".$url);
 
 		$url_params = array();
 		$url_params[CURLOPT_URL] = $url;
@@ -228,54 +207,8 @@ class Wx_api {
 		}
 		
 		// 将返回的json数据转为数组
-		//return json_decode($this->_get_from_url($url_params), TRUE);
-		//log_message('debug', __METHOD__."-url: ".$url);
 		//return json_decode($this->_get_from_url($url_params));
 		return json_decode(get_from_url($url_params));
-	}
-
-	/**
-	 * 使用curl方法获取远程url的数据
-	 *
-	 * @param array curl_setopt所需要的参数
-	 * @return string
-	 */
-	protected function _get_from_url($url_params)
-	{
-		$ch = curl_init();
-		foreach ($url_params as $key => $val)
-		{
-			curl_setopt($ch, $key, $val);
-		}
-		$output = curl_exec($ch);
-		curl_close($ch);
-		//log_message('debug', __METHOD__."-output: ".$output);
-
-		return $output;
-	}
-
-	/**
-	 * 在微信中使用http_build_query方法既然会出问题
-	 * 用此方法代替
-	 *
-	 * @param array 所需要的参数
-	 * @return string
-	 */
-	protected function _build_get_query($params)
-	{
-		$get_query = '';
-		foreach ($params as $key => $val)
-		{
-			if ($get_query === '')
-			{
-				$get_query .= $key.'='.$val;
-			}
-			else
-			{
-				$get_query .= '&'.$key.'='.$val;
-			}
-		}
-		return $get_query;
 	}
 }
 
