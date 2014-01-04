@@ -75,6 +75,7 @@ class Wx_api {
 	 */
 	public function get_user_info($openid)
 	{
+		log_message('debug', __METHOD__."-is_array openid: ".is_array($openid));
 		$params = array (
 			'access_token' => $this->_get_access_token(),
 			'openid' => (string) $openid,
