@@ -33,7 +33,9 @@ class Wx_home extends CI_Controller {
 		//$type = $this->weixin->get('MsgType');
 		$type = $this->weixin->MsgType;
 		$from = $this->weixin->FromUserName;
+		log_message('debug', "FromUserName: ".$from);
 		$nickname = $this->wx_api->get_user_info($from)->nickname;
+		log_message('debug', "Nickname: ".$nickname);
 		$response = $nickname.', 你好! '.PHP_EOL;
 		switch (strtoupper($type))
 		{
@@ -112,13 +114,13 @@ class Wx_home extends CI_Controller {
 			break;
 		case 'USER':
 			$user_1 = $this->wx_api->get_user_info('oepyJt6gXLGhAniv2Z33xfaYFNUE');
-			echo '<p>receive user 1: </p>';
-			print_r($user_1);
-			echo '<p>user 1: '.$user_1->nickname.'</p>';
+			echo '<p>receive user 1: </p><pre>';
+			var_dump($user_1);
+			echo '</pre><p>user 1: '.$user_1->nickname.'</p>';
 			$user_2 = $this->wx_api->get_user_info('abc');
-			echo '<p>receive user 2: </p>';
-			print_r($user_2);
-			echo '<p>user 2: '.$user_2->nickname.'</p>';
+			echo '<p>receive user 2: </p><pre>';
+			var_dump($user_2);
+			echo '</pre><p>user 2: '.$user_2->nickname.'</p>';
 			echo '<p>errormsg: '.$user_2->errcode.'-'.$user_2->errmsg.'</p>';
 			break;
 		case 'GET_MENU':
