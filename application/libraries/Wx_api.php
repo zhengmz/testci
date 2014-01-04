@@ -75,10 +75,10 @@ class Wx_api {
 	 */
 	public function get_user_info($openid)
 	{
-		log_message('debug', __METHOD__."-is_array openid: ".is_array($openid));
 		$params = array (
 			'access_token' => $this->_get_access_token(),
-			'openid' => (string) $openid,
+			//'openid' => (string) $openid,
+			'openid' => $openid,
 			);
 		//log_message('debug', __METHOD__."-openid: ".$openid);
 		return $this->_wx_url_api('user/info', $params);
@@ -192,11 +192,8 @@ class Wx_api {
 		if (!empty($get_params))
 		{
 		log_message('debug', __METHOD__."-openid: ".$get_params['openid']);
-			// 在微信中使用http_build_query方法既然会出问题
 			$url .= '?' . http_build_query($get_params,'','&');
 			//$url = preg_replace('/%5B[0-9]+%5D/simU', '', $url);
-			//$url .= '?'.$this->_build_get_query($get_params);
-			//$url .= '?'.build_get_query($get_params);
 		}
 		log_message('debug', __METHOD__."-url: ".$url);
 
