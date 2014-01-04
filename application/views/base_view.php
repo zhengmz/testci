@@ -24,20 +24,22 @@
 		line-height: 1.5; 
 		width: 100%;
 	}
-	h1 {display:block; font-size: 20px; line-height: 2; color: #000; font-weight: bold;}
+	h1 {display:block; font-size: 20px; line-height: 2; color: black; font-weight: bold;}
 	a,label, :focus {outline: 0 none;}
 	a,img {border: 0 none;}
 	a {color: blue;}
 	a:hover {color: red;}
+	.test_css {display:inline;}
 </style>
 </head>
 
 <body>
 <div class="contents">
-<h1>Hello World! This is basic view page.<h1>
+<h1>Hello <?php echo isset($title)? $title : '结果显示界面' ?>!</h1>
 <hr style="width:100%;"/>
 
-<p>Output the data:</p>
+<p class="test_css">Output the data:</p>
+<p class="test_css" align="right">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 <ul>
 <?php foreach ($output as $item => $value):?>
 <li><?php echo $item;?>: <br><pre><?php print_r($value)?><pre></li>
