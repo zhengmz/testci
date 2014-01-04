@@ -42,7 +42,13 @@ echo '</pre>';
 echo '<pre>url = \n';
 var_dump($url);
 echo '</pre>';
-		$response = $this->file_get_contents($url);
+		//$response = file_get_contents($url);
+ 		$ch = curl_init();
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_URL, $url);
+                $response = curl_exec($ch);
+                curl_close($ch);
                 
 echo '<pre>response = \n';
 var_dump($response);
@@ -96,12 +102,10 @@ echo '</pre>';
 
 	function file_get_content($url) {
 		$ch = curl_init();
-		$timeout = 30;
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-		$file_contents = curl_exec($ch);
+		$response = curl_exec($ch);
 		curl_close($ch);
-		return $file_contents;
+		return $response;
 	}
 }
