@@ -14,6 +14,9 @@
 		width: 94%;
 		padding-top: 2%;
 		margin-bottom:20px;
+		background: #ff7a4d;
+		color: white;
+		border: 1px solid #ff7549;
 	}
 	html,body,ul,li,p,h1,div,a,img,i,span,input,em
 	{
