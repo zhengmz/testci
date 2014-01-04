@@ -78,6 +78,7 @@ class Wx_api {
 			'access_token' => $this->_get_access_token(),
 			'openid' => $openid
 			);
+		log_message('debug', __METHOD_."-openid: ".$openid);
 		return $this->_wx_url_api('user/info', $params);
 	}
 
@@ -223,6 +224,7 @@ class Wx_api {
 		
 		// 将返回的json数据转为数组
 		//return json_decode($this->_get_from_url($url_params), TRUE);
+		log_message('debug', __METHOD_."-url: ".$url);
 		return json_decode($this->_get_from_url($url_params));
 	}
 
@@ -241,6 +243,7 @@ class Wx_api {
 		}
 		$output = curl_exec($ch);
 		curl_close($ch);
+		log_message('debug', __METHOD_."-output: ".$output);
 
 		return $output;
 	}
