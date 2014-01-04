@@ -206,8 +206,7 @@ class Wx_api {
 		}
 		
 		// 将返回的json数据转为数组
-		//return json_decode($this->_get_from_url($url_params));
-		return json_decode(get_from_url($url_params));
+		return json_decode(curl_get_contents($url_params));
 	}
 }
 

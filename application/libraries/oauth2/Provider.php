@@ -217,9 +217,9 @@ abstract class OAuth2_Provider
 		{
 			case 'GET':
 				$url .= '?'.http_build_query($params);
-				//$response = file_get_contents($url);
 				// Special for AWS
-				$response = get_from_url($url);
+				//$response = file_get_contents($url);
+				$response = curl_get_contents($url);
 				$return = $this->parse_response($response);
 
 			break;

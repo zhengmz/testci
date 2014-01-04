@@ -45,16 +45,16 @@ if ( ! function_exists('urlencode_array'))
 }
 
 /**
- * replace get_file_contents
- * get_file_contents在亚马逊主机上无法使用
+ * replace file_get_contents
+ * file_get_contents在亚马逊主机上无法使用
  * 使用curl方法获取远程url的数据
  *
  * @param mixed curl_setopt所需要的参数
  * @return string
  */
-if ( ! function_exists('get_from_url'))
+if ( ! function_exists('curl_get_contents'))
 {
-	function get_from_url($url_params)
+	function curl_get_contents($url_params)
 	{
 		$ch = curl_init();
 		if (is_array($url_params))

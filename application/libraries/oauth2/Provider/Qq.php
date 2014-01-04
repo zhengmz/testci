@@ -36,7 +36,7 @@ class OAuth2_Provider_Qq extends OAuth2_Provider
 
 		// Special for AWS
 		//$response = file_get_contents($url);
-		$response = get_from_url($url);
+		$response = curl_get_contents($url);
                 
         if (strpos($response, "callback") !== false)
         {
@@ -60,7 +60,7 @@ class OAuth2_Provider_Qq extends OAuth2_Provider
 
 		// Special for AWS
                 //$response = file_get_contents($url);
-                $response = get_from_url($url);
+                $response = curl_get_contents($url);
                 
 		$user = json_decode($response);
                 
