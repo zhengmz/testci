@@ -1,20 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-function file_get_content($url) {
-	if (function_exists('file_get_contents')) {
-		$file_contents = @file_get_contents($url);
-	}
-	if ($file_contents == ”) {
-		$ch = curl_init();
-		$timeout = 30;
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-		$file_contents = curl_exec($ch);
-		curl_close($ch);
-	}
-	return $file_contents;
-}
 
  /**
   * Oauth2 SocialAuth for CodeIgniter
@@ -57,7 +42,7 @@ echo '</pre>';
 echo '<pre>url = \n';
 var_dump($url);
 echo '</pre>';
-		$response = file_get_contents($url);
+		$response = $this->file_get_contents($url);
                 
 echo '<pre>response = \n';
 var_dump($response);
@@ -107,5 +92,16 @@ echo '</pre>';
 			'refresh_token' => $token->refresh_token
 		);
 */
+	}
+
+	function file_get_content($url) {
+		$ch = curl_init();
+		$timeout = 30;
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+		$file_contents = curl_exec($ch);
+		curl_close($ch);
+		return $file_contents;
 	}
 }
