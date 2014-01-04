@@ -77,7 +77,7 @@ class Wx_api {
 	{
 		$params = array (
 			'access_token' => $this->_get_access_token(),
-			'openid' => $openid,
+			'openid' => (string) $openid,
 			);
 		//log_message('debug', __METHOD__."-openid: ".$openid);
 		return $this->_wx_url_api('user/info', $params);
@@ -193,7 +193,7 @@ class Wx_api {
 		log_message('debug', __METHOD__."-openid: ".$get_params['openid']);
 			// 在微信中使用http_build_query方法既然会出问题
 			$url .= '?' . http_build_query($get_params,'','&');
-			$url = preg_replace('/%5B[0-9]+%5D/simU', '', $url);
+			//$url = preg_replace('/%5B[0-9]+%5D/simU', '', $url);
 			//$url .= '?'.$this->_build_get_query($get_params);
 			//$url .= '?'.build_get_query($get_params);
 		}
