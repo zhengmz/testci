@@ -90,9 +90,7 @@ echo '</pre>';
 	    	throw new OAuth2_Exception((array) $user);
 	    }
 
-		return $user;
                 
-/*
 		return array(
             'via' => 'qq',
 			'uid' => $me->openid,
@@ -105,6 +103,5 @@ echo '</pre>';
 			'expire_at' => $token->expires,
 			'refresh_token' => $token->refresh_token
 		);
-*/
 	}
 }
