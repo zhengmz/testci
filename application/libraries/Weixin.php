@@ -130,7 +130,7 @@ class Weixin {
 		// 单个的处理
 		if (! is_array($keys))
 		{
-			return isset($this->_msg_obj->$keys) ? (string) $this->_msg_obj->$keys : '';
+			return isset($this->_msg_obj->$keys) ? $this->_msg_obj->$keys : '';
 		}
 
 		$ret = array();

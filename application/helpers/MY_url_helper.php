@@ -17,6 +17,9 @@
 /**
  * urlencode for array
  * 实现对数组的urlencode
+ * urlencode的好处是对非英文内容的支持
+ * 因json_encode会自动转为unicode, 使非英文内容有问题
+ * 所以先用urlencode进行转义, json_encode后, 再用urldecode就还原
  *
  * @access	public
  * @param	array	传入待编码的数组
@@ -38,35 +41,6 @@ if ( ! function_exists('urlencode_array'))
 			}
 		}
 		return $data;
-	}
-}
-
-/**
- * replace http_build_query
- * 在微信中使用http_build_query方法既然会出问题
- * 用此方法代替
- *
- * @access	public
- * @param array 所需要的参数
- * @return string
- */
-if ( ! function_exists('build_get_query'))
-{
-	function build_get_query($params)
-	{
-		$get_query = '';
-		foreach ($params as $key => $val)
-		{
-			if ($get_query === '')
-			{
-				$get_query .= $key.'='.$val;
-			}
-			else
-			{
-				$get_query .= '&'.$key.'='.$val;
-			}
-		}
-		return $get_query;
 	}
 }
 

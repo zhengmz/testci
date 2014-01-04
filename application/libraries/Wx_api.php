@@ -77,8 +77,8 @@ class Wx_api {
 	{
 		$params = array (
 			'access_token' => $this->_get_access_token(),
-			//'openid' => (string) $openid,
-			'openid' => $openid,
+			// 避免传进来的参数类型未知而出错
+			'openid' => (string) $openid,
 			);
 		//log_message('debug', __METHOD__."-openid: ".$openid);
 		return $this->_wx_url_api('user/info', $params);
@@ -191,11 +191,10 @@ class Wx_api {
 		$url = $url_base.$method;
 		if (!empty($get_params))
 		{
-		log_message('debug', __METHOD__."-openid: ".$get_params['openid']);
 			$url .= '?' . http_build_query($get_params,'','&');
 			//$url = preg_replace('/%5B[0-9]+%5D/simU', '', $url);
 		}
-		log_message('debug', __METHOD__."-url: ".$url);
+		//log_message('debug', __METHOD__."-url: ".$url);
 
 		$url_params = array();
 		$url_params[CURLOPT_URL] = $url;
