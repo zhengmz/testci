@@ -210,7 +210,9 @@ class Wx_api {
 		$url = $url_base.$method;
 		if (!empty($get_params))
 		{
-			$url .= '?'.http_build_query($get_params);
+			// 在微信中使用http_build_query方法既然会出问题
+			//$url .= '?'.http_build_query($get_params);
+			$url .= '?'.$this->_build_get_query($get_params);
 		}
 
 		$url_params = array();
@@ -246,6 +248,30 @@ class Wx_api {
 		log_message('debug', __METHOD__."-output: ".$output);
 
 		return $output;
+	}
+
+	/**
+	 * 在微信中使用http_build_query方法既然会出问题
+	 * 用此方法代替
+	 *
+	 * @param array 所需要的参数
+	 * @return string
+	 */
+	protected function _build_get_query($params)
+	{
+		$get_query = '';
+		foreach ($params as $key => $val)
+		{
+			if ($get_query === '')
+			{
+				$get_query .= $key.'='.$val;
+			}
+			else
+			{
+				$get_query .= '&'.$key.'='.$val;
+			}
+		}
+		return $get_query;
 	}
 }
 
