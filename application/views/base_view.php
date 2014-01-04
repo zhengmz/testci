@@ -6,14 +6,13 @@
 <meta http-equiv="pragma" content="no-cache"> 
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, user-scalable=no" >
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3" >
 <style>
 	.contents {
 		display:block!important;
 		margin-left:2%;
 		width: 96%;
 		padding-top: 2%;
-		overflow: hidden;
 	}
 	html,body,ul,li,p,h1,div,a,img,i,span,input,em
 	{
