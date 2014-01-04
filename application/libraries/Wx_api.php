@@ -211,8 +211,8 @@ class Wx_api {
 		if (!empty($get_params))
 		{
 			// 在微信中使用http_build_query方法既然会出问题
-			//$url .= '?'.http_build_query($get_params);
-			$url .= '?'.$this->_build_get_query($get_params);
+			$url .= '?'.http_build_query($get_params);
+			//$url .= '?'.$this->_build_get_query($get_params);
 		}
 
 		$url_params = array();
