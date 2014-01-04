@@ -19,6 +19,7 @@ class Wx_home extends CI_Controller {
 		parent::__construct();
 		
 		log_message('debug', "Wx_home Controller Initialized");
+		$this->load->helper('url');
 		$this->load->library('wx_api');
 	}
 
