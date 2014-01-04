@@ -237,7 +237,7 @@ abstract class OAuth2_Provider
 				$response = file_get_contents($url, false, $context);
 */
  		$ch = curl_init();
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
                 curl_setopt($ch, CURLOPT_POST, TRUE);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
