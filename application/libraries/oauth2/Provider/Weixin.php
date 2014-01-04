@@ -24,15 +24,15 @@ class OAuth2_Provider_Weixin extends OAuth2_Provider
 
 	public function url_access_token()
 	{
-		return 'https://api.weibo.com/oauth2/access_token';
+		return 'https://api.weixin.qq.com/cgi-bin/token';
 	}
 
 	public function get_user_info(OAuth2_Token_Access $token)
 	{
 
-		$url = 'https://api.weibo.com/2/users/show.json?'.http_build_query(array(
+		$url = 'https://api.weixin.qq.com/cgi-bin/user/info?'.http_build_query(array(
 			'access_token' => $token->access_token,
-			'uid' => $token->uid,
+			'openid' => $token->openid
 		));
 		$user = json_decode(file_get_contents($url));
 
