@@ -244,7 +244,7 @@ abstract class OAuth2_Provider
 			CURLOPT_POSTFIELDS => http_build_query($params),
                 	CURLOPT_RETURNTRANSFER => TRUE,
 			);
-		$response = get_from_url($url_param);
+		$response = curl_get_contents($url_param);
 
                 $$response = json_decode($response, true);
                 $return = $this->parse_response($response);
