@@ -30,7 +30,7 @@ class OAuth2_Provider_Qq extends OAuth2_Provider
 	public function get_user_info(OAuth2_Token_Access $token)
 	{
 
-echo '<pre>';
+echo '<pre>token = \n';
 var_dump($token);
 echo '</pre>';
 
@@ -38,12 +38,12 @@ echo '</pre>';
 			'access_token' => $token->access_token
 		));
 
-echo '<pre>';
+echo '<pre>url = \n';
 var_dump($url);
 echo '</pre>';
 		$response = file_get_contents($url);
                 
-echo '<pre>';
+echo '<pre>response = \n';
 var_dump($response);
 echo '</pre>';
         if (strpos($response, "callback") !== false)
@@ -52,7 +52,7 @@ echo '</pre>';
             $rpos = strrpos($response, ")");
             $response  = substr($response, $lpos + 1, $rpos - $lpos -1);
         }
-echo '<pre>';
+echo '<pre>response = \n';
 var_dump($response);
 echo '</pre>';
         $me = json_decode($response);
