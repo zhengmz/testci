@@ -38,8 +38,9 @@
 <h1>Hello <?php echo isset($title)? $title : '结果显示界面' ?>!</h1>
 <hr style="width:100%;"/>
 
-<p class="test_css">Output the data:</p>
-<p class="test_css" align="right">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+<div class="test_css" align="left">Output the data:</div>
+<div class="test_css" align="right">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></div>
+
 <ul>
 <?php foreach ($output as $item => $value):?>
 <li><?php echo $item;?>: <br><pre><?php print_r($value)?><pre></li>
