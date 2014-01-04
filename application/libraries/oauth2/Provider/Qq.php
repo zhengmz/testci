@@ -30,38 +30,20 @@ class OAuth2_Provider_Qq extends OAuth2_Provider
 
 	public function get_user_info(OAuth2_Token_Access $token)
 	{
-
-echo '<pre>token = <br>';
-var_dump($token);
-echo '</pre>';
-
 		$url = 'https://graph.qq.com/oauth2.0/me?'.http_build_query(array(
 			'access_token' => $token->access_token
 		));
 
-echo '<pre>url = <br>';
-var_dump($url);
-echo '</pre>';
+		// Special for AWS
 		//$response = file_get_contents($url);
- 		$ch = curl_init();
-                //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                curl_setopt($ch, CURLOPT_URL, $url);
-                $response = curl_exec($ch);
-                curl_close($ch);
+		$response = get_from_url($url);
                 
-echo '<pre>response = <br>';
-var_dump($response);
-echo '</pre>';
         if (strpos($response, "callback") !== false)
         {
             $lpos = strpos($response, "(");
             $rpos = strrpos($response, ")");
             $response  = substr($response, $lpos + 1, $rpos - $lpos -1);
         }
-echo '<pre>response = <br>';
-var_dump($response);
-echo '</pre>';
         $me = json_decode($response);
                 
         if (isset($me->error))
@@ -75,13 +57,10 @@ echo '</pre>';
             'oauth_consumer_key' => $this->client_id,
 			'format' => 'json',
 		));
+
+		// Special for AWS
                 //$response = file_get_contents($url);
- 		$ch = curl_init();
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                curl_setopt($ch, CURLOPT_URL, $url);
-                $response = curl_exec($ch);
-                curl_close($ch);
+                $response = get_from_url($url);
                 
 		$user = json_decode($response);
                 

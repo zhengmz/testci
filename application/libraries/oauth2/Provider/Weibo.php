@@ -34,7 +34,11 @@ class OAuth2_Provider_Weibo extends OAuth2_Provider
 			'access_token' => $token->access_token,
 			'uid' => $token->uid,
 		));
-		$user = json_decode(file_get_contents($url));
+
+		// Special for AWS
+		//$user = json_decode(file_get_contents($url));
+                $response = get_from_url($url);
+		$user = json_decode($response);
 
       	if (array_key_exists("error", $user))
         {
