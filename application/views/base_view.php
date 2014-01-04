@@ -38,7 +38,7 @@
 <hr style="width:100%;"/>
 
 <table width=100%><tr>
-<td align="left">Output the data:</td>
+<td align="left">Output is:</td>
 <td align="right">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></td>
 </tr></table>
 
