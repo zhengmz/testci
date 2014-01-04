@@ -108,13 +108,16 @@ class Pages extends CI_Controller {
 		$data['dir_map'] = directory_map('uploads');
 
 		$data = array(
-			'data_arr' => $data,
+			'output' => $data,
 			'title' => ucfirst($page)
 		);
 	  
+		$this->load->view('base_view', $data);
+/*
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/'.$page, $data);
 		$this->load->view('templates/footer', $data);
+*/
 	}
 }
 

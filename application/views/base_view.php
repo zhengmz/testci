@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>欢迎绑定微信</title>
+<title><?php echo isset($title)? $title : '结果显示界面' ?></title>
 <meta charset="UTF-8">
 <meta http-equiv="pragma" content="no-cache"> 
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
@@ -21,9 +21,10 @@
 		margin: 0;
 		font-size: 16px;
 		font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", "sans-serif";
+		font-weight: normal;
 		line-height: 1.5; 
 	}
-	h1 {display:block; font-size: 20px; line-height: 2; color: #000;}
+	h1 {display:block; font-size: 20px; line-height: 2; color: #000; font-weight: bold;}
 	a,label, :focus {outline: 0 none;}
 	a,img {border: 0 none;}
 	a {color: blue;}
