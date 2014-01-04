@@ -3,6 +3,7 @@
 /**
  *	微信公众平台消息接口
  *	本类主要处理与平台之间的接口
+ *	依赖MY_url_helper中的一些方法
  *
  *	@package	Wx_api
  *	@subpackage	Libraries
@@ -113,7 +114,8 @@ class Wx_api {
 		if (is_array($menu))
 		{
 			// 先对中文进行编码
-			$menu = $this->_url_encode($menu);
+			//$menu = $this->_url_encode($menu);
+			$menu = urlencode_array($menu);
 			// 再对中文进行解码
 			$menu = urldecode(json_encode($menu, TRUE));
 			//log_message('debug', 'json menu = '.$menu);
@@ -211,8 +213,9 @@ class Wx_api {
 		if (!empty($get_params))
 		{
 			// 在微信中使用http_build_query方法既然会出问题
-			$url .= '?'.http_build_query($get_params);
+			//$url .= '?'.http_build_query($get_params);
 			//$url .= '?'.$this->_build_get_query($get_params);
+			$url .= '?'.build_get_query($get_params);
 		}
 
 		$url_params = array();
@@ -227,7 +230,8 @@ class Wx_api {
 		// 将返回的json数据转为数组
 		//return json_decode($this->_get_from_url($url_params), TRUE);
 		//log_message('debug', __METHOD__."-url: ".$url);
-		return json_decode($this->_get_from_url($url_params));
+		//return json_decode($this->_get_from_url($url_params));
+		return json_decode(get_from_url($url_params));
 	}
 
 	/**
