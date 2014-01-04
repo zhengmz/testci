@@ -37,7 +37,9 @@ class OAuth2_Provider_Weibo extends OAuth2_Provider
 
 		// Special for AWS
 		//$user = json_decode(file_get_contents($url));
+		log_message('debug', __METHOD__."-url: ".$url);
                 $response = get_from_url($url);
+		log_message('debug', __METHOD__."-response: ".$response);
 		$user = json_decode($response);
 
       	if (array_key_exists("error", $user))
