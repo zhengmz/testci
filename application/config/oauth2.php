@@ -7,17 +7,17 @@ $config['oauth2']['weibo'] = array(
         'extra' => ''
 );
 
-$config['oauth2']['weixin'] = array(
-	'name' => '微信',
-        'id' => 'e4a282ed9b33e1ff40908ad70c32b4e7',
-        'secret' => '',
-        'extra' => ''
-);
-
 $config['oauth2']['qq'] = array(
 	'name' => 'QQ',
         'id' => '100577935',
         'secret' => '7d83d74c2a58f6a51c7ca8d47d154fcb',
+        'extra' => ''
+);
+
+$config['oauth2']['weixin'] = array(
+	'name' => '微信',
+        'id' => 'wx9413fbbcb6a2b306',
+        'secret' => 'd9972f5688e006de0f4123ad6acd0365',
         'extra' => ''
 );
 

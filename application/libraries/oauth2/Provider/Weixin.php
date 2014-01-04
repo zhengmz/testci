@@ -19,12 +19,12 @@ class OAuth2_Provider_Weixin extends OAuth2_Provider
  
 	public function url_authorize()
 	{
-		return 'https://api.weibo.com/oauth2/authorize';
+		return 'https://open.weixin.qq.com/oauth';
 	}
 
 	public function url_access_token()
 	{
-		return 'https://api.weixin.qq.com/cgi-bin/token';
+		return 'https://api.weixin.qq.com/token.format';
 	}
 
 	public function get_user_info(OAuth2_Token_Access $token)
