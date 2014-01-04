@@ -10,8 +10,8 @@
 <style>
 	.contents {
 		display:block!important;
-		margin-left:2%;
-		width: 96%;
+		margin-left:3%;
+		width: 94%;
 		padding-top: 2%;
 	}
 	html,body,ul,li,p,h1,div,a,img,i,span,input,em
