@@ -29,7 +29,6 @@
 	a,img {border: 0 none;}
 	a {color: blue;}
 	a:hover {color: red;}
-	.test_css {display:inline;}
 </style>
 </head>
 
@@ -38,8 +37,10 @@
 <h1>Hello <?php echo isset($title)? $title : '结果显示界面' ?>!</h1>
 <hr style="width:100%;"/>
 
-<div class="test_css" align="left">Output the data:</div>
-<div class="test_css" align="right">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></div>
+<table><tr>
+<td align="left">Output the data:</td>
+<td align="right">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></td>
+</tr></table>
 
 <ul>
 <?php foreach ($output as $item => $value):?>
