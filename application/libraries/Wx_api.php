@@ -77,7 +77,7 @@ class Wx_api {
 	{
 		$params = array (
 			'access_token' => $this->_get_access_token(),
-			'openid' => $openid
+			'openid' => $openid,
 			);
 		//log_message('debug', __METHOD__."-openid: ".$openid);
 		return $this->_wx_url_api('user/info', $params);
