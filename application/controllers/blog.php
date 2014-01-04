@@ -16,6 +16,41 @@ class Blog extends CI_Controller {
 			$blog_heading = 'My Blog Heading';
 		}
 
+		$blog_body_1 = 'Body 1
+			adsfdsfadsf
+			asdfadsfdsafdsa
+			adsfadsfadsf
+			adsfdsafdsafds
+			adsfsadfdsaf
+			asdfasdf';
+		$blog_body_2 = 'Body 2
+			adsfdsfadsf
+			asdfadsfdsafdsa
+			adsfadsfadsf
+			adsfdsafdsafds
+			adsfsadfdsaf
+			asdfasdf';
+		$blog_body_3 = 'Body 3
+			adsfdsfadsf
+			asdfadsfdsafdsa
+			adsfadsfadsf
+			adsfdsafdsafds
+			adsfsadfdsaf
+			asdfasdf';
+		$blog_body_4 = 'Body 4
+			adsfdsfadsf
+			asdfadsfdsafdsa
+			adsfadsfadsf
+			adsfdsafdsafds
+			adsfsadfdsaf
+			asdfasdf';
+		$blog_body_5 = 'Body 5
+			adsfdsfadsf
+			asdfadsfdsafdsa
+			adsfadsfadsf
+			adsfdsafdsafds
+			adsfsadfdsaf
+			asdfasdf';
 		if ($blog_entries == '')
 		{
 			$blog_entries = array(

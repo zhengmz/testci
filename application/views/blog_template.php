@@ -17,13 +17,13 @@
 	}
 	html,body,ul,li,p,h1,div,a,img,i,span,input,em
 	{
+		margin-left:3%;
 		padding: 0;
-		margin: 0;
 		font-size: 16px;
 		font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", "sans-serif";
 		font-weight: normal;
 		line-height: 1.5; 
-		width: 100%;
+		width: 94%;
 	}
 	h1 {display:block; font-size: 20px; line-height: 2; color: black; font-weight: bold;}
 	a,label, :focus {outline: 0 none;}
@@ -37,8 +37,10 @@
 <h3>{blog_heading}</h3>
 
 {blog_entries}
+<div class='blog_body'>
 <h5>{title}</h5>
-<div class='blog_body'>{body}</div>
+<p>{body}</p>
+</div>
 {/blog_entries}
 </body>
 </html>
