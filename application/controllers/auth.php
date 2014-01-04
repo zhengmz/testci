@@ -50,6 +50,7 @@ class Auth extends CI_Controller
 
                 echo "\n\nUser Info: ";
                 var_dump($user);
+
             }
 
             catch (OAuth2_Exception $e)

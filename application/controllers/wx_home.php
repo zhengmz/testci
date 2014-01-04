@@ -108,6 +108,7 @@ class Wx_home extends CI_Controller {
 
 	public function action($action = '')
 	{
+		$data = array();
 		switch (strtoupper($action))
 		{
 		case 'BOOTSTRAP':
@@ -115,24 +116,16 @@ class Wx_home extends CI_Controller {
 			break;
 		case 'USER':
 			$user_1 = $this->wx_api->get_user_info('oepyJt6gXLGhAniv2Z33xfaYFNUE');
-			echo '<p>receive user 1: </p><pre>';
-			var_dump($user_1);
-			echo '</pre><p>user 1: '.$user_1->nickname.'</p>';
 			$user_2 = $this->wx_api->get_user_info('abc');
-			echo '<p>receive user 2: </p><pre>';
-			var_dump($user_2);
-			echo '</pre><p>user 2: '.$user_2->nickname.'</p>';
-			echo '<p>errormsg: '.$user_2->errcode.'-'.$user_2->errmsg.'</p>';
+
+			$data['user_1'] = $user_1;
+			$data['user_2'] = $user_2;
 			break;
 		case 'GET_MENU':
-			echo '<pre>';
-			print_r($this->wx_api->get_menu());
-			echo '</pre>';
+			$data['get_menu'] = $this->wx_api->get_menu();
 			break;
 		case 'DEL_MENU':
-			echo '<pre>';
-			print_r($this->wx_api->del_menu());
-			echo '</pre>';
+			$data['del_menu'] = $this->wx_api->del_menu();
 			break;
 		case 'CREATE_MENU':
 			$sub_menu = array(
@@ -180,25 +173,21 @@ class Wx_home extends CI_Controller {
 				);
 				
 			$menu = array('button' => $menu);
-			echo '<pre>';
-			print_r($menu);
-			echo '</pre>';
-			echo '<pre>';
-			echo 'ret: ';
-			$ret = $this->wx_api->create_menu($menu);
-			print_r($ret);
-			echo '</pre>';
+			$data['menu'] = $menu;
+			$data['create_menu'] = $this->wx_api->create_menu($menu);
 			break;
 		default:
-			echo "<p>请输入你所需要的操作</p>";
-			echo "<p>目前支持的功能有:</p>";
-			echo "<p>user -- 获取用户信息</p>";
-			echo "<p>create_menu -- 创建菜单</p>";
-			echo "<p>get_menu -- 获取菜单</p>";
-			echo "<p>del_menu -- 删除菜单</p>";
-			print_r(get_object_vars($this->wx_api));
+			$data['usage'] = '暂时不支持操作['.$action.']';
+			$data['usage'] .=  "<p>请输入你所需要的操作</p>";
+			$data['usage'] .=  "<p>目前支持的功能有:</p>";
+			$data['usage'] .=  "<p>user -- 获取用户信息</p>";
+			$data['usage'] .=  "<p>create_menu -- 创建菜单</p>";
+			$data['usage'] .=  "<p>get_menu -- 获取菜单</p>";
+			$data['usage'] .=  "<p>del_menu -- 删除菜单</p>";
 		}
-		
+
+		$data = array('output' => $data);
+		$this->load->view('base_view',$data);
 	}
 }
 

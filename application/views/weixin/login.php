@@ -29,7 +29,7 @@
 	html,body,ul,li,p,h1,div,a,img,i,span,input,em {padding: 0; margin: 0;}
 	html,body {line-height: 1.5; color: #333; font-size: 16px;}
 	body {background: transparent; overflow: hidden;}
-	body,input{font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;}
+	body,input{font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", "sans-serif";}
 	a,label, :focus {outline: 0 none;}
 	a,img {border: 0 none;}
 	a {color: blue;}
