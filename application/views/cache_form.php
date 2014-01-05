@@ -2,6 +2,9 @@
 <head>
 <title>My Form</title>
 <meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3" >
 </head>
 <body>

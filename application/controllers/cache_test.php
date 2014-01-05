@@ -7,26 +7,19 @@ class Cache_test extends CI_Controller {
 		$this->load->helper(array('form', 'url', 'html'));
 		$this->load->driver('cache', array('adapter' => 'file'));
 
-		if ($this->cache->file->is_supported())
-		{
-			log_message('debug', 'support file cache');
-		}
 		$user = $this->input->post('user');
-		log_message('debug', 'get user post: '.$user);
-		$cache_user = $this->cache->file->get('user');
-		log_message('debug', 'get user cache: '.$cache_user);
+		//$cache_user = $this->cache->file->get('user');
+		$cache_user = $this->cache->get('user');
 		if ($cache_user !== FALSE)
 		{
-			log_message('debug', 'cache user is: '.$user);
 			$user = $cache_user;
 		}
 		else
 		{
-			log_message('debug', 'post user is: '.$user);
 			if ($user !== FALSE)
 			{
-				log_message('debug', 'save user cache: '.$user);
-				$this->cache->file->save('user', $user);
+				//$this->cache->file->save('user', $user);
+				$this->cache->save('user', $user);
 			}
 		}
 
