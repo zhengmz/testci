@@ -25,13 +25,12 @@ class Admin extends CI_Controller {
 	{
 		$output['usage'] = '支持的命令有';
 		$data = array(
-			'output' = $output,
-			'title' = '管理页面',
+			'output' => $output,
+			'title' => '管理页面',
 			);
 		$this->load->view('base_view', $data);
 	}
 
-/*
 	public function plog($param = '')
 	{
 		if ($param === '')
@@ -56,12 +55,11 @@ class Admin extends CI_Controller {
 			$output['log-content'] = read_file($log_file);
 		}
 		$data = array(
-			'output' = $output,
-			'title' = 'Display Log',
+			'output' => $output,
+			'title' => 'Display Log',
 			);
 		$this->load->view('base_view', $data);
 	}
-*/
 }
 
 /* End of file admin.php */
