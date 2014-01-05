@@ -7,6 +7,14 @@ class Cache_test extends CI_Controller {
 		$this->load->helper(array('form', 'url', 'html'));
 		$this->load->driver('cache');
 
+		if ($this->cache->apc->is_supported())
+		{
+			log_message('debug', 'support APC cache');
+		}
+		if ($this->cache->file->is_supported())
+		{
+			log_message('debug', 'support file cache');
+		}
 		$user = $this->input->post('user');
 		$cache_user = $this->cache->file->get('user');
 		if ($cache_user !== '')
