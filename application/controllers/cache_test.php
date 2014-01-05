@@ -15,7 +15,7 @@ class Cache_test extends CI_Controller {
 		log_message('debug', 'get user post: '.$user);
 		$cache_user = $this->cache->file->get('user');
 		log_message('debug', 'get user cache: '.$cache_user);
-		if ($cache_user !== '')
+		if ($cache_user !== FALSE)
 		{
 			log_message('debug', 'cache user is: '.$user);
 			$user = $cache_user;
@@ -23,7 +23,7 @@ class Cache_test extends CI_Controller {
 		else
 		{
 			log_message('debug', 'post user is: '.$user);
-			if ($user !== '')
+			if ($user !== FALSE)
 			{
 				log_message('debug', 'save user cache: '.$user);
 				$this->cache->file->save('user', $user);
