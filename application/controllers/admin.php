@@ -31,7 +31,7 @@ class Admin extends CI_Controller {
 		$this->load->view('base_view', $data);
 	}
 
-	public function plog($param = '')
+	public function log($param = '')
 	{
 		if ($param === '')
 		{
