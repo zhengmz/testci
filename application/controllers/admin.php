@@ -31,19 +31,25 @@ class Admin extends CI_Controller {
 		$this->load->view('base_view', $data);
 	}
 
-	public function log($param = '')
+	public function cache()
 	{
-		if ($param === '')
+		$cache = $APPPATH.'cache/';
+		$output['cache'] = $cache;
+		$this->load->helper('file');
+		$output['cache item'] = get_dir_file_info($cache);
+		$this->load->view('base_view', $data);
+	}
+
+	public function log($date = '')
+	{
+		if ($date === '')
 		{
 			$this->load->helper('date');
-			$param = 'log-'.mdate('%Y-%m-%d', time());
-		}
-		else
-		{
-			$param = 'log-'.(string) $param;
+			$date = 'log-'.mdate('%Y-%m-%d', time());
 		}
 
-		$log_file = APPPATH.'logs/'.$param.'.php';
+		$output['date'] = (string) $date;
+		$log_file = APPPATH.'logs/log-'.$date.'.php';
 		$output['log'] = $log_file;
 		if ( ! file_exists($log_file))
 		{
@@ -52,9 +58,9 @@ class Admin extends CI_Controller {
 		else
 		{
 			$output['ret'] = 'file exists!';
-			$output['log-content'] = $this->load->file($log_file, TRUE);
-			//$this->load->helper('file');
-			//$output['log-content'] = read_file($log_file, TRUE);
+			//$output['log-content'] = $this->load->file($log_file, TRUE);
+			$this->load->helper('file');
+			$output['log-content'] = read_file($log_file, TRUE);
 		}
 
 		$data = array(
