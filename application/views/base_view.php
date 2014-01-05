@@ -24,7 +24,7 @@
 		line-height: 1.5; 
 		width: 100%;
 	}
-	pre {white-space: pre-line;}
+	pre {white-space: pre-wrap;}
 	h1 {display:block; font-size: 20px; line-height: 2; color: black; font-weight: bold;}
 	a,label, :focus {outline: 0 none;}
 	a,img {border: 0 none;}
@@ -45,7 +45,7 @@
 
 <ul>
 <?php foreach ($output as $item => $value):?>
-<li><?php echo $item;?>: <br><pre><?php print_r($value)?><pre></li>
+<li><?php echo $item;?>: <br><pre><?php print_r($value)?></pre></li>
 <?php endforeach; ?>
 </ul>
 </div>
