@@ -17,6 +17,7 @@
 		background: #ff7a4d;
 		color: white;
 		border: 1px solid #ff7549;
+		white-space: pre-wrap;
 	}
 	html,body,ul,li,p,h1,div,a,img,i,span,input,em
 	{
