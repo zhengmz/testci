@@ -5,18 +5,15 @@ class Cache_test extends CI_Controller {
 	function index()
 	{
 		$this->load->helper(array('form', 'url', 'html'));
-		$this->load->driver('cache');
+		$this->load->driver('cache', array('adapter' => 'file'));
 
-		if ($this->cache->apc->is_supported())
-		{
-			log_message('debug', 'support APC cache');
-		}
 		if ($this->cache->file->is_supported())
 		{
 			log_message('debug', 'support file cache');
 		}
 		$user = $this->input->post('user');
 		$cache_user = $this->cache->file->get('user');
+		log_message('debug', 'get user cache');
 		if ($cache_user !== '')
 		{
 			$user = $cache_user;
@@ -25,6 +22,7 @@ class Cache_test extends CI_Controller {
 		{
 			if ($user !== '')
 			{
+				log_message('debug', 'save user cache');
 				$this->cache->file->save('user', $user);
 			}
 		}
