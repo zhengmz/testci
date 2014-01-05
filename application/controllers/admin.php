@@ -33,10 +33,15 @@ class Admin extends CI_Controller {
 
 	public function cache()
 	{
-		$cache = $APPPATH.'cache/';
+		$cache = APPPATH.'cache/';
 		$output['cache'] = $cache;
 		$this->load->helper('file');
 		$output['cache item'] = get_dir_file_info($cache);
+
+		$data = array(
+			'output' => $output,
+			'title' => '应用缓存（文件类型）',
+			);
 		$this->load->view('base_view', $data);
 	}
 
@@ -65,7 +70,7 @@ class Admin extends CI_Controller {
 
 		$data = array(
 			'output' => $output,
-			'title' => 'Display Log',
+			'title' => '应用日志',
 			);
 		$this->load->view('base_view', $data);
 	}
