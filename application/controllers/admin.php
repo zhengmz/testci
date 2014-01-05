@@ -52,7 +52,7 @@ class Admin extends CI_Controller {
 		else
 		{
 			$output['ret'] = 'file exists!';
-			//$output['log-content'] = $this->load->file($log_file, TRUE);
+			$output['log-content'] = $this->load->file($log_file, TRUE);
 		}
 
 		$data = array(
