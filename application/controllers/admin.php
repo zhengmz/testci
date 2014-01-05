@@ -45,6 +45,7 @@ class Admin extends CI_Controller {
 
 		$log_file = APPPATH.'/logs/'.$param.'.php';
 		$output['log'] = $log_file;
+/*
 		if ( ! file_exists($log_file))
 		{
 			$output['ret'] = 'file not exists!';
@@ -53,6 +54,8 @@ class Admin extends CI_Controller {
 		{
 			$output['log-content'] = $this->load->file($log_file, TRUE);
 		}
+*/
+
 		$data = array(
 			'output' => $output,
 			'title' => 'Display Log',
