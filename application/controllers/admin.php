@@ -31,6 +31,7 @@ class App_admin extends CI_Controller {
 		$this->load->view('base_view', $data);
 	}
 
+/*
 	public function plog($param = '')
 	{
 		if ($param === '')
@@ -56,11 +57,12 @@ class App_admin extends CI_Controller {
 		}
 		$data = array(
 			'output' = $output,
-			'title' = '日志信息',
+			'title' = 'Display Log',
 			);
 		$this->load->view('base_view', $data);
 	}
+*/
 }
 
-/* End of file app_admin.php */
-/* Location: ./application/controllers/app_admin.php */
+/* End of file admin.php */
+/* Location: ./application/controllers/admin.php */
