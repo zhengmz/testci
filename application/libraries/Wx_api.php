@@ -149,7 +149,7 @@ class Wx_api {
 	{
 		$this->CI->load->driver('cache');
 
-		$access_token = $this->CI->cache->file->get('access_token');
+		$access_token = $this->CI->cache->file->get('wx_access_token');
 		if ($access_token !== FALSE)
 		{
 			return $access_token;
@@ -172,7 +172,7 @@ class Wx_api {
 
 		//log_message('debug', 'access_token = '.$access_token);
 		//log_message('debug', 'expires_in = '.$expires_in);
-		$this->CI->cache->file->save('access_token', $access_token, $expires_in);
+		$this->CI->cache->file->save('wx_access_token', $access_token, $expires_in);
 		return $access_token;
 	}
 
