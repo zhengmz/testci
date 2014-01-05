@@ -79,6 +79,10 @@ class Wx_home extends CI_Controller {
 				$menu_key = $this->weixin->EventKey;
 				$response .= sprintf('你点中的菜单项是[%s], 暂未绑定.', $menu_key);
 				$response .= PHP_EOL.anchor('/wx_home/menu/'.$menu_key, '绑定用户');
+		if (strtoupper($menu_key) === 'M304_HELP')
+		{
+			redirect('wx_home/action/blog');
+		}
 				break;
 			default:
 				$response = '暂不支持['.$event.']事件，我们将很快就会推出相关功能';
@@ -105,10 +109,7 @@ class Wx_home extends CI_Controller {
 		{
 		case 'M302_USER':
 			redirect('wx_home/action/user');
-			break;
-		case 'M304_HELP':
-			redirect('wx_home/action/blog');
-			break;
+		//	break;
 		default:
 			$data = array(
 				'action' => '/wx_home/action/user'
