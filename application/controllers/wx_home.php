@@ -101,10 +101,10 @@ class Wx_home extends CI_Controller {
 
 	public function menu($menu_key = '')
 	{
-		$this->load->library('weixin');
 		switch (strtoupper($menu_key))
 		{
 		case 'M302_USER':
+			$this->load->library('weixin');
 			redirect('wx_home/action/user');
 			break;
 		default:
