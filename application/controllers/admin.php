@@ -51,8 +51,7 @@ class Admin extends CI_Controller {
 		}
 		else
 		{
-			$this->load->helper('file');
-			$output['log-content'] = read_file($log_file);
+			$output['log-content'] = $this->load->file($log_file, TRUE);
 		}
 		$data = array(
 			'output' => $output,
