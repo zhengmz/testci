@@ -9,7 +9,7 @@
  * @author		zhengmz
  * @link		http://mp.weixin.qq.com/wiki/index.php?title=接入指南
  */
-class Admin extends CI_Controller {
+class App_admin extends CI_Controller {
 
 	/**
 	 * 构造函数
