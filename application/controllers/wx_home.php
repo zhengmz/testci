@@ -41,7 +41,8 @@ class Wx_home extends CI_Controller {
 		switch (strtoupper($type))
 		{
 		case 'TEXT':
-			$response .= '你的消息是: [ '.$this->weixin->get('Content').' ]';
+			//$response .= '你的消息是: [ '.$this->weixin->get('Content').' ]';
+			$response .= "你的消息是: [ {$this->weixin->get('Content')} ]";
 			break;
 		case 'VOICE':
 			$response .= '你的语音消息是: [ '.$this->weixin->get('Recognition').' ]';
