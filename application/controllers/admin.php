@@ -31,28 +31,28 @@ class Admin extends CI_Controller {
 		$this->load->view('base_view', $data);
 	}
 
-	public function display_log($log = '')
+	public function plog($param = '')
 	{
-		if ($log === '')
+		if ($param === '')
 		{
 			$this->load->helper('date');
-			$log = 'log-'.mdate('%Y-%m-%d', time());
+			$param = 'log-'.mdate('%Y-%m-%d', time());
 		}
 		else
 		{
-			$log = 'log-'.(string) $log;
+			$param = 'log-'.(string) $param;
 		}
 
-		$log = APPPATH.'/logs/'.$log.'.php';
-		$output['log'] = $log;
-		if ( ! file_exists($log))
+		$log_file = APPPATH.'/logs/'.$param.'.php';
+		$output['log'] = $log_file;
+		if ( ! file_exists($log_file))
 		{
 			$output['ret'] = 'file not exists!';
 		}
 		else
 		{
 			$this->load->helper('file');
-			$output['log-content'] = read_file($log);
+			$output['log-content'] = read_file($log_file);
 		}
 		$data = array(
 			'output' = $output,
@@ -62,5 +62,5 @@ class Admin extends CI_Controller {
 	}
 }
 
-/* End of file wx_home.php */
-/* Location: ./application/controllers/wx_home.php */
+/* End of file app_admin.php */
+/* Location: ./application/controllers/app_admin.php */
