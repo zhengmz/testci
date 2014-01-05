@@ -99,12 +99,19 @@ class Wx_home extends CI_Controller {
 		$this->load->view('weixin/tpl_text', $data);
 	}
 
-	public function menu($menu_key)
+	public function menu($menu_key = '')
 	{
-		$data = array(
-			'action' => '/wx_home/action/user'
-			);
-		$this->load->view('weixin/login', $data);
+		switch (strtoupper($menu_key))
+		{
+		case 'M302_USER':
+			redirect('wx_home/action/user');
+			break;
+		default:
+			$data = array(
+				'action' => '/wx_home/action/user'
+				);
+			$this->load->view('weixin/login', $data);
+		}
 	}
 
 	public function action($action = '')
@@ -136,9 +143,9 @@ class Wx_home extends CI_Controller {
 					'key' => 'M301_BIND'
 					),
 				array(
-					'type' => 'click',
+					'type' => 'view',
 					'name' => '会员信息',
-					'key' => 'M302_USER'
+					'url' => site_url('wx_home/menu/M302_USER')
 					),
 				array(
 					'type' => 'click',
