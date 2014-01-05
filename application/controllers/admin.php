@@ -51,7 +51,7 @@ class Admin extends CI_Controller {
 		if ($date === '')
 		{
 			$this->load->helper('date');
-			$date = 'log-'.mdate('%Y-%m-%d', time());
+			$date = mdate('%Y-%m-%d', time());
 		}
 
 		$output['date'] = (string) $date;
