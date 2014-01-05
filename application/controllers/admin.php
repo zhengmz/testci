@@ -33,6 +33,7 @@ class Admin extends CI_Controller {
 
 	public function cache()
 	{
+		$output['now'] = time();
 		$cache = APPPATH.'cache/';
 		$output['cache'] = $cache;
 		$this->load->helper('file');
