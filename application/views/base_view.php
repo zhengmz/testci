@@ -24,6 +24,7 @@
 		line-height: 1.5; 
 		width: 100%;
 	}
+	pre {white-space: pre-line;}
 	h1 {display:block; font-size: 20px; line-height: 2; color: black; font-weight: bold;}
 	a,label, :focus {outline: 0 none;}
 	a,img {border: 0 none;}
