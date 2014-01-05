@@ -104,8 +104,10 @@ class Wx_home extends CI_Controller {
 		switch (strtoupper($menu_key))
 		{
 		case 'M302_USER':
-			$this->load->library('weixin');
 			redirect('wx_home/action/user');
+			break;
+		case 'M304_HELP':
+			redirect('wx_home/action/blog');
 			break;
 		default:
 			$data = array(
