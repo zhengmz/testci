@@ -17,10 +17,12 @@ class Cache_test extends CI_Controller {
 		log_message('debug', 'get user cache: '.$cache_user);
 		if ($cache_user !== '')
 		{
+			log_message('debug', 'user is: '.$user);
 			$user = $cache_user;
 		}
 		else
 		{
+			log_message('debug', 'user is: '.$user);
 			if ($user !== '')
 			{
 				log_message('debug', 'save user cache: '.$user);
