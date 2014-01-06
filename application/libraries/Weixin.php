@@ -81,7 +81,7 @@ class Weixin {
 		// 读取用户消息
 		$post = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents('php://input');
 
-		log_message('debug', 'post = `'.$post.'`');
+		log_message('debug', 'post = '.urlencode($post));
 		//extract post data
 		if (! empty($post))
 		{
