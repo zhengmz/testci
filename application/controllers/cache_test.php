@@ -5,7 +5,8 @@ class Cache_test extends CI_Controller {
 	function index()
 	{
 		$this->load->helper(array('form', 'url', 'html'));
-		$this->load->driver('cache', array('adapter' => 'file'));
+		//$this->load->driver('cache', array('adapter' => 'file'));
+		$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 
 		$user = $this->input->post('user');
 		//$cache_user = $this->cache->file->get('user');
