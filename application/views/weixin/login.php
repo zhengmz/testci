@@ -50,7 +50,7 @@
 		return true;
 	}
 
-	function on_blar(input) {
+	function on_blur(input) {
 		with (input) {
 			if (value == '') {
 				value = defaultvalue;
