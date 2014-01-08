@@ -40,24 +40,35 @@
 		document.getElementById(name).innerHTML=value;
 	}
 	
-	function valid_form(form){
-		with(form) {
-			var flag = true;
-			if(login.value == "" || login.value == login.defaultValue){
-				set_html("txtinfo", "账号不能为空");
-				flag = false;
-			}else{
-				set_html("txtinfo", "");
+	function valid_form(form) {
+		with (form.login) {
+			if(value == "" || value == defaultValue) {
+				set_html("login_info", "账号不能为空");
+				return false;
 			} 
+		}
+		return true;
+	}
 
-			if(pwd.value == "" || pwd.value == pwd.defaultValue){
-				set_html("txtpwd", "密码不能为空");
-				flag = false;
-			}else{
-				set_html("txtpwd", "");
+	function on_blar(input) {
+		with (input) {
+			if (value == '') {
+				value = defaultvalue;
+				style.color='#999';
 			}
 		}
-		return flag;
+	}
+
+	function on_focus(input) {
+		with (input) {
+			if (name == 'login') {
+				set_html('login_info', '');
+			}
+			if (value == '') {
+				value = defaultvalue;
+				style.color='#999';
+			}
+		}
 	}
 </script>
 </head>
@@ -66,10 +77,9 @@
 <div class="form_area">
 <form action="<?=$action?>" method="post"  onsubmit="return valid_form(this)">
 	<p class="title_text">请输入您的账号进行绑定 </p>
-	<input class="input_item top_input_item" name="login" type="text" value="邮箱地址/手机号码/mifi ID" onFocus="set_html('txtinfo','');if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(value==''){value=defaultValue;this.style.color='#999'}" />
-	<span id="txtinfo" style="color:red;" ></span>
-	<input class="input_item bottom_input_item" type="text" name="pwd" value="账号密码" onFocus="set_html('txtpwd','');if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(value==''){value=defaultValue;this.style.color='#999'}" />
-	<span id="txtpwd" style="color:red;" ></span>
+	<input class="input_item top_input_item" name="login" type="text" value="邮箱地址/手机号码/mifi ID" onFocus="on_focus(this)" onBlur="on_blur(this)" />
+	<i id="login_info" style="color:red;" ></i>
+	<input class="input_item bottom_input_item" type="text" name="pwd" value="账号密码" onFocus="on_focus(this)" onBlur="on_blur(this)" />
 	<div align="left" class="normal_text">
 		登录即表示您同意遵守MIFI助手账户的<br/><a href="#">用户协议</a>和<a href="#">隐私设置</a>
 	</div>
