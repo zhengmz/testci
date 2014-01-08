@@ -64,9 +64,9 @@
 			if (name == 'login') {
 				set_html('login_info', '');
 			}
-			if (value == '') {
-				value = defaultvalue;
-				style.color='#999';
+			if (value == defaultvalue) {
+				value = '';
+				style.color='#000';
 			}
 		}
 	}
