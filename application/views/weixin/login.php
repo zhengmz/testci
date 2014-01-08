@@ -53,7 +53,7 @@
 	function on_blur(input) {
 		with (input) {
 			if (value == '') {
-				value = defaultvalue;
+				value = defaultValue;
 				style.color='#999';
 			}
 		}
@@ -64,7 +64,7 @@
 			if (name == 'login') {
 				set_html('login_info', '');
 			}
-			if (value == defaultvalue) {
+			if (value == defaultValue) {
 				value = '';
 				style.color='#000';
 			}
