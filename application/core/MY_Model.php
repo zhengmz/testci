@@ -326,6 +326,15 @@ class MY_Model extends CI_Model {
 		$query = $this->_db->query($sql, $param);
 		return $this->_map_field($query->result_array(), TRUE);
 	}
+
+	/**
+	 * 执行SQL语句, 通用型
+	 * @return bool 成功返回TRUE, 失败返回FALSE
+	 */
+	public function exec($sql)
+	{
+		return $this->_db->query($sql);
+	}
 }
  
 /* End of file MY_Model.php */
