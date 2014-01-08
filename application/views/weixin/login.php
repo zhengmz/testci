@@ -50,9 +50,13 @@
 		return true;
 	}
 
+	function trim(str) {
+		return str.replace(/(^\s*)|(\s*$)/g, "");
+	}
+
 	function on_blur(input) {
 		with (input) {
-			if (value == '') {
+			if (trim(value) == '') {
 				value = defaultValue;
 				style.color='#999';
 			}
