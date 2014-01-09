@@ -71,7 +71,7 @@ CREATE TABLE customers (
     province     VARCHAR( 20 ),
     country      VARCHAR( 20 ),
     address      VARCHAR( 200 ),
-    post_code    VARCHAR( 10 ),
+    zip_code     VARCHAR( 10 ),
     remark       TEXT,
     status       INT( 1 )        DEFAULT ( 1 ),
     create_tm    DATETIME        DEFAULT ( datetime(  )  ),
