@@ -88,6 +88,7 @@ class Wx_home extends CI_Controller {
 			$response = '暂不支持['.$type.']类型，我们将很快就会推出相关功能';
 		}
 
+/*
 		//testing session
 		$this->load->library('session');
 
@@ -97,6 +98,15 @@ class Wx_home extends CI_Controller {
 			$response = "上次你的事件是[$last_msg_type],".PHP_EOL.$response;
 		}
 		$this->session->set_userdata('msg_type', $type);
+*/
+		session_start();
+		$last_msg_type = $_SESSION['msg_type'];
+		if (isset($last_msg_type))
+		{
+			$response = "上次你的事件是[$last_msg_type],".PHP_EOL.$response;
+		}
+		$_SESSION['msg_type'] = $type;
+		
 
 		$data = array(
 			'to' => $from,
