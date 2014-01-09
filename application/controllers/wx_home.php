@@ -103,8 +103,7 @@ class Wx_home extends CI_Controller {
 
 	public function menu($menu_key = '')
 	{
-/*
-		//testing session
+		//用session还是可以的
 		$this->load->library('session');
 
 		$last_msg_type = $this->session->userdata('msg_type');
@@ -114,7 +113,8 @@ class Wx_home extends CI_Controller {
 			$msg = "上次你的事件是[$last_msg_type],";
 		}
 		$this->session->set_userdata('msg_type', $menu_key);
-*/
+/*
+		// 用cookie不行
 		$last_msg_type = $this->input->cookie('msg_type');
 		$msg = '';
 		if ($last_msg_type !== FALSE)
@@ -122,7 +122,7 @@ class Wx_home extends CI_Controller {
 			$msg = "上次你的事件是[$last_msg_type],";
 		}
 		$this->input->set_cookie('msg_type', $menu_key);
-		
+*/
 
 		switch (strtoupper($menu_key))
 		{
