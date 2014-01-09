@@ -26,7 +26,6 @@ class Cache_test extends CI_Controller {
 			}
 		}
 
-		$_post_num += 1;
 		$data = array(
 			'user' => $user,
 			'pwd' => $this->input->post('pwd'),
