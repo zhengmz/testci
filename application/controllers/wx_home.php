@@ -126,7 +126,7 @@ class Wx_home extends CI_Controller {
 		$msg = '';
 		if (isset($_SESSION['msg_type']))
 		{
-			$msg = "上次你的事件是[$_SESSION['msg_type']],";
+			$msg = '上次你的事件是['.$_SESSION['msg_type'].'],';
 		}
 		$_SESSION['msg_type'] = $menu_key;
 
