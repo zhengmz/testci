@@ -123,11 +123,10 @@ class Wx_home extends CI_Controller {
 	public function menu($menu_key = '')
 	{
 		session_start();
-		$last_msg_type = $_SESSION['msg_type'];
 		$msg = '';
-		if (isset($last_msg_type))
+		if (isset($_SESSION['msg_type']))
 		{
-			$msg = "上次你的事件是[$last_msg_type],";
+			$msg = "上次你的事件是[$_SESSION['msg_type']],";
 		}
 		$_SESSION['msg_type'] = $menu_key;
 
