@@ -88,6 +88,16 @@ class Wx_home extends CI_Controller {
 			$response = '暂不支持['.$type.']类型，我们将很快就会推出相关功能';
 		}
 
+		//testing session
+		$this->load->library('session');
+
+		$last_msg_type = $this->session->userdata('msg_type');
+		if ($last_msg_type !== FALSE)
+		{
+			$response = "上次你的事件是[$last_msg_type],".PHP_EOL.$response;
+		}
+		$this->session->set_userdata('msg_type', $type);
+
 		$data = array(
 			'to' => $from,
 			'from' => $this->weixin->get('ToUserName'),
@@ -96,6 +106,7 @@ class Wx_home extends CI_Controller {
 			//'type' => '',
 			'content' => $response
 		);
+
 		$this->load->view('weixin/tpl_text', $data);
 	}
 
