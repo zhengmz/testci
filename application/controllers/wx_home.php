@@ -122,6 +122,15 @@ class Wx_home extends CI_Controller {
 
 	public function menu($menu_key = '')
 	{
+		session_start();
+		$last_msg_type = $_SESSION['msg_type'];
+		$msg = '';
+		if (isset($last_msg_type))
+		{
+			$msg = "上次你的事件是[$last_msg_type],";
+		}
+		$_SESSION['msg_type'] = $menu_key;
+
 		switch (strtoupper($menu_key))
 		{
 		case 'M302_USER':
@@ -129,7 +138,8 @@ class Wx_home extends CI_Controller {
 		//	break;
 		default:
 			$data = array(
-				'action' => '/wx_home/action/user'
+				'action' => '/wx_home/action/user',
+				'menu_key' => $msg
 				);
 			$this->load->view('weixin/login', $data);
 		}

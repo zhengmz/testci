@@ -74,6 +74,7 @@
 </head>
 
 <body>
+<span><?php echo $menu_key !== '' ? $menu_key : ''; ?></span>
 <div class="form_area">
 <form action="<?=$action?>" method="post"  onsubmit="return valid_form(this)">
 	<p class="title_text">请输入您的账号进行绑定 </p>
