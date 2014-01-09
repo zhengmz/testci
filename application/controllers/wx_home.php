@@ -88,25 +88,6 @@ class Wx_home extends CI_Controller {
 			$response = '暂不支持['.$type.']类型，我们将很快就会推出相关功能';
 		}
 
-/*
-		//testing session
-		$this->load->library('session');
-
-		$last_msg_type = $this->session->userdata('msg_type');
-		if ($last_msg_type !== FALSE)
-		{
-			$response = "上次你的事件是[$last_msg_type],".PHP_EOL.$response;
-		}
-		$this->session->set_userdata('msg_type', $type);
-*/
-		session_start();
-		$last_msg_type = $_SESSION['msg_type'];
-		if (isset($last_msg_type))
-		{
-			$response = "上次你的事件是[$last_msg_type],".PHP_EOL.$response;
-		}
-		$_SESSION['msg_type'] = $type;
-		
 
 		$data = array(
 			'to' => $from,
@@ -122,13 +103,16 @@ class Wx_home extends CI_Controller {
 
 	public function menu($menu_key = '')
 	{
-		session_start();
+		//testing session
+		$this->load->library('session');
+
+		$last_msg_type = $this->session->userdata('msg_type');
 		$msg = '';
-		if (isset($_SESSION['msg_type']))
+		if ($last_msg_type !== FALSE)
 		{
-			$msg = '上次你的事件是['.$_SESSION['msg_type'].'],';
+			$msg = "上次你的事件是[$last_msg_type],";
 		}
-		$_SESSION['msg_type'] = $menu_key;
+		$this->session->set_userdata('msg_type', $menu_key);
 
 		switch (strtoupper($menu_key))
 		{
