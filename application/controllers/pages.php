@@ -107,6 +107,10 @@ class Pages extends CI_Controller {
 		$this->load->helper('directory');
 		$data['dir_map'] = directory_map('uploads');
 
+		//testing session
+		$this->load->library('session');
+		$data['session'] = $this->session->all_userdata();
+
 		$data = array(
 			'output' => $data,
 			'title' => ucfirst($page)
