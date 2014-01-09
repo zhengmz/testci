@@ -2,7 +2,7 @@
 
 class Cache_test extends CI_Controller {
 
-	static $_post_num = 0;
+	protected static $_post_num = 0;
  
 	function index()
 	{
@@ -31,7 +31,7 @@ class Cache_test extends CI_Controller {
 			'user' => $user,
 			'pwd' => $this->input->post('pwd'),
 			'email' => $this->input->post('email'),
-			'post_num' => ($_post_num ++)
+			'post_num' => (self::$_post_num ++)
 		);
 
 		 
