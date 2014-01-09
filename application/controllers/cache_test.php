@@ -2,11 +2,10 @@
 
 class Cache_test extends CI_Controller {
 
-	protected static $_post_num = 0;
- 
 	function index()
 	{
 		$this->load->helper(array('form', 'url', 'html'));
+		$this->load->library('session');
 		$this->load->driver('cache', array('adapter' => 'file'));
 		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 
@@ -26,11 +25,21 @@ class Cache_test extends CI_Controller {
 			}
 		}
 
+		$post_num = $this->session->userdata('post_num');
+		if ($post_num === FALSE)
+		{
+			$post_num = 0;
+		}
+		else
+		{
+			$post_num ++;
+		}
+		$this->session->set_userdata('post_num', $post_num);
 		$data = array(
 			'user' => $user,
 			'pwd' => $this->input->post('pwd'),
 			'email' => $this->input->post('email'),
-			'post_num' => (self::$_post_num ++)
+			'post_num' => ($post_num ++)
 		);
 
 		 
