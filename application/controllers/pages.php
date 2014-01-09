@@ -111,6 +111,9 @@ class Pages extends CI_Controller {
 		$this->load->library('session');
 		$data['session'] = $this->session->all_userdata();
 
+		//testing cookie
+		$data['cookie'] = $this->input->cookie();
+
 		$data = array(
 			'output' => $data,
 			'title' => ucfirst($page)
