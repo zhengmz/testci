@@ -1,6 +1,8 @@
 <?php
 
 class Cache_test extends CI_Controller {
+
+	static $_post_num = 0;
  
 	function index()
 	{
@@ -24,10 +26,12 @@ class Cache_test extends CI_Controller {
 			}
 		}
 
+		$_post_num += 1;
 		$data = array(
 			'user' => $user,
 			'pwd' => $this->input->post('pwd'),
-			'email' => $this->input->post('email')
+			'email' => $this->input->post('email'),
+			'post_num' => ($_post_num ++)
 		);
 
 		 

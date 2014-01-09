@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<?php echo $post_num > 0 ? "The [$post_num] post!<br>" : ''; ?>
 <?php echo form_open('cache_test'); ?>
 
 <h5>Username</h5>
