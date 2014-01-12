@@ -10,8 +10,8 @@
 <style>
 	.contents {
 		display:block!important;
-		margin-left:10%;
-		width: 50%;
+		margin-left:3%;
+		width: 94%;
 		padding-top: 2%;
 	}
 
