@@ -10,10 +10,21 @@
 <style>
 	.contents {
 		display:block!important;
+		margin-left:10%;
+		width: 80%;
+		padding-top: 5%;
+	}
+
+@media handheld 
+{
+	.contents {
+		display:block!important;
 		margin-left:3%;
 		width: 94%;
 		padding-top: 2%;
 	}
+}
+
 	html,body,ul,li,p,h1,div,a,img,i,span,input,em
 	{
 		padding: 0;
