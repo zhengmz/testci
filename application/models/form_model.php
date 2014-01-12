@@ -2,7 +2,7 @@
 
 /**
  * Form Model Class
- * 功能：
+ * 充分利用form_helper的接口，实现以下功能：
  * 1. 支持Form自动生成
  * 2. 实现自动验证
  * 3. 与数据Model直接关联（与_map字段映射表结合使用）
@@ -83,6 +83,18 @@ class Form_model extends MY_Model {
 		$where[$this->_primary_key] = $pk;
 
 		return show_form($where);
+	}
+
+	/**
+	 * save form: 
+	 * 将form post的数据保持在数据库中
+	 *	参数为空，则直接从input->post()中获取
+	 *
+	 * @param	array	form的post data
+	 * @return	string	错误返回FALSE, 成功返回字符串
+	 */
+	public function save_form($post_data = array())
+	{
 	}
 
 	/**
