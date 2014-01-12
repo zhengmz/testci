@@ -11,8 +11,8 @@
 	.contents {
 		display:block!important;
 		margin-left:10%;
-		width: 80%;
-		padding-top: 5%;
+		width: 50%;
+		padding-top: 2%;
 	}
 
 @media handheld 
