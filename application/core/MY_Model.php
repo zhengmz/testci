@@ -101,13 +101,15 @@ class MY_Model extends CI_Model {
 		{
 			if (! class_exists('CI_DB'))
 			{
+				// 连接到默认数据库，并支持AR模式
 				$CI->load->database('', FALSE, TRUE);
 			}
-			
-			$this->_db = $CI->db;
+
+			$this->_db =& $CI->db;
 		}
 		else
 		{
+			// 支持连接到不同的数据库，并支持AR模式
 			$this->_db = $CI->load->database($db_name, TRUE, TRUE);
 		}
 	}
