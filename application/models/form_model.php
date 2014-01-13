@@ -17,6 +17,7 @@ class Form_model extends MY_Model {
 
 	/**
 	 * Form config
+	 * 包括: name, action, attributes等
 	 * 	action中，要能支持update和delete两个方法或参数
 	 *
 	 * @var array
@@ -25,10 +26,20 @@ class Form_model extends MY_Model {
 	protected $_form = array();
 	/**
 	 * form fields list
+	 * 每一字段包括: name, type, attributes等
+	 *
 	 * @var array 各字段的对应属性
 	 * @access protected
 	 */
-	protected $_form_fields = array();
+	protected $_field_datas = array();
+	/**
+	 * form field rules
+	 * 包括: field, label, rules三字段
+	 *
+	 * @var array 各字段的对应验证规则
+	 * @access protected
+	 */
+	protected $_field_rules = array();
 
 	// ------------------------------------------------------------
 
@@ -48,13 +59,32 @@ class Form_model extends MY_Model {
 	 * 初始化form: 
 	 * 支持的参数:
 	 *	form array 与form相关的参数
-	 *	input array 表单字段，每一字段对应一个数组，包括button
+	 *	fields array 表单字段，每一字段对应一个数组，包括button
 	 *
 	 * @param	array	配置参数
-	 * @return	void
+	 * @return	bool	成功返回TRUE, 失败返回FALSE
 	 */
 	public function set_form($forms = array())
 	{
+		$this->_form = array('action' => '');
+		if (isset($forms['form']))
+		{
+			$this->_form = array_merge($this->_form, $forms['form']);
+		}
+
+		foreach ($forms['fields'] as $field => $attr)
+		{
+			if (isset($attr['rules']))
+			{
+				$this->_field_rules[$field] = array(
+					'field' = $field,
+					'label' = isset($attr['label']) ? $attr['label'] : $field,
+					'rules' = $attr['rules'],
+					);
+				unset($attr['rules']);
+			}
+			$this->_field_datas[$field] = $attr;
+		}
 	}
 
 	/**
