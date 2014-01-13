@@ -29,7 +29,7 @@
 	{
 		padding: 0;
 		margin: 0;
-		font-size: 100%;
+		font-size: 125%;
 		font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", "sans-serif";
 		font-weight: normal;
 		line-height: 1.5; 
