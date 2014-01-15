@@ -20,7 +20,7 @@ class Wx_home extends CI_Controller {
 		
 		log_message('debug', "Wx_home Controller Initialized");
 		$this->load->helper('url');
-		$this->load->library('wx_api');
+//		$this->load->library('wx_api');
 	}
 
 	/**
@@ -30,6 +30,24 @@ class Wx_home extends CI_Controller {
 	public function index()
 	{
 		$this->load->library('weixin');
+
+		$config = array();
+		switch ( (string)($this->weixin->ToUserName))
+		{
+		case 'gh_397558e2f7d5':
+			$config['gh'] = 'gh_397558e2f7d5';
+			$config['appid'] = 'wxb556d3b80344260f';
+			$config['appsecret'] = 'ee44ed6971f60aa587dc88778b508249';
+			break;
+		case 'gh_a143a3e290be':
+			$config['gh'] = 'gh_a143a3e290be';
+			$config['appid'] = 'wx2144d773cd09e4b4';
+			$config['appsecret'] = 'e4a282ed9b33e1ff40908ad70c32b4e7';
+			break;
+		default:
+			$config = NULL;
+		}
+		$this->load->library('wx_api', $config);
 
 		//$type = $this->weixin->get('MsgType');
 		$type = $this->weixin->MsgType;
