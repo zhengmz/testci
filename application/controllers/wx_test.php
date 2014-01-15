@@ -21,6 +21,7 @@ class Wx_test extends CI_Controller {
 		log_message('debug', "Wx_test Controller Initialized");
 		$this->load->helper('url');
 
+		$config['gh'] = 'gh_397558e2f7d5';
 		$config['appid'] = 'wxb556d3b80344260f';
 		$config['appsecret'] = 'ee44ed6971f60aa587dc88778b508249';
 		$this->load->library('wx_api', $config);
