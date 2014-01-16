@@ -117,7 +117,9 @@ class Wx_home extends CI_Controller {
 		log_message('debug', "response: ".$response);
 		log_message('debug', "ToUserName: ".$data['from']);
 
-		$this->load->view('weixin/tpl_text', $data);
+		$output = $this->load->view('weixin/tpl_text', $data, TRUE);
+		log_message('debug', "output: ".$output);
+		$this->output->set_output($output);
 	}
 
 	public function menu($menu_key = '')
