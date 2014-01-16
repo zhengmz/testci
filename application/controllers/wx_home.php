@@ -109,7 +109,7 @@ class Wx_home extends CI_Controller {
 
 		$data = array(
 			'to' => $from,
-			'from' => $this->weixin->get('ToUserName'),
+			'from' => (string)$this->weixin->ToUserName,
 			'time' => time(),
 			'type' => 'text',
 			//'type' => '',
