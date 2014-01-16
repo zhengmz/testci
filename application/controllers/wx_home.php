@@ -106,7 +106,6 @@ class Wx_home extends CI_Controller {
 			$response = '暂不支持['.$type.']类型，我们将很快就会推出相关功能';
 		}
 
-
 		$data = array(
 			'to' => $from,
 			'from' => (string)$this->weixin->ToUserName,
@@ -115,6 +114,8 @@ class Wx_home extends CI_Controller {
 			//'type' => '',
 			'content' => $response
 		);
+		log_message('debug', "response: ".$response);
+		log_message('debug', "ToUserName: ".$data['from']);
 
 		$this->load->view('weixin/tpl_text', $data);
 	}
