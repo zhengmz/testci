@@ -9,8 +9,8 @@ $config['oauth2']['weibo'] = array(
 
 $config['oauth2']['qq'] = array(
 	'name' => 'QQ',
-        'id' => '100577935',
-        'secret' => '7d83d74c2a58f6a51c7ca8d47d154fcb',
+        'id' => '101011661',
+        'secret' => 'b235d5d5245993f64dd4d39ed85015aa',
         'extra' => ''
 );
 
