@@ -193,7 +193,7 @@ class Weixin {
 	protected function _check_signature($signature, $timestamp, $nonce)
 	{
 		$tmp = array($this->_weixin_token, $timestamp, $nonce);
-		sort($tmp);
+		sort($tmp, SORT_STRING);
 
 		$str = sha1(implode($tmp));
 
