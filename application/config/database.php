@@ -64,6 +64,22 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$db['app']['hostname'] = 'sqlite:'.APPPATH.'db/app.db';
+$db['app']['username'] = '';
+$db['app']['password'] = '';
+$db['app']['database'] = '';
+$db['app']['dbdriver'] = 'pdo';
+$db['app']['dbprefix'] = '';
+$db['app']['pconnect'] = TRUE;
+$db['app']['db_debug'] = TRUE;
+$db['app']['cache_on'] = FALSE;
+$db['app']['cachedir'] = '';
+$db['app']['char_set'] = 'utf8';
+$db['app']['dbcollat'] = 'utf8_general_ci';
+$db['app']['swap_pre'] = '';
+$db['app']['autoinit'] = TRUE;
+$db['app']['stricton'] = FALSE;
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
