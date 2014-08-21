@@ -9,16 +9,16 @@ CREATE TABLE users (
                            UNIQUE,
     user_name VARCHAR( 50 ),
     create_tm DATETIME       DEFAULT ( datetime(  )  ),
-    last_tm DATETIME,
+    last_tm   DATETIME       DEFAULT ( datetime(  )  ),
     next_tm DATETIME
 );
 
 -- Table: actions
 DROP TABLE IF EXISTS 'actions';
 CREATE TABLE actions ( 
-    [from]    VARCHAR( 20 ),
-    [to]      VARCHAR( 20 ),
-    [action]  INTEGER        DEFAULT ( 1 ),
+    id_from   VARCHAR( 20 ),
+    id_to     VARCHAR( 20 ),
+    act       INTEGER        DEFAULT ( 1 ),
     update_tm DATETIME       DEFAULT ( datetime(  )  ),
     ip_addr   VARCHAR( 20 )
 );

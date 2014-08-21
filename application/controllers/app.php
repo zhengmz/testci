@@ -20,28 +20,20 @@ class App extends CI_Controller {
 		parent::__construct();
 		
 		log_message('debug', "App Controller Initialized");
-		$params = array(
-			'table_name' => 'users',
-			'primary_key' => 'id',
-			'db_name' => 'app'
-		);
-		$this->load->model('base_model', $params, 'users');
-		$params = array(
-			'table_name' => 'actions',
-			'primary_key' => 'to',
-			'db_name' => 'app'
-		);
-		$this->load->model('base_model', $params, 'actions');
 	}
 
 	/**
 	 * 默认接入函数
          * 使用GET方法，参数如下：
 	 * m  : method = c(create) | s(send) | r(receive)
-	 * u  : user name
 	 * f  : from
          * t  : to
-         * tm : datetime
+	 * u  : user name
+	 * tm : update time, optional
+	 * 使用例子：
+	 *	创建用户: app?m=c&f=13812345678&u=oscar
+	 *	发送动作: app?m=s&f=13812345678&t=13987654321&tm=2014-08-21%2014:20:30
+	 *	接收动作: app?m=r&f=13812345678
 	 */
 	public function index()
 	{
@@ -51,19 +43,111 @@ class App extends CI_Controller {
 		$msg = '';
 		switch ($input['m'])
 		{
-		case 'c':
-			if (($id = $input['f']) === FALSE || ($name = $input['u']) === FALSE)
+		case 'c': //创建用户
+			$msg = 'create user OK.';
+			if (!isset($input['f']) or !isset($input['u']))
 			{
 				$err_code = -11;
+				$msg = 'Please input user info.';
+				log_message('debug', $msg);
+				break;
 			}
-			$msg = 'create user';
+
+			//加载数据库
+			$params = array(
+				'table_name' => 'users',
+				'primary_key' => 'id',
+				'db_name' => 'app'
+			);
+			$this->load->model('base_model', $params, 'users');
+
+			//查重
+			$ret = $this->users->find_by_pk($input['f']);
+			if ( ! empty( $ret ) )
+			{
+				$err_code = -12;
+				$msg = 'user have been exist.';
+				log_message('debug', $msg);
+				break;
+			}
+
+			$rec = array(
+				'id' => $input['f'],
+				'user_name' => $input['u']
+			);
+
+			//保存
+			if ( $this->users->save($rec) === FALSE )
+			{
+				$err_code = -13;
+				$msg = 'create user ['.$rec['id'].'] failed.';
+				log_message('debug', $msg);
+				break;
+			}
 			break;
-		case 's':
-			$ip = $this->input->ip_address();
-			$msg = 'send';
+		case 's':	//发送动作
+			$msg = 'send OK.';
+			if (!isset($input['f']) or !isset($input['t']))
+			{
+				$err_code = -21;
+				$msg = 'Please input from and to.';
+				log_message('debug', $msg);
+				break;
+			}
+
+			//加载数据库
+			$params = array(
+				'table_name' => 'actions',
+				'primary_key' => 'to',
+				'db_name' => 'app'
+			);
+			$this->load->model('base_model', $params, 'actions');
+
+			$rec = array(
+				'id_from' => $input['f'],
+				'id_to' => $input['t'],
+				'ip_addr' => $this->input->ip_address()
+			);
+
+			//如果传时间过来就记录下来
+			if ( isset($input['tm']) )
+			{
+				$rec['update_tm'] = $input['tm'];
+			}
+
+			//保存
+			if ( $this->actions->save($rec) === FALSE )
+			{
+				$err_code = -22;
+				$msg = 'send from ['.$rec['from'].'] failed.';
+				log_message('debug', $msg);
+				break;
+			}
 			break;
 		case 'r':
-			$msg = 'receive';
+			$msg = 'receive OK.';
+			if ( !isset($input['f']) )
+			{
+				$err_code = -31;
+				$msg = 'Please input from.';
+				log_message('debug', $msg);
+				break;
+			}
+
+			//加载数据库: 用户表和动作表
+			$params = array(
+				'table_name' => 'actions',
+				'primary_key' => 'to',
+				'db_name' => 'app'
+			);
+			$this->load->model('base_model', $params, 'actions');
+			$params = array(
+				'table_name' => 'users',
+				'primary_key' => 'id',
+				'db_name' => 'app'
+			);
+			$this->load->model('base_model', $params, 'users');
+
 			break;
 		default:
 			$err_code = -1;
@@ -71,8 +155,8 @@ class App extends CI_Controller {
 			break;
 		}
 
-		echo '<pre>';
-		print_r($input);
+//		echo '<pre>';
+//		print_r($input);
 
 		$ret = array(
 			'errno' => $err_code,
