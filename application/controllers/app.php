@@ -153,9 +153,7 @@ class App extends CI_Controller {
 			$id = $input['f'];
 			$curr_tm = date('Y-m-d H:i:s');
 			$last_tm = '';
-echo "<pre>";
-var_dump($curr_tm);
-echo "\n";
+
 			//先从users中获取上次读取时间, 并更新最新时间
 			$ret = $this->users->find_by_pk($id);
 			if ( empty( $ret ) )	//如果未登记，先保存
@@ -188,20 +186,30 @@ echo "\n";
 					break;
 				}
 			}
-var_dump($last_tm);
-echo "\n";
 
-			$data = array(
-				'count' => 2,
-				array(
-					'f' => '10001',
-					'tm' => '2014-08-20 14:00:00'
-				),
-				array(
-					'f' => '10002',
-					'tm' => '2014-08-21 14:00:00'
-				)
+			//根据前后时间获取动作列表
+			$where = array(
+				'id_to' => $id,
+				'update_tm <=' => $curr_tm
 			);
+			if ( $last_tm != '')
+			{
+				$where['update_tm >'] = $last_tm;
+			}
+
+			$count = 0;
+			$data = array('count' => 0);
+			$ret = $this->actions->find_all($where, 0, 0,'update_tm ASC');
+			foreach ($ret as $row)
+			{
+				$data[] = array(
+					'f' => $row['id_from'],
+					'tm' => $row['update_tm']
+				);
+				$count ++;
+			}
+			$data['count'] = $count;
+
 			echo json_encode($data);
 			$ret_flag = FALSE;
 
