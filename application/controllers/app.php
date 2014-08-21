@@ -41,6 +41,8 @@ class App extends CI_Controller {
 		
 		$err_code = 0;
 		$msg = '';
+		$ret_flag = TRUE;
+
 		switch ($input['m'])
 		{
 		case 'c': //创建用户
@@ -148,6 +150,61 @@ class App extends CI_Controller {
 			);
 			$this->load->model('base_model', $params, 'users');
 
+			$id = $input['f'];
+			$curr_tm = date('Y-m-d H:i:s');
+			$last_tm = '';
+echo "<pre>";
+var_dump($curr_tm);
+echo "\n";
+			//先从users中获取上次读取时间, 并更新最新时间
+			$ret = $this->users->find_by_pk($id);
+			if ( empty( $ret ) )	//如果未登记，先保存
+			{
+				$rec = array(
+					'id' => $input['f'],
+					'user_name' => $input['f']
+				);
+
+				if ( $this->users->save($rec) === FALSE )
+				{
+					$err_code = -32;
+					$msg = 'create user ['.$rec['id'].'] failed.';
+					log_message('debug', $msg);
+					break;
+				}
+			}
+			else 
+			{
+				$last_tm = $ret['last_tm'];
+				//更新最新时间
+				$attr = array(
+					'last_tm' => $curr_tm
+				);
+				if ( $this->users->update_by_pk($id, $attr) === FALSE )
+				{
+					$err_code = -33;
+					$msg = 'update last_tm failed.';
+					log_message('debug', $msg);
+					break;
+				}
+			}
+var_dump($last_tm);
+echo "\n";
+
+			$data = array(
+				'count' => 2,
+				array(
+					'f' => '10001',
+					'tm' => '2014-08-20 14:00:00'
+				),
+				array(
+					'f' => '10002',
+					'tm' => '2014-08-21 14:00:00'
+				)
+			);
+			echo json_encode($data);
+			$ret_flag = FALSE;
+
 			break;
 		default:
 			$err_code = -1;
@@ -158,11 +215,14 @@ class App extends CI_Controller {
 //		echo '<pre>';
 //		print_r($input);
 
-		$ret = array(
-			'errno' => $err_code,
-			'msg' => $msg
-		);
-		echo json_encode($ret);
+		if ( $ret_flag )
+		{
+			$ret = array(
+				'errno' => $err_code,
+				'msg' => $msg
+			);
+			echo json_encode($ret);
+		};
 	}
 
 }
