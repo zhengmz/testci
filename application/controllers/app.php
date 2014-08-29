@@ -233,7 +233,7 @@ class App extends CI_Controller {
 			echo '用户总数是: '.$count;
 			if ( $count > 0 )
 			{
-				$users = $this->actions->find_all();
+				$users = $this->users->find_all();
 				echo PHP_EOL.'用户信息如下: '.PHP_EOL;
 				print_r($users);
 			}
@@ -242,7 +242,7 @@ class App extends CI_Controller {
 			if ( $count > 0 )
 			{
 				$actions = $this->actions->find_all();
-				echo PHP_EOL.'用户信息如下: '.PHP_EOL;
+				echo PHP_EOL.'动作列表如下: '.PHP_EOL;
 				print_r($actions);
 			}
 			$ret_flag = FALSE;
