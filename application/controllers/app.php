@@ -126,7 +126,7 @@ class App extends CI_Controller {
 				break;
 			}
 			break;
-		case 'r':
+		case 'r':	//接收动作
 			$msg = 'receive OK.';
 			if ( !isset($input['f']) )
 			{
@@ -214,6 +214,39 @@ class App extends CI_Controller {
 			$ret_flag = FALSE;
 
 			break;
+		case 'a':	//管理端口
+			//加载数据库: 用户表和动作表
+			$params = array(
+				'table_name' => 'actions',
+				'primary_key' => 'to',
+				'db_name' => 'app'
+			);
+			$this->load->model('base_model', $params, 'actions');
+			$params = array(
+				'table_name' => 'users',
+				'primary_key' => 'id',
+				'db_name' => 'app'
+			);
+			$this->load->model('base_model', $params, 'users');
+			echo '<pre>';
+			$count = $this->users->count();
+			echo '用户总数是: '.$count;
+			if ( $count > 0 )
+			{
+				$users = $this->actions->find_all();
+				echo PHP_EOL.'用户信息如下: '.PHP_EOL;
+				print_r($users);
+			}
+			$count = $this->actions->count();
+			echo PHP_EOL.'动作总数是: '.$count;
+			if ( $count > 0 )
+			{
+				$actions = $this->actions->find_all();
+				echo PHP_EOL.'用户信息如下: '.PHP_EOL;
+				print_r($actions);
+			}
+			$ret_flag = FALSE;
+			break;
 		default:
 			$err_code = -1;
 			$msg = 'unknown command!';
@@ -232,7 +265,6 @@ class App extends CI_Controller {
 			echo json_encode($ret);
 		};
 	}
-
 }
 
 /* End of file app.php */
