@@ -18,6 +18,23 @@ class App extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+
+		//加载数据库
+		//用户表
+		$params = array(
+			'table_name' => 'users',
+			'primary_key' => 'id',
+			'db_name' => 'app'
+		);
+		$this->load->model('base_model', $params, 'users');
+
+		//动作表
+		$params = array(
+			'table_name' => 'actions',
+			'primary_key' => 'to',
+			'db_name' => 'app'
+		);
+		$this->load->model('base_model', $params, 'actions');
 		
 		log_message('debug', "App Controller Initialized");
 	}
@@ -34,6 +51,7 @@ class App extends CI_Controller {
 	 *	创建用户: app?m=c&f=13812345678&u=oscar
 	 *	发送动作: app?m=s&f=13812345678&t=13987654321&tm=2014-08-21%2014:20:30
 	 *	接收动作: app?m=r&f=13812345678
+	 *	查询用户: app?m=q&f=13812345678
 	 */
 	public function index()
 	{
@@ -54,14 +72,6 @@ class App extends CI_Controller {
 				log_message('debug', $msg);
 				break;
 			}
-
-			//加载数据库
-			$params = array(
-				'table_name' => 'users',
-				'primary_key' => 'id',
-				'db_name' => 'app'
-			);
-			$this->load->model('base_model', $params, 'users');
 
 			//查重
 			$ret = $this->users->find_by_pk($input['f']);
@@ -97,14 +107,6 @@ class App extends CI_Controller {
 				break;
 			}
 
-			//加载数据库
-			$params = array(
-				'table_name' => 'actions',
-				'primary_key' => 'to',
-				'db_name' => 'app'
-			);
-			$this->load->model('base_model', $params, 'actions');
-
 			$rec = array(
 				'id_from' => $input['f'],
 				'id_to' => $input['t'],
@@ -136,22 +138,9 @@ class App extends CI_Controller {
 				break;
 			}
 
-			//加载数据库: 用户表和动作表
-			$params = array(
-				'table_name' => 'actions',
-				'primary_key' => 'to',
-				'db_name' => 'app'
-			);
-			$this->load->model('base_model', $params, 'actions');
-			$params = array(
-				'table_name' => 'users',
-				'primary_key' => 'id',
-				'db_name' => 'app'
-			);
-			$this->load->model('base_model', $params, 'users');
-
 			$id = $input['f'];
 			$curr_tm = date('Y-m-d H:i:s');
+			log_message('debug', 'current time is ['.$curr_tm.']');
 			$last_tm = '';
 
 			//先从users中获取上次读取时间, 并更新最新时间
@@ -214,20 +203,30 @@ class App extends CI_Controller {
 			$ret_flag = FALSE;
 
 			break;
+		case 'q':	//查询功能
+			$msg = 'Query user OK.';
+			if ( !isset($input['f']) )
+			{
+				$err_code = -41;
+				$msg = 'Please input userid.';
+				log_message('debug', $msg);
+				break;
+			}
+			
+			//查询
+			$ret = $this->users->find_by_pk($input['f']);
+			if ( ! empty( $ret ) )   //存在
+			{
+				$err_code = 1;
+				$msg = 'User is exist!';
+			}
+			else	//不存在
+			{
+				$err_code = 0;
+				$msg = 'User is not exist!';
+			}
+			break;
 		case 'a':	//管理端口
-			//加载数据库: 用户表和动作表
-			$params = array(
-				'table_name' => 'actions',
-				'primary_key' => 'to',
-				'db_name' => 'app'
-			);
-			$this->load->model('base_model', $params, 'actions');
-			$params = array(
-				'table_name' => 'users',
-				'primary_key' => 'id',
-				'db_name' => 'app'
-			);
-			$this->load->model('base_model', $params, 'users');
 			echo '<pre>';
 			$count = $this->users->count();
 			echo '用户总数是: '.$count;
