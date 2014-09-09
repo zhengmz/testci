@@ -65,7 +65,7 @@ class App extends CI_Controller {
 		{
 		case 'c': //创建用户
 			$msg = 'create user OK.';
-			if (!isset($input['f']) or !isset($input['u']))
+			if ( !isset($input['f']) )
 			{
 				$err_code = -11;
 				$msg = 'Please input user info.';
@@ -85,8 +85,14 @@ class App extends CI_Controller {
 
 			$rec = array(
 				'id' => $input['f'],
-				'user_name' => $input['u']
+				'user_name' => $input['f']
 			);
+
+			//传昵称过来就记录下来
+			if ( isset($input['u']) )
+			{
+				$rec['user_name'] = $input['u'];
+			}
 
 			//保存
 			if ( $this->users->save($rec) === FALSE )
@@ -193,7 +199,7 @@ class App extends CI_Controller {
 			{
 				$data[] = array(
 					'f' => $row['id_from'],
-					'tm' => $row['update_tm']
+					'tm' => substr($row['update_tm'], 0, strlen($row['update_tm'])-3)
 				);
 				$count ++;
 			}
