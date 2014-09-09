@@ -114,6 +114,10 @@ class Pages extends CI_Controller {
 		//testing cookie
 		$data['cookie'] = $this->input->cookie();
 
+		//testing date and timezone
+		$data['date_str'] = date('Y-m-d H:i:s');
+		$data['timezone'] = date_default_timezone_get();
+
 		$data = array(
 			'output' => $data,
 			'title' => ucfirst($page)
