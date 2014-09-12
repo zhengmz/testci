@@ -8,8 +8,8 @@ CREATE TABLE users (
     id      VARCHAR( 20 )  PRIMARY KEY
                            UNIQUE,
     user_name VARCHAR( 50 ),
-    create_tm DATETIME       DEFAULT ( datetime( 'now', 'localtime' )  ),
-    last_tm   DATETIME       DEFAULT ( datetime( 'now', 'localtime' )  )
+    create_tm DATETIME       DEFAULT ( datetime( 'now', '+8 hour' )  ),
+    last_tm   DATETIME       DEFAULT ( datetime( 'now', '+8 hour' )  )
 );
 
 -- Table: actions
@@ -18,7 +18,7 @@ CREATE TABLE actions (
     id_from   VARCHAR( 20 ),
     id_to     VARCHAR( 20 ),
     act       INTEGER        DEFAULT ( 1 ),
-    update_tm DATETIME       DEFAULT ( datetime( 'now', 'localtime' )  ),
+    update_tm DATETIME       DEFAULT ( datetime( 'now', '+8 hour' )  ),
     ip_addr   VARCHAR( 20 )
 );
 
