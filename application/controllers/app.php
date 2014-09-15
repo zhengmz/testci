@@ -73,8 +73,9 @@ class App extends CI_Controller {
 				break;
 			}
 
+			$id = $this->_trim_phone($input['f']);
 			//查重
-			$ret = $this->users->find_by_pk($input['f']);
+			$ret = $this->users->find_by_pk($id);
 			if ( ! empty( $ret ) )
 			{
 				$err_code = -12;
@@ -84,14 +85,14 @@ class App extends CI_Controller {
 			}
 
 			$rec = array(
-				'id' => $input['f'],
-				'user_name' => $input['f']
+				'id' => $id,
+				'user_name' => $id
 			);
 
 			//传昵称过来就记录下来
 			if ( isset($input['u']) )
 			{
-				$rec['user_name'] = $input['u'];
+				$rec['user_name'] = trim($input['u']);
 			}
 
 			//保存
@@ -113,9 +114,11 @@ class App extends CI_Controller {
 				break;
 			}
 
+			$from_id = $this->_trim_phone($input['f']);
+			$to_id = $this->_trim_phone($input['t']);
 			$rec = array(
-				'id_from' => $input['f'],
-				'id_to' => $input['t'],
+				'id_from' => $from_id,
+				'id_to' => $to_id,
 				'ip_addr' => $this->input->ip_address()
 			);
 
@@ -144,7 +147,8 @@ class App extends CI_Controller {
 				break;
 			}
 
-			$id = $input['f'];
+			$id = $this->_trim_phone($input['f']);
+			//$id = $input['f'];
 			$curr_tm = date('Y-m-d H:i:s');
 			log_message('debug', 'current time is ['.$curr_tm.']');
 			$last_tm = '';
@@ -154,8 +158,8 @@ class App extends CI_Controller {
 			if ( empty( $ret ) )	//如果未登记，先保存
 			{
 				$rec = array(
-					'id' => $input['f'],
-					'user_name' => $input['f']
+					'id' => $id,
+					'user_name' => $id
 				);
 
 				if ( $this->users->save($rec) === FALSE )
@@ -220,7 +224,8 @@ class App extends CI_Controller {
 			}
 			
 			//查询
-			$ret = $this->users->find_by_pk($input['f']);
+			$id = $this->_trim_phone($input['f']);
+			$ret = $this->users->find_by_pk($id);
 			if ( ! empty( $ret ) )   //存在
 			{
 				$err_code = 1;
@@ -293,6 +298,17 @@ class App extends CI_Controller {
 			);
 			echo json_encode($ret);
 		};
+	}
+
+	protected function _trim_phone($phone)
+	{
+		$phone = trim($phone);
+		$phone = str_replace('-', '' ,$phone);
+		if ( preg_match('/^86[0-9]*/', $phone) )
+		{
+			$phone = substr($phone, 2);
+		}
+		return $phone;
 	}
 }
 
