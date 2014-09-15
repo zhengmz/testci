@@ -49,6 +49,11 @@ class Wx_home extends CI_Controller {
 			$config['appid'] = 'wx85454e595db83b15';
 			$config['appsecret'] = 'ea93ebd1d0b75eaeb4167db99c61c19f';
 			break;
+		case 'gh_48212394643e':
+			$config['gh'] = 'gh_48212394643e';
+			$config['appid'] = 'wx66a9788a546a16be';
+			$config['appsecret'] = 'b9efc156e0ee2f8b93417c99f6a05006';
+			break;
 		default:
 			$config = NULL;
 		}
