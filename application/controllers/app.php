@@ -233,6 +233,14 @@ class App extends CI_Controller {
 			}
 			break;
 		case 'a':	//管理端口
+			//先处理表格数据清除工作
+			$del_t = isset($input['del']) ? $input['del'] : '';
+			if ($del_t === 'users' or $del_t === 'actions')
+			{
+				$sql = 'delete from '.$del_t;
+				$this->users->exec($sql);
+			}
+			$this->load->helper(array('html','url'));
 			$this->load->library('table');
 			if ( $this->users->count() > 0 )
 			{
@@ -240,7 +248,8 @@ class App extends CI_Controller {
 				$tmpl = array('table_open'  => '<table border="1" cellpadding="3" cellspacing="0">');
 				$this->table->set_template($tmpl);
 				$users = $this->users->find_all();
-				$output['用户表'] = $this->table->generate($users);
+				$del_str = '<a href="'.base_url('app?m=a&del=users').'">清除数据</a>'.br();
+				$output['用户表'] = $del_str.$this->table->generate($users);
 			}
 			else
 			{
@@ -253,7 +262,8 @@ class App extends CI_Controller {
 				$tmpl = array('table_open'  => '<table border="1" cellpadding="3" cellspacing="0">');
 				$this->table->set_template($tmpl);
 				$actions = $this->actions->find_all();
-				$output['动作表'] = $this->table->generate($actions);
+				$del_str = '<a href="'.base_url('app?m=a&del=actions').'">清除数据</a>'.br();
+				$output['动作表'] = $del_str.$this->table->generate($actions);
 			}
 			else
 			{
