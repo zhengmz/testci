@@ -236,7 +236,11 @@ class App extends CI_Controller {
 			$this->load->library('table');
 			if ( $this->users->count() > 0 )
 			{
-				$output['用户表'] = $this->table->generate($this->users->find_all());
+				$this->table->set_heading(array('id', 'Name', 'Update_tm', 'Last_tm'));
+				$tmpl = array('table_open'  => '<table border="1" cellpadding="3" cellspacing="0">');
+				$this->table->set_template($tmpl);
+				$users = $this->users->find_all();
+				$output['用户表'] = $this->table->generate($users);
 			}
 			else
 			{
@@ -244,7 +248,12 @@ class App extends CI_Controller {
 			}
 			if ( $this->actions->count() > 0 )
 			{
-				$output['动作表'] = $this->table->generate($this->actions->find_all());
+				$this->table->clear();
+				$this->table->set_heading(array('From', 'To', 'Action', 'Update_tm', 'IP'));
+				$tmpl = array('table_open'  => '<table border="1" cellpadding="3" cellspacing="0">');
+				$this->table->set_template($tmpl);
+				$actions = $this->actions->find_all();
+				$output['动作表'] = $this->table->generate($actions);
 			}
 			else
 			{
