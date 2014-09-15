@@ -233,38 +233,22 @@ class App extends CI_Controller {
 			}
 			break;
 		case 'a':	//管理端口
-/*
-			echo '<pre>';
-			$count = $this->users->count();
-			echo '用户总数是: '.$count;
-			if ( $count > 0 )
+			$this->load->library('table');
+			if ( $this->users->count() > 0 )
 			{
-				$users = $this->users->find_all();
-				echo PHP_EOL.'用户信息如下: '.PHP_EOL;
-				print_r($users);
+				$output['用户表'] = $this->table->generate($this->users->find_all());
 			}
-			$count = $this->actions->count();
-			echo PHP_EOL.'动作总数是: '.$count;
-			if ( $count > 0 )
+			else
 			{
-				$actions = $this->actions->find_all();
-				echo PHP_EOL.'动作列表如下: '.PHP_EOL;
-				print_r($actions);
+				$output['用户表'] = 0;
 			}
-*/
-			$count = $this->users->count();
-			$output['用户总数'] = $count;
-			if ( $count > 0 )
+			if ( $this->actions->count() > 0 )
 			{
-				$users = $this->users->find_all();
-				$output['用户列表'] = $users;
+				$output['动作表'] = $this->table->generate($this->actions->find_all());
 			}
-			$count = $this->actions->count();
-			$output['动作总数'] = $count;
-			if ( $count > 0 )
+			else
 			{
-				$actions = $this->actions->find_all();
-				$output['动作列表'] = $actions;
+				$output['动作表'] = 0;
 			}
 			$data = array(
 				'output' => $output,
