@@ -233,6 +233,7 @@ class App extends CI_Controller {
 			}
 			break;
 		case 'a':	//管理端口
+/*
 			echo '<pre>';
 			$count = $this->users->count();
 			echo '用户总数是: '.$count;
@@ -250,6 +251,26 @@ class App extends CI_Controller {
 				echo PHP_EOL.'动作列表如下: '.PHP_EOL;
 				print_r($actions);
 			}
+*/
+			$count = $this->users->count();
+			$output['用户总数'] = $count;
+			if ( $count > 0 )
+			{
+				$users = $this->users->find_all();
+				$output['用户列表'] = $users;
+			}
+			$count = $this->actions->count();
+			$output['动作总数'] = $count;
+			if ( $count > 0 )
+			{
+				$actions = $this->actions->find_all();
+				$output['动作列表'] = $actions;
+			}
+			$data = array(
+				'output' => $output,
+				'title' => '数据库信息',
+				);
+			$this->load->view('base_view', $data);
 			$ret_flag = FALSE;
 			break;
 		default:
